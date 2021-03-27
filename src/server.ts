@@ -4,14 +4,24 @@ import { v4 as uuidv4 } from 'uuid';
 import fs from 'fs';
 import path from 'path';
 import Formidable from 'formidable';
+import Queue from 'bull';
+import { main } from './tools/insert-to-db';
 
 const app = express();
 
 const port = process.env.PORT || 3000;
 
+const queue = new Queue('data processing', {
+    redis: {
+        host: '127.0.0.1',
+        port: 6379
+    }
+});
+
 app.use(cors());
 
 app.get('/', (req, res) => {
+    main('uploader_2');
     res.send('Welcome to WearMerge!');
 });
 

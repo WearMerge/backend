@@ -1,0 +1,416 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#20",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "userProfilePK",
+        "calendarDate",
+        "uuid",
+        "durationInMilliseconds",
+        "rulePk",
+        "totalKilocalories",
+        "activeKilocalories",
+        "bmrKilocalories",
+        "wellnessKilocalories",
+        "remainingKilocalories",
+        "wellnessTotalKilocalories",
+        "wellnessActiveKilocalories",
+        "totalSteps",
+        "dailyStepGoal",
+        "netCalorieGoal",
+        "totalDistanceMeters",
+        "wellnessDistanceMeters",
+        "wellnessStartTimeGmt",
+        "wellnessEndTimeGmt",
+        "wellnessStartTimeLocal",
+        "wellnessEndTimeLocal",
+        "highlyActiveSeconds",
+        "activeSeconds",
+        "moderateIntensityMinutes",
+        "vigorousIntensityMinutes",
+        "floorsAscendedInMeters",
+        "floorsDescendedInMeters",
+        "userIntensityMinutesGoal",
+        "userFloorsAscendedGoal",
+        "minHeartRate",
+        "maxHeartRate",
+        "restingHeartRate",
+        "currentDayRestingHeartRate",
+        "restingHeartRateTimestamp",
+        "includesWellnessData",
+        "includesActivityData",
+        "includesCalorieConsumedData",
+        "source",
+        "allDayStress",
+        "minAvgHeartRate",
+        "maxAvgHeartRate",
+        "version"
+    ],
+    "properties": {
+        "userProfilePK": {
+            "$id": "#/properties/userProfilePK",
+            "type": "integer",
+            "title": "The userProfilePK schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "calendarDate": {
+            "$id": "#/properties/calendarDate",
+            "type": "object",
+            "title": "The calendarDate schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "required": [
+                "date"
+            ],
+            "properties": {
+                "date": {
+                    "$id": "#/properties/calendarDate/properties/date",
+                    "type": "string",
+                    "title": "The date schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": ""
+                }
+            },
+            "additionalProperties": true
+        },
+        "uuid": {
+            "$id": "#/properties/uuid",
+            "type": "string",
+            "title": "The uuid schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "durationInMilliseconds": {
+            "$id": "#/properties/durationInMilliseconds",
+            "type": "integer",
+            "title": "The durationInMilliseconds schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "rulePk": {
+            "$id": "#/properties/rulePk",
+            "type": "integer",
+            "title": "The rulePk schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "totalKilocalories": {
+            "$id": "#/properties/totalKilocalories",
+            "type": "number",
+            "title": "The totalKilocalories schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "activeKilocalories": {
+            "$id": "#/properties/activeKilocalories",
+            "type": "number",
+            "title": "The activeKilocalories schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "bmrKilocalories": {
+            "$id": "#/properties/bmrKilocalories",
+            "type": "number",
+            "title": "The bmrKilocalories schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "wellnessKilocalories": {
+            "$id": "#/properties/wellnessKilocalories",
+            "type": "number",
+            "title": "The wellnessKilocalories schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "remainingKilocalories": {
+            "$id": "#/properties/remainingKilocalories",
+            "type": "number",
+            "title": "The remainingKilocalories schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "wellnessTotalKilocalories": {
+            "$id": "#/properties/wellnessTotalKilocalories",
+            "type": "number",
+            "title": "The wellnessTotalKilocalories schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "wellnessActiveKilocalories": {
+            "$id": "#/properties/wellnessActiveKilocalories",
+            "type": "number",
+            "title": "The wellnessActiveKilocalories schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "totalSteps": {
+            "$id": "#/properties/totalSteps",
+            "type": "integer",
+            "title": "The totalSteps schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "dailyStepGoal": {
+            "$id": "#/properties/dailyStepGoal",
+            "type": "integer",
+            "title": "The dailyStepGoal schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "netCalorieGoal": {
+            "$id": "#/properties/netCalorieGoal",
+            "type": "integer",
+            "title": "The netCalorieGoal schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "totalDistanceMeters": {
+            "$id": "#/properties/totalDistanceMeters",
+            "type": "integer",
+            "title": "The totalDistanceMeters schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "wellnessDistanceMeters": {
+            "$id": "#/properties/wellnessDistanceMeters",
+            "type": "integer",
+            "title": "The wellnessDistanceMeters schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "wellnessStartTimeGmt": {
+            "$id": "#/properties/wellnessStartTimeGmt",
+            "type": "object",
+            "title": "The wellnessStartTimeGmt schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "required": [
+                "date"
+            ],
+            "properties": {
+                "date": {
+                    "$id": "#/properties/wellnessStartTimeGmt/properties/date",
+                    "type": "string",
+                    "title": "The date schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": ""
+                }
+            },
+            "additionalProperties": true
+        },
+        "wellnessEndTimeGmt": {
+            "$id": "#/properties/wellnessEndTimeGmt",
+            "type": "object",
+            "title": "The wellnessEndTimeGmt schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "required": [
+                "date"
+            ],
+            "properties": {
+                "date": {
+                    "$id": "#/properties/wellnessEndTimeGmt/properties/date",
+                    "type": "string",
+                    "title": "The date schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": ""
+                }
+            },
+            "additionalProperties": true
+        },
+        "wellnessStartTimeLocal": {
+            "$id": "#/properties/wellnessStartTimeLocal",
+            "type": "object",
+            "title": "The wellnessStartTimeLocal schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "required": [
+                "date"
+            ],
+            "properties": {
+                "date": {
+                    "$id": "#/properties/wellnessStartTimeLocal/properties/date",
+                    "type": "string",
+                    "title": "The date schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": ""
+                }
+            },
+            "additionalProperties": true
+        },
+        "wellnessEndTimeLocal": {
+            "$id": "#/properties/wellnessEndTimeLocal",
+            "type": "object",
+            "title": "The wellnessEndTimeLocal schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "required": [
+                "date"
+            ],
+            "properties": {
+                "date": {
+                    "$id": "#/properties/wellnessEndTimeLocal/properties/date",
+                    "type": "string",
+                    "title": "The date schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": ""
+                }
+            },
+            "additionalProperties": true
+        },
+        "highlyActiveSeconds": {
+            "$id": "#/properties/highlyActiveSeconds",
+            "type": "integer",
+            "title": "The highlyActiveSeconds schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "activeSeconds": {
+            "$id": "#/properties/activeSeconds",
+            "type": "integer",
+            "title": "The activeSeconds schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "moderateIntensityMinutes": {
+            "$id": "#/properties/moderateIntensityMinutes",
+            "type": "integer",
+            "title": "The moderateIntensityMinutes schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "vigorousIntensityMinutes": {
+            "$id": "#/properties/vigorousIntensityMinutes",
+            "type": "integer",
+            "title": "The vigorousIntensityMinutes schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "floorsAscendedInMeters": {
+            "$id": "#/properties/floorsAscendedInMeters",
+            "type": "number",
+            "title": "The floorsAscendedInMeters schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "floorsDescendedInMeters": {
+            "$id": "#/properties/floorsDescendedInMeters",
+            "type": "number",
+            "title": "The floorsDescendedInMeters schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "userIntensityMinutesGoal": {
+            "$id": "#/properties/userIntensityMinutesGoal",
+            "type": "integer",
+            "title": "The userIntensityMinutesGoal schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "userFloorsAscendedGoal": {
+            "$id": "#/properties/userFloorsAscendedGoal",
+            "type": "integer",
+            "title": "The userFloorsAscendedGoal schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "minHeartRate": {
+            "$id": "#/properties/minHeartRate",
+            "type": "integer",
+            "title": "The minHeartRate schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "maxHeartRate": {
+            "$id": "#/properties/maxHeartRate",
+            "type": "integer",
+            "title": "The maxHeartRate schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "restingHeartRate": {
+            "$id": "#/properties/restingHeartRate",
+            "type": "integer",
+            "title": "The restingHeartRate schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "currentDayRestingHeartRate": {
+            "$id": "#/properties/currentDayRestingHeartRate",
+            "type": "integer",
+            "title": "The currentDayRestingHeartRate schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "restingHeartRateTimestamp": {
+            "$id": "#/properties/restingHeartRateTimestamp",
+            "type": "string",
+            "title": "The restingHeartRateTimestamp schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "includesWellnessData": {
+            "$id": "#/properties/includesWellnessData",
+            "type": "boolean",
+            "title": "The includesWellnessData schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": false
+        },
+        "includesActivityData": {
+            "$id": "#/properties/includesActivityData",
+            "type": "boolean",
+            "title": "The includesActivityData schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": false
+        },
+        "includesCalorieConsumedData": {
+            "$id": "#/properties/includesCalorieConsumedData",
+            "type": "boolean",
+            "title": "The includesCalorieConsumedData schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": false
+        },
+        "source": {
+            "$id": "#/properties/source",
+            "type": "integer",
+            "title": "The source schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "allDayStress": {
+            "$id": "#/properties/allDayStress",
+            "type": "object",
+            "title": "The allDayStress schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "required": [],
+            "additionalProperties": true
+        },
+        "minAvgHeartRate": {
+            "$id": "#/properties/minAvgHeartRate",
+            "type": "integer",
+            "title": "The minAvgHeartRate schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "maxAvgHeartRate": {
+            "$id": "#/properties/maxAvgHeartRate",
+            "type": "integer",
+            "title": "The maxAvgHeartRate schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "version": {
+            "$id": "#/properties/version",
+            "type": "integer",
+            "title": "The version schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        }
+    },
+    "additionalProperties": false
+}

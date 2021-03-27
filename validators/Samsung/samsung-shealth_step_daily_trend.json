@@ -1,0 +1,117 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#34",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "binning_data",
+        "update_time",
+        "create_time",
+        "source_pkg_name",
+        "source_type",
+        "count",
+        "speed",
+        "distance",
+        "calorie",
+        "deviceuuid",
+        "pkg_name",
+        "datauuid",
+        "day_time"
+    ],
+    "properties": {
+        "binning_data": {
+            "$id": "#/properties/binning_data",
+            "type": "string",
+            "title": "The binning_data schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "update_time": {
+            "$id": "#/properties/update_time",
+            "type": "string",
+            "title": "The update_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "create_time": {
+            "$id": "#/properties/create_time",
+            "type": "string",
+            "title": "The create_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "source_pkg_name": {
+            "$id": "#/properties/source_pkg_name",
+            "type": "string",
+            "title": "The source_pkg_name schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "source_type": {
+            "$id": "#/properties/source_type",
+            "type": "string",
+            "title": "The source_type schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "count": {
+            "$id": "#/properties/count",
+            "type": "string",
+            "title": "The count schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "speed": {
+            "$id": "#/properties/speed",
+            "type": "string",
+            "title": "The speed schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "distance": {
+            "$id": "#/properties/distance",
+            "type": "string",
+            "title": "The distance schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "calorie": {
+            "$id": "#/properties/calorie",
+            "type": "string",
+            "title": "The calorie schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "deviceuuid": {
+            "$id": "#/properties/deviceuuid",
+            "type": "string",
+            "title": "The deviceuuid schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "pkg_name": {
+            "$id": "#/properties/pkg_name",
+            "type": "string",
+            "title": "The pkg_name schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "datauuid": {
+            "$id": "#/properties/datauuid",
+            "type": "string",
+            "title": "The datauuid schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "day_time": {
+            "$id": "#/properties/day_time",
+            "type": "string",
+            "title": "The day_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        }
+    },
+    "additionalProperties": false
+}

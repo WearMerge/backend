@@ -1,0 +1,81 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#22",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "sleepStartTimestampGMT",
+        "sleepEndTimestampGMT",
+        "calendarDate",
+        "sleepWindowConfirmationType",
+        "retro"
+    ],
+    "properties": {
+        "sleepStartTimestampGMT": {
+            "$id": "#/properties/sleepStartTimestampGMT",
+            "type": "string",
+            "title": "The sleepStartTimestampGMT schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "sleepEndTimestampGMT": {
+            "$id": "#/properties/sleepEndTimestampGMT",
+            "type": "string",
+            "title": "The sleepEndTimestampGMT schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "calendarDate": {
+            "$id": "#/properties/calendarDate",
+            "type": "string",
+            "title": "The calendarDate schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "sleepWindowConfirmationType": {
+            "$id": "#/properties/sleepWindowConfirmationType",
+            "type": "string",
+            "title": "The sleepWindowConfirmationType schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "deepSleepSeconds": {
+            "$id": "#/properties/deepSleepSeconds",
+            "type": "integer",
+            "title": "The deepSleepSeconds schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "lightSleepSeconds": {
+            "$id": "#/properties/lightSleepSeconds",
+            "type": "integer",
+            "title": "The lightSleepSeconds schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "awakeSleepSeconds": {
+            "$id": "#/properties/awakeSleepSeconds",
+            "type": "integer",
+            "title": "The awakeSleepSeconds schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "unmeasurableSeconds": {
+            "$id": "#/properties/unmeasurableSeconds",
+            "type": "integer",
+            "title": "The unmeasurableSeconds schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "retro": {
+            "$id": "#/properties/retro",
+            "type": "boolean",
+            "title": "The retro schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": false
+        }
+    },
+    "additionalProperties": false
+}

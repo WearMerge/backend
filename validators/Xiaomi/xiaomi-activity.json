@@ -1,0 +1,61 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#3",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "date",
+        "lastSyncTime",
+        "steps",
+        "distance",
+        "runDistance",
+        "calories"
+    ],
+    "properties": {
+        "date": {
+            "$id": "#/properties/date",
+            "type": "string",
+            "title": "The date schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "lastSyncTime": {
+            "$id": "#/properties/lastSyncTime",
+            "type": "string",
+            "title": "The lastSyncTime schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "steps": {
+            "$id": "#/properties/steps",
+            "type": "string",
+            "title": "The steps schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "distance": {
+            "$id": "#/properties/distance",
+            "type": "string",
+            "title": "The distance schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "runDistance": {
+            "$id": "#/properties/runDistance",
+            "type": "string",
+            "title": "The runDistance schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "calories": {
+            "$id": "#/properties/calories",
+            "type": "string",
+            "title": "The calories schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        }
+    },
+    "additionalProperties": false
+}

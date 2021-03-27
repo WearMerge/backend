@@ -1,0 +1,69 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#9",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "userId",
+        "gender",
+        "height",
+        "weight",
+        "nickName",
+        "avatar",
+        "birthday"
+    ],
+    "properties": {
+        "userId": {
+            "$id": "#/properties/userId",
+            "type": "string",
+            "title": "The userId schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "gender": {
+            "$id": "#/properties/gender",
+            "type": "string",
+            "title": "The gender schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "height": {
+            "$id": "#/properties/height",
+            "type": "string",
+            "title": "The height schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "weight": {
+            "$id": "#/properties/weight",
+            "type": "string",
+            "title": "The weight schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "nickName": {
+            "$id": "#/properties/nickName",
+            "type": "string",
+            "title": "The nickName schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "avatar": {
+            "$id": "#/properties/avatar",
+            "type": "string",
+            "title": "The avatar schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "birthday": {
+            "$id": "#/properties/birthday",
+            "type": "string",
+            "title": "The birthday schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        }
+    },
+    "additionalProperties": false
+}

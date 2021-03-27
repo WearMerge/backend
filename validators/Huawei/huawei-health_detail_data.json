@@ -1,0 +1,151 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#24",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "recordId",
+        "healthDataSource",
+        "appType",
+        "timeZone",
+        "startTime",
+        "deviceCode",
+        "endTime",
+        "type",
+        "samplePoints",
+        "version"
+    ],
+    "properties": {
+        "recordId": {
+            "$id": "#/properties/recordId",
+            "type": "string",
+            "title": "The recordId schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "healthDataSource": {
+            "$id": "#/properties/healthDataSource",
+            "type": "integer",
+            "title": "The healthDataSource schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "appType": {
+            "$id": "#/properties/appType",
+            "type": "integer",
+            "title": "The appType schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "timeZone": {
+            "$id": "#/properties/timeZone",
+            "type": "string",
+            "title": "The timeZone schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "startTime": {
+            "$id": "#/properties/startTime",
+            "type": "integer",
+            "title": "The startTime schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "deviceCode": {
+            "$id": "#/properties/deviceCode",
+            "type": "integer",
+            "title": "The deviceCode schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "endTime": {
+            "$id": "#/properties/endTime",
+            "type": "integer",
+            "title": "The endTime schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "type": {
+            "$id": "#/properties/type",
+            "type": "integer",
+            "title": "The type schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "samplePoints": {
+            "$id": "#/properties/samplePoints",
+            "type": "array",
+            "title": "The samplePoints schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": [],
+            "additionalItems": true,
+            "items": {
+                "$id": "#/properties/samplePoints/items",
+                "anyOf": [
+                    {
+                        "$id": "#/properties/samplePoints/items/anyOf/0",
+                        "type": "object",
+                        "title": "The first anyOf schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": {},
+                        "required": [
+                            "unit",
+                            "startTime",
+                            "endTime",
+                            "value",
+                            "key"
+                        ],
+                        "properties": {
+                            "unit": {
+                                "$id": "#/properties/samplePoints/items/anyOf/0/properties/unit",
+                                "type": "string",
+                                "title": "The unit schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": ""
+                            },
+                            "startTime": {
+                                "$id": "#/properties/samplePoints/items/anyOf/0/properties/startTime",
+                                "type": "integer",
+                                "title": "The startTime schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0
+                            },
+                            "endTime": {
+                                "$id": "#/properties/samplePoints/items/anyOf/0/properties/endTime",
+                                "type": "integer",
+                                "title": "The endTime schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0
+                            },
+                            "value": {
+                                "$id": "#/properties/samplePoints/items/anyOf/0/properties/value",
+                                "type": "string",
+                                "title": "The value schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": ""
+                            },
+                            "key": {
+                                "$id": "#/properties/samplePoints/items/anyOf/0/properties/key",
+                                "type": "string",
+                                "title": "The key schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": ""
+                            }
+                        },
+                        "additionalProperties": true
+                    }
+                ]
+            }
+        },
+        "version": {
+            "$id": "#/properties/version",
+            "type": "integer",
+            "title": "The version schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        }
+    },
+    "additionalProperties": false
+}

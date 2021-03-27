@@ -1,0 +1,37 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#1",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "date",
+        "time",
+        "steps"
+    ],
+    "properties": {
+        "date": {
+            "$id": "#/properties/date",
+            "type": "string",
+            "title": "The date schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "time": {
+            "$id": "#/properties/time",
+            "type": "string",
+            "title": "The time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "steps": {
+            "$id": "#/properties/steps",
+            "type": "string",
+            "title": "The steps schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        }
+    },
+    "additionalProperties": false
+}

@@ -1,0 +1,101 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#4",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "timestamp",
+        "weight",
+        "height",
+        "bmi",
+        "fatRate",
+        "bodyWaterRate",
+        "boneMass",
+        "metabolism",
+        "muscleRate",
+        "visceralFat",
+        "impedance"
+    ],
+    "properties": {
+        "timestamp": {
+            "$id": "#/properties/timestamp",
+            "type": "string",
+            "title": "The timestamp schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "weight": {
+            "$id": "#/properties/weight",
+            "type": "string",
+            "title": "The weight schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "height": {
+            "$id": "#/properties/height",
+            "type": "string",
+            "title": "The height schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "bmi": {
+            "$id": "#/properties/bmi",
+            "type": "string",
+            "title": "The bmi schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "fatRate": {
+            "$id": "#/properties/fatRate",
+            "type": "string",
+            "title": "The fatRate schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "bodyWaterRate": {
+            "$id": "#/properties/bodyWaterRate",
+            "type": "string",
+            "title": "The bodyWaterRate schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "boneMass": {
+            "$id": "#/properties/boneMass",
+            "type": "string",
+            "title": "The boneMass schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "metabolism": {
+            "$id": "#/properties/metabolism",
+            "type": "string",
+            "title": "The metabolism schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "muscleRate": {
+            "$id": "#/properties/muscleRate",
+            "type": "string",
+            "title": "The muscleRate schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "visceralFat": {
+            "$id": "#/properties/visceralFat",
+            "type": "string",
+            "title": "The visceralFat schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "impedance": {
+            "$id": "#/properties/impedance",
+            "type": "string",
+            "title": "The impedance schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        }
+    },
+    "additionalProperties": false
+}

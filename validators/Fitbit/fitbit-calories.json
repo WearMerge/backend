@@ -1,0 +1,37 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#15",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "calories",
+        "dateTime",
+        "value"
+    ],
+    "properties": {
+        "calories": {
+            "$id": "#/properties/calories",
+            "type": "string",
+            "title": "The calories schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "dateTime": {
+            "$id": "#/properties/dateTime",
+            "type": "string",
+            "title": "The dateTime schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "value": {
+            "$id": "#/properties/value",
+            "type": "string",
+            "title": "The value schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        }
+    },
+    "additionalProperties": false
+}

@@ -1,0 +1,101 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#19",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "userName",
+        "firstName",
+        "lastName",
+        "emailAddress",
+        "gender",
+        "birthDate",
+        "height",
+        "weight",
+        "activityClass",
+        "vo2Max",
+        "vo2MaxCycling"
+    ],
+    "properties": {
+        "userName": {
+            "$id": "#/properties/userName",
+            "type": "string",
+            "title": "The userName schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "firstName": {
+            "$id": "#/properties/firstName",
+            "type": "string",
+            "title": "The firstName schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "lastName": {
+            "$id": "#/properties/lastName",
+            "type": "string",
+            "title": "The lastName schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "emailAddress": {
+            "$id": "#/properties/emailAddress",
+            "type": "string",
+            "title": "The emailAddress schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "gender": {
+            "$id": "#/properties/gender",
+            "type": "string",
+            "title": "The gender schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "birthDate": {
+            "$id": "#/properties/birthDate",
+            "type": "string",
+            "title": "The birthDate schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "height": {
+            "$id": "#/properties/height",
+            "type": "number",
+            "title": "The height schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "weight": {
+            "$id": "#/properties/weight",
+            "type": "number",
+            "title": "The weight schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "activityClass": {
+            "$id": "#/properties/activityClass",
+            "type": "integer",
+            "title": "The activityClass schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "vo2Max": {
+            "$id": "#/properties/vo2Max",
+            "type": "number",
+            "title": "The vo2Max schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "vo2MaxCycling": {
+            "$id": "#/properties/vo2MaxCycling",
+            "type": "number",
+            "title": "The vo2MaxCycling schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        }
+    },
+    "additionalProperties": false
+}

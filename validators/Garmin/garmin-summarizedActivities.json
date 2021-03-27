@@ -1,0 +1,417 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#21",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "activityId",
+        "uuidMsb",
+        "uuidLsb",
+        "name",
+        "activityType",
+        "userProfileId",
+        "timeZoneId",
+        "beginTimestamp",
+        "eventTypeId",
+        "rule",
+        "sportType",
+        "startTimeGmt",
+        "startTimeLocal",
+        "duration",
+        "distance",
+        "elevationGain",
+        "elevationLoss",
+        "avgSpeed",
+        "maxSpeed",
+        "avgHr",
+        "maxHr",
+        "calories",
+        "startLongitude",
+        "startLatitude",
+        "aerobicTrainingEffect",
+        "avgFractionalCadence",
+        "maxFractionalCadence",
+        "elapsedDuration",
+        "movingDuration",
+        "deviceId",
+        "minTemperature",
+        "maxTemperature",
+        "minElevation",
+        "maxElevation",
+        "locationName",
+        "summarizedDiveInfo",
+        "maxVerticalSpeed",
+        "lapCount",
+        "parent",
+        "purposeful",
+        "autoCalcCalories",
+        "favorite",
+        "pr",
+        "elevationCorrected",
+        "atpActivity"
+    ],
+    "properties": {
+        "activityId": {
+            "$id": "#/properties/activityId",
+            "type": "integer",
+            "title": "The activityId schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "uuidMsb": {
+            "$id": "#/properties/uuidMsb",
+            "type": "integer",
+            "title": "The uuidMsb schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "uuidLsb": {
+            "$id": "#/properties/uuidLsb",
+            "type": "integer",
+            "title": "The uuidLsb schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "name": {
+            "$id": "#/properties/name",
+            "type": "string",
+            "title": "The name schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "activityType": {
+            "$id": "#/properties/activityType",
+            "type": "string",
+            "title": "The activityType schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "userProfileId": {
+            "$id": "#/properties/userProfileId",
+            "type": "integer",
+            "title": "The userProfileId schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "timeZoneId": {
+            "$id": "#/properties/timeZoneId",
+            "type": "integer",
+            "title": "The timeZoneId schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "beginTimestamp": {
+            "$id": "#/properties/beginTimestamp",
+            "type": "integer",
+            "title": "The beginTimestamp schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "eventTypeId": {
+            "$id": "#/properties/eventTypeId",
+            "type": "integer",
+            "title": "The eventTypeId schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "rule": {
+            "$id": "#/properties/rule",
+            "type": "string",
+            "title": "The rule schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "sportType": {
+            "$id": "#/properties/sportType",
+            "type": "string",
+            "title": "The sportType schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "startTimeGmt": {
+            "$id": "#/properties/startTimeGmt",
+            "type": "number",
+            "title": "The startTimeGmt schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "startTimeLocal": {
+            "$id": "#/properties/startTimeLocal",
+            "type": "number",
+            "title": "The startTimeLocal schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "duration": {
+            "$id": "#/properties/duration",
+            "type": "number",
+            "title": "The duration schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "distance": {
+            "$id": "#/properties/distance",
+            "type": "number",
+            "title": "The distance schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "elevationGain": {
+            "$id": "#/properties/elevationGain",
+            "type": "number",
+            "title": "The elevationGain schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "elevationLoss": {
+            "$id": "#/properties/elevationLoss",
+            "type": "number",
+            "title": "The elevationLoss schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "avgSpeed": {
+            "$id": "#/properties/avgSpeed",
+            "type": "number",
+            "title": "The avgSpeed schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "maxSpeed": {
+            "$id": "#/properties/maxSpeed",
+            "type": "number",
+            "title": "The maxSpeed schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "avgHr": {
+            "$id": "#/properties/avgHr",
+            "type": "number",
+            "title": "The avgHr schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "maxHr": {
+            "$id": "#/properties/maxHr",
+            "type": "number",
+            "title": "The maxHr schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "maxRunCadence": {
+            "$id": "#/properties/maxRunCadence",
+            "type": "number",
+            "title": "The maxRunCadence schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "steps": {
+            "$id": "#/properties/steps",
+            "type": "number",
+            "title": "The steps schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "calories": {
+            "$id": "#/properties/calories",
+            "type": "number",
+            "title": "The calories schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "startLongitude": {
+            "$id": "#/properties/startLongitude",
+            "type": "number",
+            "title": "The startLongitude schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "startLatitude": {
+            "$id": "#/properties/startLatitude",
+            "type": "number",
+            "title": "The startLatitude schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "aerobicTrainingEffect": {
+            "$id": "#/properties/aerobicTrainingEffect",
+            "type": "number",
+            "title": "The aerobicTrainingEffect schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "avgStrideLength": {
+            "$id": "#/properties/avgStrideLength",
+            "type": "number",
+            "title": "The avgStrideLength schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "avgFractionalCadence": {
+            "$id": "#/properties/avgFractionalCadence",
+            "type": "number",
+            "title": "The avgFractionalCadence schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "maxFractionalCadence": {
+            "$id": "#/properties/maxFractionalCadence",
+            "type": "number",
+            "title": "The maxFractionalCadence schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "elapsedDuration": {
+            "$id": "#/properties/elapsedDuration",
+            "type": "number",
+            "title": "The elapsedDuration schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "movingDuration": {
+            "$id": "#/properties/movingDuration",
+            "type": "number",
+            "title": "The movingDuration schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "deviceId": {
+            "$id": "#/properties/deviceId",
+            "type": "integer",
+            "title": "The deviceId schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "minTemperature": {
+            "$id": "#/properties/minTemperature",
+            "type": "number",
+            "title": "The minTemperature schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "maxTemperature": {
+            "$id": "#/properties/maxTemperature",
+            "type": "number",
+            "title": "The maxTemperature schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "minElevation": {
+            "$id": "#/properties/minElevation",
+            "type": "number",
+            "title": "The minElevation schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "maxElevation": {
+            "$id": "#/properties/maxElevation",
+            "type": "number",
+            "title": "The maxElevation schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "avgDoubleCadence": {
+            "$id": "#/properties/avgDoubleCadence",
+            "type": "number",
+            "title": "The avgDoubleCadence schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "maxDoubleCadence": {
+            "$id": "#/properties/maxDoubleCadence",
+            "type": "number",
+            "title": "The maxDoubleCadence schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "locationName": {
+            "$id": "#/properties/locationName",
+            "type": "string",
+            "title": "The locationName schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "summarizedDiveInfo": {
+            "$id": "#/properties/summarizedDiveInfo",
+            "type": "object",
+            "title": "The summarizedDiveInfo schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "required": [],
+            "additionalProperties": true
+        },
+        "maxVerticalSpeed": {
+            "$id": "#/properties/maxVerticalSpeed",
+            "type": "number",
+            "title": "The maxVerticalSpeed schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "manufacturer": {
+            "$id": "#/properties/manufacturer",
+            "type": "string",
+            "title": "The manufacturer schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "lapCount": {
+            "$id": "#/properties/lapCount",
+            "type": "integer",
+            "title": "The lapCount schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "parent": {
+            "$id": "#/properties/parent",
+            "type": "boolean",
+            "title": "The parent schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": false
+        },
+        "purposeful": {
+            "$id": "#/properties/purposeful",
+            "type": "boolean",
+            "title": "The purposeful schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": false
+        },
+        "autoCalcCalories": {
+            "$id": "#/properties/autoCalcCalories",
+            "type": "boolean",
+            "title": "The autoCalcCalories schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": false
+        },
+        "favorite": {
+            "$id": "#/properties/favorite",
+            "type": "boolean",
+            "title": "The favorite schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": false
+        },
+        "pr": {
+            "$id": "#/properties/pr",
+            "type": "boolean",
+            "title": "The pr schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": false
+        },
+        "elevationCorrected": {
+            "$id": "#/properties/elevationCorrected",
+            "type": "boolean",
+            "title": "The elevationCorrected schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": false
+        },
+        "atpActivity": {
+            "$id": "#/properties/atpActivity",
+            "type": "boolean",
+            "title": "The atpActivity schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": false
+        }
+    },
+    "additionalProperties": false
+}

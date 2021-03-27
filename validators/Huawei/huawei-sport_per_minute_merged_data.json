@@ -1,0 +1,151 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#23",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "appType",
+        "sportType",
+        "timeZone",
+        "startTime",
+        "endTime",
+        "deviceCode",
+        "sportBasicInfos",
+        "version"
+    ],
+    "properties": {
+        "appType": {
+            "$id": "#/properties/appType",
+            "type": "integer",
+            "title": "The appType schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "sportType": {
+            "$id": "#/properties/sportType",
+            "type": "integer",
+            "title": "The sportType schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "timeZone": {
+            "$id": "#/properties/timeZone",
+            "type": "string",
+            "title": "The timeZone schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "startTime": {
+            "$id": "#/properties/startTime",
+            "type": "integer",
+            "title": "The startTime schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "endTime": {
+            "$id": "#/properties/endTime",
+            "type": "integer",
+            "title": "The endTime schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "deviceCode": {
+            "$id": "#/properties/deviceCode",
+            "type": "integer",
+            "title": "The deviceCode schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "sportBasicInfos": {
+            "$id": "#/properties/sportBasicInfos",
+            "type": "array",
+            "title": "The sportBasicInfos schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": [],
+            "additionalItems": true,
+            "items": {
+                "$id": "#/properties/sportBasicInfos/items",
+                "anyOf": [
+                    {
+                        "$id": "#/properties/sportBasicInfos/items/anyOf/0",
+                        "type": "object",
+                        "title": "The first anyOf schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": {},
+                        "required": [
+                            "duration",
+                            "altitude",
+                            "distance",
+                            "calorie",
+                            "count",
+                            "floor",
+                            "steps"
+                        ],
+                        "properties": {
+                            "duration": {
+                                "$id": "#/properties/sportBasicInfos/items/anyOf/0/properties/duration",
+                                "type": "integer",
+                                "title": "The duration schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0
+                            },
+                            "altitude": {
+                                "$id": "#/properties/sportBasicInfos/items/anyOf/0/properties/altitude",
+                                "type": "number",
+                                "title": "The altitude schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0.0
+                            },
+                            "distance": {
+                                "$id": "#/properties/sportBasicInfos/items/anyOf/0/properties/distance",
+                                "type": "integer",
+                                "title": "The distance schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0
+                            },
+                            "calorie": {
+                                "$id": "#/properties/sportBasicInfos/items/anyOf/0/properties/calorie",
+                                "type": "integer",
+                                "title": "The calorie schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0
+                            },
+                            "count": {
+                                "$id": "#/properties/sportBasicInfos/items/anyOf/0/properties/count",
+                                "type": "integer",
+                                "title": "The count schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0
+                            },
+                            "floor": {
+                                "$id": "#/properties/sportBasicInfos/items/anyOf/0/properties/floor",
+                                "type": "integer",
+                                "title": "The floor schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0
+                            },
+                            "steps": {
+                                "$id": "#/properties/sportBasicInfos/items/anyOf/0/properties/steps",
+                                "type": "integer",
+                                "title": "The steps schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0
+                            }
+                        },
+                        "additionalProperties": true
+                    }
+                ]
+            }
+        },
+        "version": {
+            "$id": "#/properties/version",
+            "type": "integer",
+            "title": "The version schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        }
+    },
+    "additionalProperties": false
+}

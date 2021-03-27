@@ -1,0 +1,157 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#36",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "duration",
+        "version_code",
+        "run_step",
+        "walk_step",
+        "com.samsung.health.step_count.start_time",
+        "com.samsung.health.step_count.sample_position_type",
+        "com.samsung.health.step_count.custom",
+        "com.samsung.health.step_count.update_time",
+        "com.samsung.health.step_count.create_time",
+        "com.samsung.health.step_count.count",
+        "com.samsung.health.step_count.speed",
+        "com.samsung.health.step_count.distance",
+        "com.samsung.health.step_count.calorie",
+        "com.samsung.health.step_count.time_offset",
+        "com.samsung.health.step_count.deviceuuid",
+        "com.samsung.health.step_count.pkg_name",
+        "com.samsung.health.step_count.end_time",
+        "com.samsung.health.step_count.datauuid"
+    ],
+    "properties": {
+        "duration": {
+            "$id": "#/properties/duration",
+            "type": "string",
+            "title": "The duration schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "version_code": {
+            "$id": "#/properties/version_code",
+            "type": "string",
+            "title": "The version_code schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "run_step": {
+            "$id": "#/properties/run_step",
+            "type": "string",
+            "title": "The run_step schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "walk_step": {
+            "$id": "#/properties/walk_step",
+            "type": "string",
+            "title": "The walk_step schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.step_count.start_time": {
+            "$id": "#/properties/com.samsung.health.step_count.start_time",
+            "type": "string",
+            "title": "The com.samsung.health.step_count.start_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.step_count.sample_position_type": {
+            "$id": "#/properties/com.samsung.health.step_count.sample_position_type",
+            "type": "string",
+            "title": "The com.samsung.health.step_count.sample_position_type schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.step_count.custom": {
+            "$id": "#/properties/com.samsung.health.step_count.custom",
+            "type": "string",
+            "title": "The com.samsung.health.step_count.custom schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.step_count.update_time": {
+            "$id": "#/properties/com.samsung.health.step_count.update_time",
+            "type": "string",
+            "title": "The com.samsung.health.step_count.update_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.step_count.create_time": {
+            "$id": "#/properties/com.samsung.health.step_count.create_time",
+            "type": "string",
+            "title": "The com.samsung.health.step_count.create_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.step_count.count": {
+            "$id": "#/properties/com.samsung.health.step_count.count",
+            "type": "string",
+            "title": "The com.samsung.health.step_count.count schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.step_count.speed": {
+            "$id": "#/properties/com.samsung.health.step_count.speed",
+            "type": "string",
+            "title": "The com.samsung.health.step_count.speed schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.step_count.distance": {
+            "$id": "#/properties/com.samsung.health.step_count.distance",
+            "type": "string",
+            "title": "The com.samsung.health.step_count.distance schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.step_count.calorie": {
+            "$id": "#/properties/com.samsung.health.step_count.calorie",
+            "type": "string",
+            "title": "The com.samsung.health.step_count.calorie schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.step_count.time_offset": {
+            "$id": "#/properties/com.samsung.health.step_count.time_offset",
+            "type": "string",
+            "title": "The com.samsung.health.step_count.time_offset schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.step_count.deviceuuid": {
+            "$id": "#/properties/com.samsung.health.step_count.deviceuuid",
+            "type": "string",
+            "title": "The com.samsung.health.step_count.deviceuuid schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.step_count.pkg_name": {
+            "$id": "#/properties/com.samsung.health.step_count.pkg_name",
+            "type": "string",
+            "title": "The com.samsung.health.step_count.pkg_name schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.step_count.end_time": {
+            "$id": "#/properties/com.samsung.health.step_count.end_time",
+            "type": "string",
+            "title": "The com.samsung.health.step_count.end_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.step_count.datauuid": {
+            "$id": "#/properties/com.samsung.health.step_count.datauuid",
+            "type": "string",
+            "title": "The com.samsung.health.step_count.datauuid schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        }
+    },
+    "additionalProperties": false
+}

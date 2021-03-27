@@ -1,0 +1,116 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#29",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "workoutActivityType",
+        "duration",
+        "durationUnit",
+        "totalDistance",
+        "totalDistanceUnit",
+        "totalEnergyBurned",
+        "totalEnergyBurnedUnit",
+        "sourceName",
+        "sourceVersion",
+        "creationDate",
+        "startDate",
+        "endDate"
+    ],
+    "properties": {
+        "workoutActivityType": {
+            "$id": "#/properties/workoutActivityType",
+            "type": "string",
+            "title": "The workoutActivityType schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "duration": {
+            "$id": "#/properties/duration",
+            "type": "string",
+            "title": "The duration schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "durationUnit": {
+            "$id": "#/properties/durationUnit",
+            "type": "string",
+            "title": "The durationUnit schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "totalDistance": {
+            "$id": "#/properties/totalDistance",
+            "type": "string",
+            "title": "The totalDistance schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "totalDistanceUnit": {
+            "$id": "#/properties/totalDistanceUnit",
+            "type": "string",
+            "title": "The totalDistanceUnit schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "totalEnergyBurned": {
+            "$id": "#/properties/totalEnergyBurned",
+            "type": "string",
+            "title": "The totalEnergyBurned schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "totalEnergyBurnedUnit": {
+            "$id": "#/properties/totalEnergyBurnedUnit",
+            "type": "string",
+            "title": "The totalEnergyBurnedUnit schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "sourceName": {
+            "$id": "#/properties/sourceName",
+            "type": "string",
+            "title": "The sourceName schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "sourceVersion": {
+            "$id": "#/properties/sourceVersion",
+            "type": "string",
+            "title": "The sourceVersion schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "creationDate": {
+            "$id": "#/properties/creationDate",
+            "type": "string",
+            "title": "The creationDate schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "startDate": {
+            "$id": "#/properties/startDate",
+            "type": "string",
+            "title": "The startDate schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "endDate": {
+            "$id": "#/properties/endDate",
+            "type": "string",
+            "title": "The endDate schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "children": {
+            "$id": "#/properties/children",
+            "type": "array",
+            "title": "The children schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        }
+    },
+    "additionalProperties": false
+}

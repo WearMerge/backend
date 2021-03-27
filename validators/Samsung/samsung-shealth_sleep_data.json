@@ -1,0 +1,101 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#32",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "start_time",
+        "update_time",
+        "create_time",
+        "sleep_uuid",
+        "sleep_status",
+        "time_offset",
+        "deviceuuid",
+        "comment",
+        "pkg_name",
+        "json_version",
+        "datauuid"
+    ],
+    "properties": {
+        "start_time": {
+            "$id": "#/properties/start_time",
+            "type": "string",
+            "title": "The start_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "update_time": {
+            "$id": "#/properties/update_time",
+            "type": "string",
+            "title": "The update_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "create_time": {
+            "$id": "#/properties/create_time",
+            "type": "string",
+            "title": "The create_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "sleep_uuid": {
+            "$id": "#/properties/sleep_uuid",
+            "type": "string",
+            "title": "The sleep_uuid schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "sleep_status": {
+            "$id": "#/properties/sleep_status",
+            "type": "string",
+            "title": "The sleep_status schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "time_offset": {
+            "$id": "#/properties/time_offset",
+            "type": "string",
+            "title": "The time_offset schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "deviceuuid": {
+            "$id": "#/properties/deviceuuid",
+            "type": "string",
+            "title": "The deviceuuid schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "comment": {
+            "$id": "#/properties/comment",
+            "type": "string",
+            "title": "The comment schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "pkg_name": {
+            "$id": "#/properties/pkg_name",
+            "type": "string",
+            "title": "The pkg_name schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "json_version": {
+            "$id": "#/properties/json_version",
+            "type": "string",
+            "title": "The json_version schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "datauuid": {
+            "$id": "#/properties/datauuid",
+            "type": "string",
+            "title": "The datauuid schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        }
+    },
+    "additionalProperties": false
+}

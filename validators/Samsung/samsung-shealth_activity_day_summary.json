@@ -1,0 +1,157 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#30",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "step_count",
+        "active_time",
+        "others_time",
+        "update_time",
+        "create_time",
+        "goal",
+        "longest_active_time",
+        "score",
+        "distance",
+        "calorie",
+        "extra_data",
+        "deviceuuid",
+        "run_time",
+        "pkg_name",
+        "walk_time",
+        "longest_idle_time",
+        "datauuid",
+        "day_time"
+    ],
+    "properties": {
+        "step_count": {
+            "$id": "#/properties/step_count",
+            "type": "string",
+            "title": "The step_count schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "active_time": {
+            "$id": "#/properties/active_time",
+            "type": "string",
+            "title": "The active_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "others_time": {
+            "$id": "#/properties/others_time",
+            "type": "string",
+            "title": "The others_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "update_time": {
+            "$id": "#/properties/update_time",
+            "type": "string",
+            "title": "The update_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "create_time": {
+            "$id": "#/properties/create_time",
+            "type": "string",
+            "title": "The create_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "goal": {
+            "$id": "#/properties/goal",
+            "type": "string",
+            "title": "The goal schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "longest_active_time": {
+            "$id": "#/properties/longest_active_time",
+            "type": "string",
+            "title": "The longest_active_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "score": {
+            "$id": "#/properties/score",
+            "type": "string",
+            "title": "The score schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "distance": {
+            "$id": "#/properties/distance",
+            "type": "string",
+            "title": "The distance schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "calorie": {
+            "$id": "#/properties/calorie",
+            "type": "string",
+            "title": "The calorie schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "extra_data": {
+            "$id": "#/properties/extra_data",
+            "type": "string",
+            "title": "The extra_data schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "deviceuuid": {
+            "$id": "#/properties/deviceuuid",
+            "type": "string",
+            "title": "The deviceuuid schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "run_time": {
+            "$id": "#/properties/run_time",
+            "type": "string",
+            "title": "The run_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "pkg_name": {
+            "$id": "#/properties/pkg_name",
+            "type": "string",
+            "title": "The pkg_name schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "walk_time": {
+            "$id": "#/properties/walk_time",
+            "type": "string",
+            "title": "The walk_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "longest_idle_time": {
+            "$id": "#/properties/longest_idle_time",
+            "type": "string",
+            "title": "The longest_idle_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "datauuid": {
+            "$id": "#/properties/datauuid",
+            "type": "string",
+            "title": "The datauuid schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "day_time": {
+            "$id": "#/properties/day_time",
+            "type": "string",
+            "title": "The day_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        }
+    },
+    "additionalProperties": false
+}

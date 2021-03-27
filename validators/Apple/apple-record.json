@@ -1,0 +1,91 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#38",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "type",
+        "sourceName",
+        "sourceVersion",
+        "unit",
+        "creationDate",
+        "startDate",
+        "endDate",
+        "value"
+    ],
+    "properties": {
+        "type": {
+            "$id": "#/properties/type",
+            "type": "string",
+            "title": "The type schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "sourceName": {
+            "$id": "#/properties/sourceName",
+            "type": "string",
+            "title": "The sourceName schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "sourceVersion": {
+            "$id": "#/properties/sourceVersion",
+            "type": "string",
+            "title": "The sourceVersion schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "device": {
+            "$id": "#/properties/device",
+            "type": "string",
+            "title": "The device schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "unit": {
+            "$id": "#/properties/unit",
+            "type": "string",
+            "title": "The unit schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "creationDate": {
+            "$id": "#/properties/creationDate",
+            "type": "string",
+            "title": "The creationDate schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "startDate": {
+            "$id": "#/properties/startDate",
+            "type": "string",
+            "title": "The startDate schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "endDate": {
+            "$id": "#/properties/endDate",
+            "type": "string",
+            "title": "The endDate schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "value": {
+            "$id": "#/properties/value",
+            "type": "string",
+            "title": "The value schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "children": {
+            "$id": "#/properties/children",
+            "type": "array",
+            "title": "The children schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        }
+    },
+    "additionalProperties": false
+}

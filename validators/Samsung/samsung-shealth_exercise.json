@@ -1,0 +1,485 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#31",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "live_data_internal",
+        "mission_value",
+        "subset_data",
+        "total_calorie",
+        "completion_status",
+        "pace_info_id",
+        "pace_live_data",
+        "sensing_status",
+        "source_type",
+        "mission_type",
+        "tracking_status",
+        "program_id",
+        "reward_status",
+        "heart_rate_sample_count",
+        "mission_extra_value",
+        "program_schedule_id",
+        "heart_rate_deviceuuid",
+        "location_data_internal",
+        "additional_internal",
+        "com.samsung.health.exercise.duration",
+        "com.samsung.health.exercise.additional",
+        "com.samsung.health.exercise.mean_caloricburn_rate",
+        "com.samsung.health.exercise.location_data",
+        "com.samsung.health.exercise.start_time",
+        "com.samsung.health.exercise.exercise_type",
+        "com.samsung.health.exercise.custom",
+        "com.samsung.health.exercise.max_altitude",
+        "com.samsung.health.exercise.incline_distance",
+        "com.samsung.health.exercise.mean_heart_rate",
+        "com.samsung.health.exercise.count_type",
+        "com.samsung.health.exercise.mean_rpm",
+        "com.samsung.health.exercise.min_altitude",
+        "com.samsung.health.exercise.max_heart_rate",
+        "com.samsung.health.exercise.update_time",
+        "com.samsung.health.exercise.create_time",
+        "com.samsung.health.exercise.max_power",
+        "com.samsung.health.exercise.max_speed",
+        "com.samsung.health.exercise.mean_cadence",
+        "com.samsung.health.exercise.min_heart_rate",
+        "com.samsung.health.exercise.count",
+        "com.samsung.health.exercise.distance",
+        "com.samsung.health.exercise.max_caloricburn_rate",
+        "com.samsung.health.exercise.calorie",
+        "com.samsung.health.exercise.max_cadence",
+        "com.samsung.health.exercise.decline_distance",
+        "com.samsung.health.exercise.vo2_max",
+        "com.samsung.health.exercise.time_offset",
+        "com.samsung.health.exercise.deviceuuid",
+        "com.samsung.health.exercise.max_rpm",
+        "com.samsung.health.exercise.comment",
+        "com.samsung.health.exercise.live_data",
+        "com.samsung.health.exercise.mean_power",
+        "com.samsung.health.exercise.mean_speed",
+        "com.samsung.health.exercise.pkg_name",
+        "com.samsung.health.exercise.altitude_gain",
+        "com.samsung.health.exercise.altitude_loss",
+        "com.samsung.health.exercise.exercise_custom_type",
+        "com.samsung.health.exercise.end_time",
+        "com.samsung.health.exercise.datauuid"
+    ],
+    "properties": {
+        "live_data_internal": {
+            "$id": "#/properties/live_data_internal",
+            "type": "string",
+            "title": "The live_data_internal schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "mission_value": {
+            "$id": "#/properties/mission_value",
+            "type": "string",
+            "title": "The mission_value schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "subset_data": {
+            "$id": "#/properties/subset_data",
+            "type": "string",
+            "title": "The subset_data schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "total_calorie": {
+            "$id": "#/properties/total_calorie",
+            "type": "string",
+            "title": "The total_calorie schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "completion_status": {
+            "$id": "#/properties/completion_status",
+            "type": "string",
+            "title": "The completion_status schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "pace_info_id": {
+            "$id": "#/properties/pace_info_id",
+            "type": "string",
+            "title": "The pace_info_id schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "pace_live_data": {
+            "$id": "#/properties/pace_live_data",
+            "type": "string",
+            "title": "The pace_live_data schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "sensing_status": {
+            "$id": "#/properties/sensing_status",
+            "type": "string",
+            "title": "The sensing_status schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "source_type": {
+            "$id": "#/properties/source_type",
+            "type": "string",
+            "title": "The source_type schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "mission_type": {
+            "$id": "#/properties/mission_type",
+            "type": "string",
+            "title": "The mission_type schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "tracking_status": {
+            "$id": "#/properties/tracking_status",
+            "type": "string",
+            "title": "The tracking_status schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "program_id": {
+            "$id": "#/properties/program_id",
+            "type": "string",
+            "title": "The program_id schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "reward_status": {
+            "$id": "#/properties/reward_status",
+            "type": "string",
+            "title": "The reward_status schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "heart_rate_sample_count": {
+            "$id": "#/properties/heart_rate_sample_count",
+            "type": "string",
+            "title": "The heart_rate_sample_count schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "mission_extra_value": {
+            "$id": "#/properties/mission_extra_value",
+            "type": "string",
+            "title": "The mission_extra_value schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "program_schedule_id": {
+            "$id": "#/properties/program_schedule_id",
+            "type": "string",
+            "title": "The program_schedule_id schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "heart_rate_deviceuuid": {
+            "$id": "#/properties/heart_rate_deviceuuid",
+            "type": "string",
+            "title": "The heart_rate_deviceuuid schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "location_data_internal": {
+            "$id": "#/properties/location_data_internal",
+            "type": "string",
+            "title": "The location_data_internal schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "additional_internal": {
+            "$id": "#/properties/additional_internal",
+            "type": "string",
+            "title": "The additional_internal schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.duration": {
+            "$id": "#/properties/com.samsung.health.exercise.duration",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.duration schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.additional": {
+            "$id": "#/properties/com.samsung.health.exercise.additional",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.additional schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.mean_caloricburn_rate": {
+            "$id": "#/properties/com.samsung.health.exercise.mean_caloricburn_rate",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.mean_caloricburn_rate schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.location_data": {
+            "$id": "#/properties/com.samsung.health.exercise.location_data",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.location_data schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.start_time": {
+            "$id": "#/properties/com.samsung.health.exercise.start_time",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.start_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.exercise_type": {
+            "$id": "#/properties/com.samsung.health.exercise.exercise_type",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.exercise_type schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.custom": {
+            "$id": "#/properties/com.samsung.health.exercise.custom",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.custom schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.max_altitude": {
+            "$id": "#/properties/com.samsung.health.exercise.max_altitude",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.max_altitude schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.incline_distance": {
+            "$id": "#/properties/com.samsung.health.exercise.incline_distance",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.incline_distance schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.mean_heart_rate": {
+            "$id": "#/properties/com.samsung.health.exercise.mean_heart_rate",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.mean_heart_rate schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.count_type": {
+            "$id": "#/properties/com.samsung.health.exercise.count_type",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.count_type schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.mean_rpm": {
+            "$id": "#/properties/com.samsung.health.exercise.mean_rpm",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.mean_rpm schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.min_altitude": {
+            "$id": "#/properties/com.samsung.health.exercise.min_altitude",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.min_altitude schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.max_heart_rate": {
+            "$id": "#/properties/com.samsung.health.exercise.max_heart_rate",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.max_heart_rate schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.update_time": {
+            "$id": "#/properties/com.samsung.health.exercise.update_time",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.update_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.create_time": {
+            "$id": "#/properties/com.samsung.health.exercise.create_time",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.create_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.max_power": {
+            "$id": "#/properties/com.samsung.health.exercise.max_power",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.max_power schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.max_speed": {
+            "$id": "#/properties/com.samsung.health.exercise.max_speed",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.max_speed schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.mean_cadence": {
+            "$id": "#/properties/com.samsung.health.exercise.mean_cadence",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.mean_cadence schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.min_heart_rate": {
+            "$id": "#/properties/com.samsung.health.exercise.min_heart_rate",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.min_heart_rate schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.count": {
+            "$id": "#/properties/com.samsung.health.exercise.count",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.count schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.distance": {
+            "$id": "#/properties/com.samsung.health.exercise.distance",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.distance schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.max_caloricburn_rate": {
+            "$id": "#/properties/com.samsung.health.exercise.max_caloricburn_rate",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.max_caloricburn_rate schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.calorie": {
+            "$id": "#/properties/com.samsung.health.exercise.calorie",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.calorie schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.max_cadence": {
+            "$id": "#/properties/com.samsung.health.exercise.max_cadence",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.max_cadence schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.decline_distance": {
+            "$id": "#/properties/com.samsung.health.exercise.decline_distance",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.decline_distance schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.vo2_max": {
+            "$id": "#/properties/com.samsung.health.exercise.vo2_max",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.vo2_max schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.time_offset": {
+            "$id": "#/properties/com.samsung.health.exercise.time_offset",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.time_offset schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.deviceuuid": {
+            "$id": "#/properties/com.samsung.health.exercise.deviceuuid",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.deviceuuid schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.max_rpm": {
+            "$id": "#/properties/com.samsung.health.exercise.max_rpm",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.max_rpm schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.comment": {
+            "$id": "#/properties/com.samsung.health.exercise.comment",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.comment schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.live_data": {
+            "$id": "#/properties/com.samsung.health.exercise.live_data",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.live_data schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.mean_power": {
+            "$id": "#/properties/com.samsung.health.exercise.mean_power",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.mean_power schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.mean_speed": {
+            "$id": "#/properties/com.samsung.health.exercise.mean_speed",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.mean_speed schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.pkg_name": {
+            "$id": "#/properties/com.samsung.health.exercise.pkg_name",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.pkg_name schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.altitude_gain": {
+            "$id": "#/properties/com.samsung.health.exercise.altitude_gain",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.altitude_gain schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.altitude_loss": {
+            "$id": "#/properties/com.samsung.health.exercise.altitude_loss",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.altitude_loss schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.exercise_custom_type": {
+            "$id": "#/properties/com.samsung.health.exercise.exercise_custom_type",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.exercise_custom_type schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.end_time": {
+            "$id": "#/properties/com.samsung.health.exercise.end_time",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.end_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.exercise.datauuid": {
+            "$id": "#/properties/com.samsung.health.exercise.datauuid",
+            "type": "string",
+            "title": "The com.samsung.health.exercise.datauuid schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        }
+    },
+    "additionalProperties": false
+}

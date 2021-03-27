@@ -1,0 +1,100 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#40",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "dateComponents",
+        "activeEnergyBurned",
+        "activeEnergyBurnedGoal",
+        "activeEnergyBurnedUnit",
+        "appleMoveTime",
+        "appleMoveTimeGoal",
+        "appleExerciseTime",
+        "appleExerciseTimeGoal",
+        "appleStandHours",
+        "appleStandHoursGoal"
+    ],
+    "properties": {
+        "dateComponents": {
+            "$id": "#/properties/dateComponents",
+            "type": "string",
+            "title": "The dateComponents schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "activeEnergyBurned": {
+            "$id": "#/properties/activeEnergyBurned",
+            "type": "string",
+            "title": "The activeEnergyBurned schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "activeEnergyBurnedGoal": {
+            "$id": "#/properties/activeEnergyBurnedGoal",
+            "type": "string",
+            "title": "The activeEnergyBurnedGoal schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "activeEnergyBurnedUnit": {
+            "$id": "#/properties/activeEnergyBurnedUnit",
+            "type": "string",
+            "title": "The activeEnergyBurnedUnit schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "appleMoveTime": {
+            "$id": "#/properties/appleMoveTime",
+            "type": "string",
+            "title": "The appleMoveTime schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "appleMoveTimeGoal": {
+            "$id": "#/properties/appleMoveTimeGoal",
+            "type": "string",
+            "title": "The appleMoveTimeGoal schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "appleExerciseTime": {
+            "$id": "#/properties/appleExerciseTime",
+            "type": "string",
+            "title": "The appleExerciseTime schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "appleExerciseTimeGoal": {
+            "$id": "#/properties/appleExerciseTimeGoal",
+            "type": "string",
+            "title": "The appleExerciseTimeGoal schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "appleStandHours": {
+            "$id": "#/properties/appleStandHours",
+            "type": "string",
+            "title": "The appleStandHours schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "appleStandHoursGoal": {
+            "$id": "#/properties/appleStandHoursGoal",
+            "type": "string",
+            "title": "The appleStandHoursGoal schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "children": {
+            "$id": "#/properties/children",
+            "type": "array",
+            "title": "The children schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        }
+    },
+    "additionalProperties": false
+}

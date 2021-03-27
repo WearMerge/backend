@@ -1,0 +1,261 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#14",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "id",
+        "full_name",
+        "first_name",
+        "last_name",
+        "display_name_setting",
+        "display_name",
+        "username",
+        "email_address",
+        "date_of_birth",
+        "child",
+        "country",
+        "state",
+        "city",
+        "timezone",
+        "locale",
+        "member_since",
+        "about_me",
+        "start_of_week",
+        "sleep_tracking",
+        "time_display_format",
+        "gender",
+        "height",
+        "weight",
+        "stride_length_walking",
+        "stride_length_running",
+        "weight_unit",
+        "distance_unit",
+        "height_unit",
+        "water_unit",
+        "glucose_unit",
+        "swim_unit"
+    ],
+    "properties": {
+        "id": {
+            "$id": "#/properties/id",
+            "type": "string",
+            "title": "The id schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "full_name": {
+            "$id": "#/properties/full_name",
+            "type": "string",
+            "title": "The full_name schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "first_name": {
+            "$id": "#/properties/first_name",
+            "type": "string",
+            "title": "The first_name schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "last_name": {
+            "$id": "#/properties/last_name",
+            "type": "string",
+            "title": "The last_name schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "display_name_setting": {
+            "$id": "#/properties/display_name_setting",
+            "type": "string",
+            "title": "The display_name_setting schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "display_name": {
+            "$id": "#/properties/display_name",
+            "type": "string",
+            "title": "The display_name schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "username": {
+            "$id": "#/properties/username",
+            "type": "string",
+            "title": "The username schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "email_address": {
+            "$id": "#/properties/email_address",
+            "type": "string",
+            "title": "The email_address schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "date_of_birth": {
+            "$id": "#/properties/date_of_birth",
+            "type": "string",
+            "title": "The date_of_birth schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "child": {
+            "$id": "#/properties/child",
+            "type": "string",
+            "title": "The child schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "country": {
+            "$id": "#/properties/country",
+            "type": "string",
+            "title": "The country schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "state": {
+            "$id": "#/properties/state",
+            "type": "string",
+            "title": "The state schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "city": {
+            "$id": "#/properties/city",
+            "type": "string",
+            "title": "The city schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "timezone": {
+            "$id": "#/properties/timezone",
+            "type": "string",
+            "title": "The timezone schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "locale": {
+            "$id": "#/properties/locale",
+            "type": "string",
+            "title": "The locale schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "member_since": {
+            "$id": "#/properties/member_since",
+            "type": "string",
+            "title": "The member_since schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "about_me": {
+            "$id": "#/properties/about_me",
+            "type": "string",
+            "title": "The about_me schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "start_of_week": {
+            "$id": "#/properties/start_of_week",
+            "type": "string",
+            "title": "The start_of_week schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "sleep_tracking": {
+            "$id": "#/properties/sleep_tracking",
+            "type": "string",
+            "title": "The sleep_tracking schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "time_display_format": {
+            "$id": "#/properties/time_display_format",
+            "type": "string",
+            "title": "The time_display_format schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "gender": {
+            "$id": "#/properties/gender",
+            "type": "string",
+            "title": "The gender schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "height": {
+            "$id": "#/properties/height",
+            "type": "string",
+            "title": "The height schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "weight": {
+            "$id": "#/properties/weight",
+            "type": "string",
+            "title": "The weight schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "stride_length_walking": {
+            "$id": "#/properties/stride_length_walking",
+            "type": "string",
+            "title": "The stride_length_walking schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "stride_length_running": {
+            "$id": "#/properties/stride_length_running",
+            "type": "string",
+            "title": "The stride_length_running schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "weight_unit": {
+            "$id": "#/properties/weight_unit",
+            "type": "string",
+            "title": "The weight_unit schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "distance_unit": {
+            "$id": "#/properties/distance_unit",
+            "type": "string",
+            "title": "The distance_unit schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "height_unit": {
+            "$id": "#/properties/height_unit",
+            "type": "string",
+            "title": "The height_unit schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "water_unit": {
+            "$id": "#/properties/water_unit",
+            "type": "string",
+            "title": "The water_unit schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "glucose_unit": {
+            "$id": "#/properties/glucose_unit",
+            "type": "string",
+            "title": "The glucose_unit schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "swim_unit": {
+            "$id": "#/properties/swim_unit",
+            "type": "string",
+            "title": "The swim_unit schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        }
+    },
+    "additionalProperties": false
+}

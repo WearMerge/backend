@@ -1,0 +1,77 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#8",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "type",
+        "startTime",
+        "sportTime",
+        "distance",
+        "maxPace",
+        "minPace",
+        "avgPace",
+        "calories"
+    ],
+    "properties": {
+        "type": {
+            "$id": "#/properties/type",
+            "type": "string",
+            "title": "The type schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "startTime": {
+            "$id": "#/properties/startTime",
+            "type": "string",
+            "title": "The startTime schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "sportTime": {
+            "$id": "#/properties/sportTime",
+            "type": "string",
+            "title": "The sportTime schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "distance": {
+            "$id": "#/properties/distance",
+            "type": "string",
+            "title": "The distance schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "maxPace": {
+            "$id": "#/properties/maxPace",
+            "type": "string",
+            "title": "The maxPace schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "minPace": {
+            "$id": "#/properties/minPace",
+            "type": "string",
+            "title": "The minPace schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "avgPace": {
+            "$id": "#/properties/avgPace",
+            "type": "string",
+            "title": "The avgPace schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "calories": {
+            "$id": "#/properties/calories",
+            "type": "string",
+            "title": "The calories schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        }
+    },
+    "additionalProperties": false
+}

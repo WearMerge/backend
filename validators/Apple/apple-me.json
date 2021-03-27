@@ -1,0 +1,53 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#37",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "HKCharacteristicTypeIdentifierDateOfBirth",
+        "HKCharacteristicTypeIdentifierBiologicalSex",
+        "HKCharacteristicTypeIdentifierBloodType",
+        "HKCharacteristicTypeIdentifierFitzpatrickSkinType",
+        "HKCharacteristicTypeIdentifierCardioFitnessMedicationsUse"
+    ],
+    "properties": {
+        "HKCharacteristicTypeIdentifierDateOfBirth": {
+            "$id": "#/properties/HKCharacteristicTypeIdentifierDateOfBirth",
+            "type": "string",
+            "title": "The HKCharacteristicTypeIdentifierDateOfBirth schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "HKCharacteristicTypeIdentifierBiologicalSex": {
+            "$id": "#/properties/HKCharacteristicTypeIdentifierBiologicalSex",
+            "type": "string",
+            "title": "The HKCharacteristicTypeIdentifierBiologicalSex schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "HKCharacteristicTypeIdentifierBloodType": {
+            "$id": "#/properties/HKCharacteristicTypeIdentifierBloodType",
+            "type": "string",
+            "title": "The HKCharacteristicTypeIdentifierBloodType schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "HKCharacteristicTypeIdentifierFitzpatrickSkinType": {
+            "$id": "#/properties/HKCharacteristicTypeIdentifierFitzpatrickSkinType",
+            "type": "string",
+            "title": "The HKCharacteristicTypeIdentifierFitzpatrickSkinType schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "HKCharacteristicTypeIdentifierCardioFitnessMedicationsUse": {
+            "$id": "#/properties/HKCharacteristicTypeIdentifierCardioFitnessMedicationsUse",
+            "type": "string",
+            "title": "The HKCharacteristicTypeIdentifierCardioFitnessMedicationsUse schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        }
+    },
+    "additionalProperties": false
+}

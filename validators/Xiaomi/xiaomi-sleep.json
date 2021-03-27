@@ -1,0 +1,69 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#7",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "date",
+        "lastSyncTime",
+        "deepSleepTime",
+        "shallowSleepTime",
+        "wakeTime",
+        "start",
+        "stop"
+    ],
+    "properties": {
+        "date": {
+            "$id": "#/properties/date",
+            "type": "string",
+            "title": "The date schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "lastSyncTime": {
+            "$id": "#/properties/lastSyncTime",
+            "type": "string",
+            "title": "The lastSyncTime schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "deepSleepTime": {
+            "$id": "#/properties/deepSleepTime",
+            "type": "string",
+            "title": "The deepSleepTime schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "shallowSleepTime": {
+            "$id": "#/properties/shallowSleepTime",
+            "type": "string",
+            "title": "The shallowSleepTime schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "wakeTime": {
+            "$id": "#/properties/wakeTime",
+            "type": "string",
+            "title": "The wakeTime schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "start": {
+            "$id": "#/properties/start",
+            "type": "string",
+            "title": "The start schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "stop": {
+            "$id": "#/properties/stop",
+            "type": "string",
+            "title": "The stop schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        }
+    },
+    "additionalProperties": false
+}

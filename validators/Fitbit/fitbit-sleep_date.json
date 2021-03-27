@@ -1,0 +1,299 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#18",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "logId",
+        "dateOfSleep",
+        "startTime",
+        "endTime",
+        "duration",
+        "minutesToFallAsleep",
+        "minutesAsleep",
+        "minutesAwake",
+        "minutesAfterWakeup",
+        "timeInBed",
+        "efficiency",
+        "type",
+        "infoCode",
+        "levels",
+        "mainSleep"
+    ],
+    "properties": {
+        "logId": {
+            "$id": "#/properties/logId",
+            "type": "integer",
+            "title": "The logId schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "dateOfSleep": {
+            "$id": "#/properties/dateOfSleep",
+            "type": "string",
+            "title": "The dateOfSleep schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "startTime": {
+            "$id": "#/properties/startTime",
+            "type": "string",
+            "title": "The startTime schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "endTime": {
+            "$id": "#/properties/endTime",
+            "type": "string",
+            "title": "The endTime schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "duration": {
+            "$id": "#/properties/duration",
+            "type": "integer",
+            "title": "The duration schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "minutesToFallAsleep": {
+            "$id": "#/properties/minutesToFallAsleep",
+            "type": "integer",
+            "title": "The minutesToFallAsleep schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "minutesAsleep": {
+            "$id": "#/properties/minutesAsleep",
+            "type": "integer",
+            "title": "The minutesAsleep schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "minutesAwake": {
+            "$id": "#/properties/minutesAwake",
+            "type": "integer",
+            "title": "The minutesAwake schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "minutesAfterWakeup": {
+            "$id": "#/properties/minutesAfterWakeup",
+            "type": "integer",
+            "title": "The minutesAfterWakeup schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "timeInBed": {
+            "$id": "#/properties/timeInBed",
+            "type": "integer",
+            "title": "The timeInBed schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "efficiency": {
+            "$id": "#/properties/efficiency",
+            "type": "integer",
+            "title": "The efficiency schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "type": {
+            "$id": "#/properties/type",
+            "type": "string",
+            "title": "The type schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "infoCode": {
+            "$id": "#/properties/infoCode",
+            "type": "integer",
+            "title": "The infoCode schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "levels": {
+            "$id": "#/properties/levels",
+            "type": "object",
+            "title": "The levels schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "required": [
+                "summary"
+            ],
+            "properties": {
+                "summary": {
+                    "$id": "#/properties/levels/properties/summary",
+                    "type": "object",
+                    "title": "The summary schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "required": [
+                        "deep",
+                        "wake",
+                        "light",
+                        "rem"
+                    ],
+                    "properties": {
+                        "deep": {
+                            "$id": "#/properties/levels/properties/summary/properties/deep",
+                            "type": "object",
+                            "title": "The deep schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "required": [
+                                "count",
+                                "minutes",
+                                "thirtyDayAvgMinutes"
+                            ],
+                            "properties": {
+                                "count": {
+                                    "$id": "#/properties/levels/properties/summary/properties/deep/properties/count",
+                                    "type": "integer",
+                                    "title": "The count schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": 0
+                                },
+                                "minutes": {
+                                    "$id": "#/properties/levels/properties/summary/properties/deep/properties/minutes",
+                                    "type": "integer",
+                                    "title": "The minutes schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": 0
+                                },
+                                "thirtyDayAvgMinutes": {
+                                    "$id": "#/properties/levels/properties/summary/properties/deep/properties/thirtyDayAvgMinutes",
+                                    "type": "integer",
+                                    "title": "The thirtyDayAvgMinutes schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": 0
+                                }
+                            },
+                            "additionalProperties": true
+                        },
+                        "wake": {
+                            "$id": "#/properties/levels/properties/summary/properties/wake",
+                            "type": "object",
+                            "title": "The wake schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "required": [
+                                "count",
+                                "minutes",
+                                "thirtyDayAvgMinutes"
+                            ],
+                            "properties": {
+                                "count": {
+                                    "$id": "#/properties/levels/properties/summary/properties/wake/properties/count",
+                                    "type": "integer",
+                                    "title": "The count schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": 0
+                                },
+                                "minutes": {
+                                    "$id": "#/properties/levels/properties/summary/properties/wake/properties/minutes",
+                                    "type": "integer",
+                                    "title": "The minutes schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": 0
+                                },
+                                "thirtyDayAvgMinutes": {
+                                    "$id": "#/properties/levels/properties/summary/properties/wake/properties/thirtyDayAvgMinutes",
+                                    "type": "integer",
+                                    "title": "The thirtyDayAvgMinutes schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": 0
+                                }
+                            },
+                            "additionalProperties": true
+                        },
+                        "light": {
+                            "$id": "#/properties/levels/properties/summary/properties/light",
+                            "type": "object",
+                            "title": "The light schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "required": [
+                                "count",
+                                "minutes",
+                                "thirtyDayAvgMinutes"
+                            ],
+                            "properties": {
+                                "count": {
+                                    "$id": "#/properties/levels/properties/summary/properties/light/properties/count",
+                                    "type": "integer",
+                                    "title": "The count schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": 0
+                                },
+                                "minutes": {
+                                    "$id": "#/properties/levels/properties/summary/properties/light/properties/minutes",
+                                    "type": "integer",
+                                    "title": "The minutes schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": 0
+                                },
+                                "thirtyDayAvgMinutes": {
+                                    "$id": "#/properties/levels/properties/summary/properties/light/properties/thirtyDayAvgMinutes",
+                                    "type": "integer",
+                                    "title": "The thirtyDayAvgMinutes schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": 0
+                                }
+                            },
+                            "additionalProperties": true
+                        },
+                        "rem": {
+                            "$id": "#/properties/levels/properties/summary/properties/rem",
+                            "type": "object",
+                            "title": "The rem schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "required": [
+                                "count",
+                                "minutes",
+                                "thirtyDayAvgMinutes"
+                            ],
+                            "properties": {
+                                "count": {
+                                    "$id": "#/properties/levels/properties/summary/properties/rem/properties/count",
+                                    "type": "integer",
+                                    "title": "The count schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": 0
+                                },
+                                "minutes": {
+                                    "$id": "#/properties/levels/properties/summary/properties/rem/properties/minutes",
+                                    "type": "integer",
+                                    "title": "The minutes schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": 0
+                                },
+                                "thirtyDayAvgMinutes": {
+                                    "$id": "#/properties/levels/properties/summary/properties/rem/properties/thirtyDayAvgMinutes",
+                                    "type": "integer",
+                                    "title": "The thirtyDayAvgMinutes schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": 0
+                                }
+                            },
+                            "additionalProperties": true
+                        }
+                    },
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true
+        },
+        "mainSleep": {
+            "$id": "#/properties/mainSleep",
+            "type": "boolean",
+            "title": "The mainSleep schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": false
+        }
+    },
+    "additionalProperties": false
+}

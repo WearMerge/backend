@@ -1,0 +1,181 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#29",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "body_fat_mass",
+        "start_time",
+        "custom",
+        "height",
+        "weight",
+        "muscle_mass",
+        "update_time",
+        "create_time",
+        "skeletal_muscle",
+        "fat_free_mass",
+        "basal_metabolic_rate",
+        "time_offset",
+        "deviceuuid",
+        "skeletal_muscle_mass",
+        "comment",
+        "fat_free",
+        "pkg_name",
+        "body_fat",
+        "datauuid",
+        "vfa_level",
+        "total_body_water"
+    ],
+    "properties": {
+        "body_fat_mass": {
+            "$id": "#/properties/body_fat_mass",
+            "type": "string",
+            "title": "The body_fat_mass schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "start_time": {
+            "$id": "#/properties/start_time",
+            "type": "string",
+            "title": "The start_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "custom": {
+            "$id": "#/properties/custom",
+            "type": "string",
+            "title": "The custom schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "height": {
+            "$id": "#/properties/height",
+            "type": "string",
+            "title": "The height schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "weight": {
+            "$id": "#/properties/weight",
+            "type": "string",
+            "title": "The weight schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "muscle_mass": {
+            "$id": "#/properties/muscle_mass",
+            "type": "string",
+            "title": "The muscle_mass schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "update_time": {
+            "$id": "#/properties/update_time",
+            "type": "string",
+            "title": "The update_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "create_time": {
+            "$id": "#/properties/create_time",
+            "type": "string",
+            "title": "The create_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "skeletal_muscle": {
+            "$id": "#/properties/skeletal_muscle",
+            "type": "string",
+            "title": "The skeletal_muscle schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "fat_free_mass": {
+            "$id": "#/properties/fat_free_mass",
+            "type": "string",
+            "title": "The fat_free_mass schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "basal_metabolic_rate": {
+            "$id": "#/properties/basal_metabolic_rate",
+            "type": "string",
+            "title": "The basal_metabolic_rate schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "time_offset": {
+            "$id": "#/properties/time_offset",
+            "type": "string",
+            "title": "The time_offset schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "deviceuuid": {
+            "$id": "#/properties/deviceuuid",
+            "type": "string",
+            "title": "The deviceuuid schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "skeletal_muscle_mass": {
+            "$id": "#/properties/skeletal_muscle_mass",
+            "type": "string",
+            "title": "The skeletal_muscle_mass schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "comment": {
+            "$id": "#/properties/comment",
+            "type": "string",
+            "title": "The comment schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "fat_free": {
+            "$id": "#/properties/fat_free",
+            "type": "string",
+            "title": "The fat_free schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "pkg_name": {
+            "$id": "#/properties/pkg_name",
+            "type": "string",
+            "title": "The pkg_name schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "body_fat": {
+            "$id": "#/properties/body_fat",
+            "type": "string",
+            "title": "The body_fat schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "datauuid": {
+            "$id": "#/properties/datauuid",
+            "type": "string",
+            "title": "The datauuid schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "vfa_level": {
+            "$id": "#/properties/vfa_level",
+            "type": "string",
+            "title": "The vfa_level schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "total_body_water": {
+            "$id": "#/properties/total_body_water",
+            "type": "string",
+            "title": "The total_body_water schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        }
+    },
+    "additionalProperties": false
+}

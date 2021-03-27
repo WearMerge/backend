@@ -1,0 +1,85 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#13",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "Start_Time",
+        "End_Time",
+        "Minutes_Asleep",
+        "Minutes_Awake",
+        "Number_of_Awakenings",
+        "Time_in_Bed",
+        "Minutes_REM_Sleep",
+        "Minutes_Light_Sleep",
+        "Minutes_Deep_Sleep"
+    ],
+    "properties": {
+        "Start_Time": {
+            "$id": "#/properties/Start_Time",
+            "type": "string",
+            "title": "The Start_Time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "End_Time": {
+            "$id": "#/properties/End_Time",
+            "type": "string",
+            "title": "The End_Time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "Minutes_Asleep": {
+            "$id": "#/properties/Minutes_Asleep",
+            "type": "string",
+            "title": "The Minutes_Asleep schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "Minutes_Awake": {
+            "$id": "#/properties/Minutes_Awake",
+            "type": "string",
+            "title": "The Minutes_Awake schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "Number_of_Awakenings": {
+            "$id": "#/properties/Number_of_Awakenings",
+            "type": "string",
+            "title": "The Number_of_Awakenings schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "Time_in_Bed": {
+            "$id": "#/properties/Time_in_Bed",
+            "type": "string",
+            "title": "The Time_in_Bed schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "Minutes_REM_Sleep": {
+            "$id": "#/properties/Minutes_REM_Sleep",
+            "type": "string",
+            "title": "The Minutes_REM_Sleep schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "Minutes_Light_Sleep": {
+            "$id": "#/properties/Minutes_Light_Sleep",
+            "type": "string",
+            "title": "The Minutes_Light_Sleep schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "Minutes_Deep_Sleep": {
+            "$id": "#/properties/Minutes_Deep_Sleep",
+            "type": "string",
+            "title": "The Minutes_Deep_Sleep schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        }
+    },
+    "additionalProperties": false
+}

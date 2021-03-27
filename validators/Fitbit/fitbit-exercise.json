@@ -1,0 +1,381 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#17",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "logId",
+        "activityName",
+        "activityTypeId",
+        "activityLevel",
+        "averageHeartRate",
+        "calories",
+        "duration",
+        "activeDuration",
+        "steps",
+        "logType",
+        "manualValuesSpecified",
+        "heartRateZones",
+        "activeZoneMinutes",
+        "lastModified",
+        "startTime",
+        "originalStartTime",
+        "originalDuration",
+        "elevationGain",
+        "hasGps",
+        "shouldFetchDetails",
+        "hasActiveZoneMinutes"
+    ],
+    "properties": {
+        "logId": {
+            "$id": "#/properties/logId",
+            "type": "integer",
+            "title": "The logId schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "activityName": {
+            "$id": "#/properties/activityName",
+            "type": "string",
+            "title": "The activityName schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "activityTypeId": {
+            "$id": "#/properties/activityTypeId",
+            "type": "integer",
+            "title": "The activityTypeId schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "activityLevel": {
+            "$id": "#/properties/activityLevel",
+            "type": "array",
+            "title": "The activityLevel schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": [],
+            "additionalItems": true,
+            "items": {
+                "$id": "#/properties/activityLevel/items",
+                "anyOf": [
+                    {
+                        "$id": "#/properties/activityLevel/items/anyOf/0",
+                        "type": "object",
+                        "title": "The first anyOf schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": {},
+                        "required": [
+                            "minutes",
+                            "name"
+                        ],
+                        "properties": {
+                            "minutes": {
+                                "$id": "#/properties/activityLevel/items/anyOf/0/properties/minutes",
+                                "type": "integer",
+                                "title": "The minutes schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0
+                            },
+                            "name": {
+                                "$id": "#/properties/activityLevel/items/anyOf/0/properties/name",
+                                "type": "string",
+                                "title": "The name schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": ""
+                            }
+                        },
+                        "additionalProperties": true
+                    }
+                ]
+            }
+        },
+        "averageHeartRate": {
+            "$id": "#/properties/averageHeartRate",
+            "type": "integer",
+            "title": "The averageHeartRate schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "calories": {
+            "$id": "#/properties/calories",
+            "type": "integer",
+            "title": "The calories schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "duration": {
+            "$id": "#/properties/duration",
+            "type": "integer",
+            "title": "The duration schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "activeDuration": {
+            "$id": "#/properties/activeDuration",
+            "type": "integer",
+            "title": "The activeDuration schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "steps": {
+            "$id": "#/properties/steps",
+            "type": "integer",
+            "title": "The steps schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "logType": {
+            "$id": "#/properties/logType",
+            "type": "string",
+            "title": "The logType schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "manualValuesSpecified": {
+            "$id": "#/properties/manualValuesSpecified",
+            "type": "object",
+            "title": "The manualValuesSpecified schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "required": [
+                "calories",
+                "distance",
+                "steps"
+            ],
+            "properties": {
+                "calories": {
+                    "$id": "#/properties/manualValuesSpecified/properties/calories",
+                    "type": "boolean",
+                    "title": "The calories schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": false
+                },
+                "distance": {
+                    "$id": "#/properties/manualValuesSpecified/properties/distance",
+                    "type": "boolean",
+                    "title": "The distance schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": false
+                },
+                "steps": {
+                    "$id": "#/properties/manualValuesSpecified/properties/steps",
+                    "type": "boolean",
+                    "title": "The steps schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": false
+                }
+            },
+            "additionalProperties": true
+        },
+        "heartRateZones": {
+            "$id": "#/properties/heartRateZones",
+            "type": "array",
+            "title": "The heartRateZones schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": [],
+            "additionalItems": true,
+            "items": {
+                "$id": "#/properties/heartRateZones/items",
+                "anyOf": [
+                    {
+                        "$id": "#/properties/heartRateZones/items/anyOf/0",
+                        "type": "object",
+                        "title": "The first anyOf schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": {},
+                        "required": [
+                            "name",
+                            "min",
+                            "max",
+                            "minutes",
+                            "caloriesOut"
+                        ],
+                        "properties": {
+                            "name": {
+                                "$id": "#/properties/heartRateZones/items/anyOf/0/properties/name",
+                                "type": "string",
+                                "title": "The name schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": ""
+                            },
+                            "min": {
+                                "$id": "#/properties/heartRateZones/items/anyOf/0/properties/min",
+                                "type": "integer",
+                                "title": "The min schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0
+                            },
+                            "max": {
+                                "$id": "#/properties/heartRateZones/items/anyOf/0/properties/max",
+                                "type": "integer",
+                                "title": "The max schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0
+                            },
+                            "minutes": {
+                                "$id": "#/properties/heartRateZones/items/anyOf/0/properties/minutes",
+                                "type": "integer",
+                                "title": "The minutes schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0
+                            },
+                            "caloriesOut": {
+                                "$id": "#/properties/heartRateZones/items/anyOf/0/properties/caloriesOut",
+                                "type": "number",
+                                "title": "The caloriesOut schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0.0
+                            }
+                        },
+                        "additionalProperties": true
+                    }
+                ]
+            }
+        },
+        "activeZoneMinutes": {
+            "$id": "#/properties/activeZoneMinutes",
+            "type": "object",
+            "title": "The activeZoneMinutes schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "required": [
+                "totalMinutes",
+                "minutesInHeartRateZones"
+            ],
+            "properties": {
+                "totalMinutes": {
+                    "$id": "#/properties/activeZoneMinutes/properties/totalMinutes",
+                    "type": "integer",
+                    "title": "The totalMinutes schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": 0
+                },
+                "minutesInHeartRateZones": {
+                    "$id": "#/properties/activeZoneMinutes/properties/minutesInHeartRateZones",
+                    "type": "array",
+                    "title": "The minutesInHeartRateZones schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": [],
+                    "additionalItems": true,
+                    "items": {
+                        "$id": "#/properties/activeZoneMinutes/properties/minutesInHeartRateZones/items",
+                        "anyOf": [
+                            {
+                                "$id": "#/properties/activeZoneMinutes/properties/minutesInHeartRateZones/items/anyOf/0",
+                                "type": "object",
+                                "title": "The first anyOf schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": {},
+                                "required": [
+                                    "minutes",
+                                    "zoneName",
+                                    "order",
+                                    "type",
+                                    "minuteMultiplier"
+                                ],
+                                "properties": {
+                                    "minutes": {
+                                        "$id": "#/properties/activeZoneMinutes/properties/minutesInHeartRateZones/items/anyOf/0/properties/minutes",
+                                        "type": "integer",
+                                        "title": "The minutes schema",
+                                        "description": "An explanation about the purpose of this instance.",
+                                        "default": 0
+                                    },
+                                    "zoneName": {
+                                        "$id": "#/properties/activeZoneMinutes/properties/minutesInHeartRateZones/items/anyOf/0/properties/zoneName",
+                                        "type": "string",
+                                        "title": "The zoneName schema",
+                                        "description": "An explanation about the purpose of this instance.",
+                                        "default": ""
+                                    },
+                                    "order": {
+                                        "$id": "#/properties/activeZoneMinutes/properties/minutesInHeartRateZones/items/anyOf/0/properties/order",
+                                        "type": "integer",
+                                        "title": "The order schema",
+                                        "description": "An explanation about the purpose of this instance.",
+                                        "default": 0
+                                    },
+                                    "type": {
+                                        "$id": "#/properties/activeZoneMinutes/properties/minutesInHeartRateZones/items/anyOf/0/properties/type",
+                                        "type": "string",
+                                        "title": "The type schema",
+                                        "description": "An explanation about the purpose of this instance.",
+                                        "default": ""
+                                    },
+                                    "minuteMultiplier": {
+                                        "$id": "#/properties/activeZoneMinutes/properties/minutesInHeartRateZones/items/anyOf/0/properties/minuteMultiplier",
+                                        "type": "integer",
+                                        "title": "The minuteMultiplier schema",
+                                        "description": "An explanation about the purpose of this instance.",
+                                        "default": 0
+                                    }
+                                },
+                                "additionalProperties": true
+                            }
+                        ]
+                    }
+                }
+            },
+            "additionalProperties": true
+        },
+        "lastModified": {
+            "$id": "#/properties/lastModified",
+            "type": "string",
+            "title": "The lastModified schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "startTime": {
+            "$id": "#/properties/startTime",
+            "type": "string",
+            "title": "The startTime schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "originalStartTime": {
+            "$id": "#/properties/originalStartTime",
+            "type": "string",
+            "title": "The originalStartTime schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "originalDuration": {
+            "$id": "#/properties/originalDuration",
+            "type": "integer",
+            "title": "The originalDuration schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        },
+        "elevationGain": {
+            "$id": "#/properties/elevationGain",
+            "type": "number",
+            "title": "The elevationGain schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "hasGps": {
+            "$id": "#/properties/hasGps",
+            "type": "boolean",
+            "title": "The hasGps schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": false
+        },
+        "shouldFetchDetails": {
+            "$id": "#/properties/shouldFetchDetails",
+            "type": "boolean",
+            "title": "The shouldFetchDetails schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": false
+        },
+        "hasActiveZoneMinutes": {
+            "$id": "#/properties/hasActiveZoneMinutes",
+            "type": "boolean",
+            "title": "The hasActiveZoneMinutes schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": false
+        }
+    },
+    "additionalProperties": false
+}

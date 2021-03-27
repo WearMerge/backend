@@ -1,0 +1,277 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#33",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "original_efficiency",
+        "mental_recovery",
+        "factor_01",
+        "factor_02",
+        "factor_03",
+        "factor_04",
+        "factor_05",
+        "factor_06",
+        "factor_07",
+        "factor_08",
+        "factor_09",
+        "factor_10",
+        "has_sleep_data",
+        "physical_recovery",
+        "original_wake_up_time",
+        "movement_awakening",
+        "original_bed_time",
+        "quality",
+        "extra_data",
+        "sleep_cycle",
+        "efficiency",
+        "sleep_score",
+        "sleep_duration",
+        "com.samsung.health.sleep.start_time",
+        "com.samsung.health.sleep.custom",
+        "com.samsung.health.sleep.update_time",
+        "com.samsung.health.sleep.create_time",
+        "com.samsung.health.sleep.time_offset",
+        "com.samsung.health.sleep.deviceuuid",
+        "com.samsung.health.sleep.comment",
+        "com.samsung.health.sleep.pkg_name",
+        "com.samsung.health.sleep.end_time",
+        "com.samsung.health.sleep.datauuid"
+    ],
+    "properties": {
+        "original_efficiency": {
+            "$id": "#/properties/original_efficiency",
+            "type": "string",
+            "title": "The original_efficiency schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "mental_recovery": {
+            "$id": "#/properties/mental_recovery",
+            "type": "string",
+            "title": "The mental_recovery schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "factor_01": {
+            "$id": "#/properties/factor_01",
+            "type": "string",
+            "title": "The factor_01 schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "factor_02": {
+            "$id": "#/properties/factor_02",
+            "type": "string",
+            "title": "The factor_02 schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "factor_03": {
+            "$id": "#/properties/factor_03",
+            "type": "string",
+            "title": "The factor_03 schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "factor_04": {
+            "$id": "#/properties/factor_04",
+            "type": "string",
+            "title": "The factor_04 schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "factor_05": {
+            "$id": "#/properties/factor_05",
+            "type": "string",
+            "title": "The factor_05 schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "factor_06": {
+            "$id": "#/properties/factor_06",
+            "type": "string",
+            "title": "The factor_06 schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "factor_07": {
+            "$id": "#/properties/factor_07",
+            "type": "string",
+            "title": "The factor_07 schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "factor_08": {
+            "$id": "#/properties/factor_08",
+            "type": "string",
+            "title": "The factor_08 schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "factor_09": {
+            "$id": "#/properties/factor_09",
+            "type": "string",
+            "title": "The factor_09 schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "factor_10": {
+            "$id": "#/properties/factor_10",
+            "type": "string",
+            "title": "The factor_10 schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "has_sleep_data": {
+            "$id": "#/properties/has_sleep_data",
+            "type": "string",
+            "title": "The has_sleep_data schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "physical_recovery": {
+            "$id": "#/properties/physical_recovery",
+            "type": "string",
+            "title": "The physical_recovery schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "original_wake_up_time": {
+            "$id": "#/properties/original_wake_up_time",
+            "type": "string",
+            "title": "The original_wake_up_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "movement_awakening": {
+            "$id": "#/properties/movement_awakening",
+            "type": "string",
+            "title": "The movement_awakening schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "original_bed_time": {
+            "$id": "#/properties/original_bed_time",
+            "type": "string",
+            "title": "The original_bed_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "quality": {
+            "$id": "#/properties/quality",
+            "type": "string",
+            "title": "The quality schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "extra_data": {
+            "$id": "#/properties/extra_data",
+            "type": "string",
+            "title": "The extra_data schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "sleep_cycle": {
+            "$id": "#/properties/sleep_cycle",
+            "type": "string",
+            "title": "The sleep_cycle schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "efficiency": {
+            "$id": "#/properties/efficiency",
+            "type": "string",
+            "title": "The efficiency schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "sleep_score": {
+            "$id": "#/properties/sleep_score",
+            "type": "string",
+            "title": "The sleep_score schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "sleep_duration": {
+            "$id": "#/properties/sleep_duration",
+            "type": "string",
+            "title": "The sleep_duration schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.sleep.start_time": {
+            "$id": "#/properties/com.samsung.health.sleep.start_time",
+            "type": "string",
+            "title": "The com.samsung.health.sleep.start_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.sleep.custom": {
+            "$id": "#/properties/com.samsung.health.sleep.custom",
+            "type": "string",
+            "title": "The com.samsung.health.sleep.custom schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.sleep.update_time": {
+            "$id": "#/properties/com.samsung.health.sleep.update_time",
+            "type": "string",
+            "title": "The com.samsung.health.sleep.update_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.sleep.create_time": {
+            "$id": "#/properties/com.samsung.health.sleep.create_time",
+            "type": "string",
+            "title": "The com.samsung.health.sleep.create_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.sleep.time_offset": {
+            "$id": "#/properties/com.samsung.health.sleep.time_offset",
+            "type": "string",
+            "title": "The com.samsung.health.sleep.time_offset schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.sleep.deviceuuid": {
+            "$id": "#/properties/com.samsung.health.sleep.deviceuuid",
+            "type": "string",
+            "title": "The com.samsung.health.sleep.deviceuuid schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.sleep.comment": {
+            "$id": "#/properties/com.samsung.health.sleep.comment",
+            "type": "string",
+            "title": "The com.samsung.health.sleep.comment schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.sleep.pkg_name": {
+            "$id": "#/properties/com.samsung.health.sleep.pkg_name",
+            "type": "string",
+            "title": "The com.samsung.health.sleep.pkg_name schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.sleep.end_time": {
+            "$id": "#/properties/com.samsung.health.sleep.end_time",
+            "type": "string",
+            "title": "The com.samsung.health.sleep.end_time schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "com.samsung.health.sleep.datauuid": {
+            "$id": "#/properties/com.samsung.health.sleep.datauuid",
+            "type": "string",
+            "title": "The com.samsung.health.sleep.datauuid schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        }
+    },
+    "additionalProperties": false
+}
