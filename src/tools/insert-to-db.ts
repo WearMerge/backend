@@ -6,9 +6,11 @@ import stripBomStream from 'strip-bom-stream';
 import streamJson, { Readable, Transform, Writable } from 'stream-json/streamers/StreamArray';
 import bigXml from 'big-xml';
 import path from'path';
-import { Cast } from './cast';
+import { Cast } from '../helpers/cast';
 import {v4 as uuidv4 } from 'uuid';
 import ReplaceStream from 'replacestream';
+import { getFiles } from '../helpers/get-files';
+import { fitbitSummary, huaweiXLS } from '../helpers/reconstruct-files';
 
 const ajv = new Ajv({strict: false});
 
@@ -29,21 +31,6 @@ const garminInvalid = new RegExp(/\[[\n ]*\{[\n ]*"summarizedActivitiesExport"[\
 const garminObjectInvalid = new RegExp(/\{[\n ]*"userName"[\0-\377:nonascii:]*?\"firstName"/);
 const huaweiInvalid = new RegExp(/\[[\n ]*\{[\n ]*"sportDataUserData"[\n ]*\:[\n ]*\[/);
 const samsungInvalid = new RegExp(/com.samsung.health.\w+.\w+,\d+,\d+\n|com.samsung.shealth.\w+.\w+,\d+,\d+\n/);
-
-
-const getFiles = async (path: string) => {
-    const entries = await fs.promises.readdir(path, { withFileTypes: true });
-    // Get files within the current directory and add a path key to the file objects
-    const files = entries
-        .filter(folder => !folder.isDirectory())
-        .map(file => ({ ...file, path: path + file.name }));
-    // Get folders within the current directory
-    const folders = entries.filter(folder => folder.isDirectory());
-    for (const folder of folders) {
-        files.push(...await getFiles(`${path}${folder.name}/`));
-    }
-    return files;
-};
 
 // const convertTimeTo24 = (time) => {
 //     const hours = parseInt(time.substr(0, 2));
@@ -104,7 +91,7 @@ const validation = async (data: any, validators: {path: string, name: string }[]
 
 const insertCSV = async (path: string, validators: any, db: any, userId: string, uuid: string) => {
     let parser: Readable;
-    await new Promise<void>(resolve => {
+    const isFinished = await new Promise<boolean>(resolve => {
         const middleware  = fs.createReadStream(path)
             .pipe(ReplaceStream(samsungInvalid, () => {
                 middleware.destroy();
@@ -113,7 +100,7 @@ const insertCSV = async (path: string, validators: any, db: any, userId: string,
                     .pipe(ReplaceStream(/,\n/g, '\n'))
                     .pipe(stripBomStream())
                     .pipe(csvParser());
-                resolve();
+                resolve(false);
                 return '';
             }))
             .pipe(ReplaceStream(xiaomiInvalid, () => {
@@ -122,19 +109,36 @@ const insertCSV = async (path: string, validators: any, db: any, userId: string,
                     .pipe(ReplaceStream(/date,lastSyncTime,heartRate,timestamp[\n]*/, 'lastSyncTime,heartRate\n'))
                     .pipe(stripBomStream())
                     .pipe(csvParser());
-                resolve();
+                resolve(false);
+                return '';
+            }))
+            .pipe(ReplaceStream(fitbitSummaryInvalid, () => {
+                middleware.destroy();
+                fitbitSummary(path)
+                    .then(async (paths) => {
+                        for (const element of paths) {
+                            await insertCSV(element, validators, db, userId, uuid);
+                        }
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+                resolve(true);
                 return '';
             }));
+        middleware.on('data', () => {});
         middleware.on('finish', () => {
             parser = fs.createReadStream(path).pipe(stripBomStream()).pipe(csvParser());
-            resolve();
+            resolve(false);
         });
         middleware.on('error', () => {});
     });
+    if (isFinished) {
+        return;
+    }
     let buffer: Promise<any[]>[] = [];
     await new Promise<void>(resolve => {
         parser.on('data', async (data) => {
-            //console.log(data);
             buffer.push(validation(data, validators, uuid));
             if (buffer.length > bufferLength) {
                 parser.pause();
@@ -142,7 +146,9 @@ const insertCSV = async (path: string, validators: any, db: any, userId: string,
                     return db.collection(userId).insertMany(x.flat());
                 }).then(() => {
                     parser.resume();
-                }).catch(() => {});
+                }).catch((e) => {
+                    console.log(e);
+                });
                 buffer = [];
             }
         }).on('end', async () => {
@@ -150,12 +156,12 @@ const insertCSV = async (path: string, validators: any, db: any, userId: string,
                 try {
                     await db.collection(userId).insertMany((await Promise.all(buffer)).flat());
                 } catch (error) {
-                    //console.error(error);
+                    console.error(error);
                 }
             }
             resolve();
         }).on('error', async (e) => {
-            //console.error(e);
+            console.error(e);
             resolve();
         });
     });
@@ -190,12 +196,12 @@ const insertXML = async (path: string, validators: any, db: any, userId: string,
                 try {
                     await db.collection(userId).insertMany((await Promise.all(buffer)).flat());
                 } catch (error) {
-                    //console.error(error);
+                    console.error(error);
                 }
             }
             resolve();
         }).on('error', async (e: Error) => {
-            //console.error(e);
+            console.error(e);
             resolve();
         });
     });
@@ -231,24 +237,17 @@ const insertJSON = async (path: string, validators: any, db: any, userId: string
                 resolve();
                 return '';
             })as Transform);
-        console.log(9);
-        //console.log(middleware);
-        // middleware.on('data', (data: any) => {
-        //     //console.log(data);
-        // });
-        middleware.on('end', () => {
-            console.log(1);
+        middleware.on('data', () => {});
+        middleware.on('finish', () => {
             parser = fs.createReadStream(path).pipe(streamJson.withParser());
             resolve();
         });
         middleware.on('error', () => {});
     });
-    console.log(8);
     let buffer: Promise<any[]>[] = [];
     await new Promise<void>(resolve => {
         parser.on('data', async (data: any) => {
             buffer.push(validation(data.value, validators, uuid));
-            //console.log(data);
             if (buffer.length > bufferLength) {
                 parser.pause();
                 Promise.all(buffer).then(x => {
@@ -280,7 +279,7 @@ export async function main(userId: string) {
     const client = await new MongoClient('mongodb://localhost:27017', { useUnifiedTopology: true, forceServerObjectId: true }).connect();
     const db = client.db('wearmerge');
     // db.dropDatabase();
-    // await db.dropCollection(userId);
+    await db.dropCollection(userId);
 
     const validators = await getFiles('./validators/');
     const uploadsFiles = await getFiles(path.join('uploads', userId, '/'));
@@ -313,7 +312,7 @@ export async function main(userId: string) {
             }
         }));
     }
-    await client.close();
+    //await client.close();
 }
 
 //main('uploader_2');
