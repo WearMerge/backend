@@ -223,7 +223,7 @@ const insertJSON = async (path: string, validators: any, db: any, userId: string
     });
 };
 
-export async function main(userId: string) {
+export async function insertToDB(userId: string) {
     const client = await new MongoClient('mongodb://localhost:27017', { forceServerObjectId: true }).connect();
     const db = client.db('wearmerge');
     // db.dropDatabase();
@@ -265,5 +265,3 @@ export async function main(userId: string) {
     }
     await client.close().then(()=>{console.log('END')});
 }
-
-//main('uploader_2');

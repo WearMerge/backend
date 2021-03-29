@@ -5,7 +5,8 @@ import fs from 'fs';
 import path from 'path';
 import Formidable from 'formidable';
 import Queue from 'bull';
-import { main } from './tools/insert-to-db';
+import { insertToDB } from './tools/insert-to-db';
+import { exportFromDB } from './tools/export-from-db';
 
 const app = express();
 
@@ -21,8 +22,13 @@ const queue = new Queue('data processing', {
 app.use(cors());
 
 app.get('/', (req, res) => {
-    main('uploader_2');
+    exportFromDB('uploader_2');
     res.send('Welcome to WearMerge!');
+});
+
+app.get('/insert', (req, res) => {
+    insertToDB('uploader_2');
+    res.status(200).send('Inserting to DB');
 });
 
 app.post('/upload-file', (req, res) => {
