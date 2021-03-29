@@ -1,27 +1,20 @@
 import { MongoClient } from 'mongodb';
 import fs from 'fs';
-import Ajv from 'ajv';
 import csvParser from 'csv-parser';
 import stripBomStream from 'strip-bom-stream';
-import streamJson, { Readable, Transform, Writable } from 'stream-json/streamers/StreamArray';
+import streamJson, { Readable, Transform } from 'stream-json/streamers/StreamArray';
 import bigXml from 'big-xml';
 import path from'path';
-import { Cast } from '../helpers/cast';
 import {v4 as uuidv4 } from 'uuid';
 import ReplaceStream from 'replacestream';
 import { getFiles } from '../helpers/get-files';
 import { fitbitSummary, huaweiXLS } from '../helpers/reconstruct-files';
+import { validator } from '../helpers/validate-data';
+import Ajv from 'ajv';
 
 const ajv = new Ajv({strict: false});
 
 const bufferLength = 100000;
-
-// const containsDate = ['dateComponents_apple-activity_summary.json', 'calendarDate_garmin-sleepData.json', 'dateOfSleep_fitbit-sleep_date.json', 'Date_fitbit-foods.json', 'Date_fitbit-body.json', 'Date_fitbit-activities.json', 'date_xiaomi-activity.json', 'date_xiaomi-activity_minute.json', 'date_xiaomi-activity_stage.json', 'date_xiaomi-heartrate_auto.json', 'date_xiaomi-sleep.json'];
-// const containsDateAndTime = ['endDate_apple-workout.json', 'startDate_apple-workout.json', 'creationDate_apple-workout.json', 'endDate_apple-record.json', 'startDate_apple-record.json', 'creationDate_apple-record.json', 'com.samsung.health.step_count.end_time_samsung-shealth_tracker_pedometer_step_count.json', 'com.samsung.health.step_count.create_time_samsung-shealth_tracker_pedometer_step_count.json', 'com.samsung.health.step_count.update_time_samsung-shealth_tracker_pedometer_step_count.json', 'com.samsung.health.step_count.start_time_samsung-shealth_tracker_pedometer_step_count.json', 'com.samsung.health.heart_rate.end_time_samsung-shealth_tracker_health_rate.json', 'com.samsung.health.heart_rate.create_time_samsung-shealth_tracker_health_rate.json', 'com.samsung.health.heart_rate.update_time_samsung-shealth_tracker_health_rate.json', 'com.samsung.health.heart_rate.start_time_samsung-shealth_tracker_health_rate.json', 'create_time_samsung-shealth_step_daily_trend.json', 'update_time_samsung-shealth_step_daily_trend.json', 'com.samsung.health.sleep.end_time_samsung-shealth_sleep.json', 'com.samsung.health.sleep.create_time_samsung-shealth_sleep.json', 'com.samsung.health.sleep.update_time_samsung-shealth_sleep.json', 'com.samsung.health.sleep.start_time_samsung-shealth_sleep.json', 'create_time_samsung-shealth_sleep_data.json', 'update_time_samsung-shealth_sleep_data.json', 'start_time_samsung-shealth_sleep_data.json', 'com.samsung.health.exercise.end_time_samsung-shealth_exercise.json', 'com.samsung.health.exercise.create_time_samsung-shealth_exercise.json', 'com.samsung.health.exercise.update_time_samsung-shealth_exercise.json', 'com.samsung.health.exercise.start_time_samsung-shealth_exercise.json', 'create_time_samsung-shealth_activity_day_summary.json', 'update_time_samsung-shealth_activity_day_summary.json', 'create_time_samsung-health_weight.json', 'update_time_samsung-health_weight.json', 'start_time_samsung-health_weight.json', 'end_time_samsung-health_sleep_stage.json', 'create_time_samsung-health_sleep_stage.json', 'update_time_samsung-health_sleep_stage.json', 'start_time_samsung-health_sleep_stage.json', 'create_time_samsung-health_height.json', 'update_time_samsung-health_height.json', 'start_time_samsung-health_height.json', 'sleepEndTimestampGMT_garmin-sleepData.json', 'sleepStartTimestampGMT_garmin-sleepData.json', 'restingHeartRateTimestamp_garmin-UDSFile.json', 'date_garmin-UDSFile.json', 'dateTime_fitbit-sleep_date.json', 'endTime_fitbit-sleep_date.json', 'startTime_fitbit-sleep_date.json', 'originalStartTime_fitbit-exercise.json', 'startTime_fitbit-exercise.json', 'lastModified_fitbit-exercise.json', 'dateTime_fitbit-steps_date.json', 'dateTime_fitbit-heart_rate.json', 'Start_Time_fitbit-sleep.json', 'End_Time_fitbit-sleep.json', 'dateTime_fitbit-calories.json'];
-// const containsTimestampUTC = ['lastSyncTime_xiaomi-activity.json', 'timestamp_xiaomi-body.json', 'lastSyncTime_xiaomi-sleep.json', 'start_xiaomi-sleep.json', 'stop_xiaomi-sleep.json', 'startTime_xiaomi-sport.json'];
-// const containsTimestamp = ['endTime_huawei-sport_per_minute_merged_data.json', 'startTime_huawei-sport_per_minute_merged_data.json', 'endTime_huawei-health_detail_data.json', 'startTime_huawei-health_detail_data.json', 'beginTimestamp_garmin-summarizedActivities.json', 'startTimeGmt_garmin-summarizedActivities.json', 'startTimeLocal_garmin-summarizedActivities.json'];
-// const containsTime = ['time_xiaomi-activity_minute.json', 'start_xiaomi-activity_stage.json', 'stop_xiaomi-activity_stage.json', 'time_xiaomi-heartrate_auto.json'];
-// const isNotNumber = ['timeZone'];
 
 const xiaomiInvalid = new RegExp(/date,lastSyncTime,heartRate,timestamp[\n]*/);
 const fitbitSummaryInvalid = new RegExp(/Body\nDate,Weight,BMI,Fat|Food\nDate,Calories In|Activities\nDate,Calories Burned,Steps,Distance,Floors,Minutes Sedentary,Minutes Lightly Active,Minutes Fairly Active,Minutes Very Active,Activity Calories|Sleep\nStart Time,End Time,Minutes Asleep,Minutes Awake,Number of Awakenings,Time in Bed,Minutes REM Sleep,Minutes Light Sleep,Minutes Deep Sleep|Food Log/);
@@ -31,63 +24,6 @@ const garminInvalid = new RegExp(/\[[\n ]*\{[\n ]*"summarizedActivitiesExport"[\
 const garminObjectInvalid = new RegExp(/\{[\n ]*"userName"[\0-\377:nonascii:]*?\"firstName"/);
 const huaweiInvalid = new RegExp(/\[[\n ]*\{[\n ]*"sportDataUserData"[\n ]*\:[\n ]*\[/);
 const samsungInvalid = new RegExp(/com.samsung.health.\w+.\w+,\d+,\d+\n|com.samsung.shealth.\w+.\w+,\d+,\d+\n/);
-
-// const convertTimeTo24 = (time) => {
-//     const hours = parseInt(time.substr(0, 2));
-//     if (time.indexOf(/AM|am/g) != -1 && hours == 12) {
-//         time = time.replace('12', '0');
-//     }
-//     if (time.indexOf(/PM|pm/g)  != -1 && hours < 12) {
-//         time = time.replace(hours, (hours + 12));
-//     }
-//     return time.replace(/AM|PM|am|pm/g, '');
-// };
-
-// const castTypes = (data, schema) => {
-//     let rawDate = '';
-//     let keyName = '';
-//     for (let key in data) {
-//         keyName = key + '_' + schema;
-//         if (typeof data[key] === 'object') {
-//             data[key] = castTypes(data[key], schema);
-//         } else if (containsDate.includes(keyName)) {
-//             rawDate = data[key];
-//             data[key] = new Date(rawDate);
-//         } else if (containsDateAndTime.includes(keyName)) {
-//             if (data[key].match(/\d(AM|PM)/g) !== null) {
-//                 data[key] = new Date(data[key].replace(/([\0-\377:nonascii:]*?)(AM|PM)/g, '$1 $2'));
-//             } else {
-//                 data[key] = new Date(data[key]);
-//             }
-//         } else if (containsTimestampUTC.includes(keyName)) {
-//             data[key] = new Date(Number(data[key]) * 1000);
-//         } else if (containsTimestamp.includes(keyName)) {
-//             data[key] = new Date(data[key]);
-//         } else if (containsTime.includes(keyName)) {
-//             data[key] = new Date(rawDate + ' ' + data[key]);
-//         } else if (typeof Number(data[key]) === 'number' && !isNaN(data[key]) && !isNotNumber.includes(key)) {
-//             data[key] = Number(data[key]);
-//         }
-//     }
-//     return data;
-// };
-
-const validation = async (data: any, validators: {path: string, name: string }[], uuid: string) => {
-    return await Promise.all(validators.map(async (schemaObj: any) => {
-        //console.log(schemaObj.path);
-        const schema = require('.' + schemaObj.path);
-        const valid = await ajv.validate(schema, data);
-        if (valid) {
-            const brandAndSchema = schemaObj.name.split('-');
-            // return ({
-            //     brand: brandAndSchema[0],
-            //     schema: brandAndSchema[1],
-            //     data: castTypes(data, schemaObj.name)
-            // });
-            return new Cast(data, brandAndSchema, uuid).insert();
-        }
-    })).then(obj => obj.filter(x => x).flat());
-};
 
 const insertCSV = async (path: string, validators: any, db: any, userId: string, uuid: string) => {
     let parser: Readable;
@@ -102,7 +38,7 @@ const insertCSV = async (path: string, validators: any, db: any, userId: string,
                     .pipe(csvParser());
                 resolve(false);
                 return '';
-            }))
+            })as Transform)
             .pipe(ReplaceStream(xiaomiInvalid, () => {
                 middleware.destroy();
                 parser = fs.createReadStream(path)
@@ -111,21 +47,12 @@ const insertCSV = async (path: string, validators: any, db: any, userId: string,
                     .pipe(csvParser());
                 resolve(false);
                 return '';
-            }))
+            })as Transform)
             .pipe(ReplaceStream(fitbitSummaryInvalid, () => {
                 middleware.destroy();
-                fitbitSummary(path)
-                    .then(async (paths) => {
-                        for (const element of paths) {
-                            await insertCSV(element, validators, db, userId, uuid);
-                        }
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    });
-                resolve(true);
+                resolve(fitbitSummary(path, validators, db, userId, uuid, bufferLength, ajv));
                 return '';
-            }));
+            })as Transform);
         middleware.on('data', () => {});
         middleware.on('finish', () => {
             parser = fs.createReadStream(path).pipe(stripBomStream()).pipe(csvParser());
@@ -139,7 +66,7 @@ const insertCSV = async (path: string, validators: any, db: any, userId: string,
     let buffer: Promise<any[]>[] = [];
     await new Promise<void>(resolve => {
         parser.on('data', async (data) => {
-            buffer.push(validation(data, validators, uuid));
+            buffer.push(validator(data, validators, uuid, ajv));
             if (buffer.length > bufferLength) {
                 parser.pause();
                 Promise.all(buffer).then(x => {
@@ -181,7 +108,7 @@ const insertXML = async (path: string, validators: any, db: any, userId: string,
                     data.attrs.children = data.children.map((x: any) => x.attrs);
                 }
             }
-            buffer.push(validation(data.attrs, validators, uuid));
+            buffer.push(validator(data.attrs, validators, uuid, ajv));
             if (buffer.length > bufferLength) {
                 parser.pause();
                 Promise.all(buffer).then(x => {
@@ -236,6 +163,14 @@ const insertJSON = async (path: string, validators: any, db: any, userId: string
                     .pipe(streamJson.withParser());
                 resolve();
                 return '';
+            })as Transform)
+            .pipe(ReplaceStream(huaweiInvalid, () => {
+                middleware.destroy();
+                parser = fs.createReadStream(path)
+                    .pipe(ReplaceStream(/\{[\n ]*"sportDataUserData"[\n ]*\:[\n ]*\[|\][\n ]*\,[\n ]*"timeZone"[\n ]*\:[\n ]*"\+\d+"[\n ]*\,[\n ]*"recordDay"[\n ]*\:[\n ]*\d+[\n ]*\,[\n ]*"version"[\n ]*\:[\n ]*\d+[\n ]*\}/g, ''))
+                    .pipe(streamJson.withParser());
+                resolve()
+                return '';
             })as Transform);
         middleware.on('data', () => {});
         middleware.on('finish', () => {
@@ -247,7 +182,7 @@ const insertJSON = async (path: string, validators: any, db: any, userId: string
     let buffer: Promise<any[]>[] = [];
     await new Promise<void>(resolve => {
         parser.on('data', async (data: any) => {
-            buffer.push(validation(data.value, validators, uuid));
+            buffer.push(validator(data.value, validators, uuid, ajv));
             if (buffer.length > bufferLength) {
                 parser.pause();
                 Promise.all(buffer).then(x => {
@@ -303,16 +238,19 @@ export async function main(userId: string) {
                 uuid.set(key, uuidv4());
             }
             const fileType = obj.name.substr(obj.name.lastIndexOf('.') + 1);
+            
             if (fileType === 'csv') {
                 await insertCSV(obj.path, validators, db, userId, uuid.get(key));
             } else if (fileType === 'json') {
                 await insertJSON(obj.path, validators, db, userId, uuid.get(key));
             } else if (fileType === 'xml') {
                 await insertXML(obj.path, validators, db, userId, uuid.get(key));
+            } else if (fileType === 'xls') {
+                await huaweiXLS(obj.path, validators, db, userId, uuid.get(key), bufferLength, ajv);
             }
         }));
     }
-    //await client.close();
+    await client.close();
 }
 
 //main('uploader_2');
