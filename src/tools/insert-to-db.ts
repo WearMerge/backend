@@ -263,5 +263,5 @@ export async function insertToDB(userId: string) {
             }
         }));
     }
-    await client.close().then(()=>{console.log('END')});
+    await client.close().then(()=>{console.log('INSERTED')});
 }

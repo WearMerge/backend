@@ -22,13 +22,17 @@ const queue = new Queue('data processing', {
 app.use(cors());
 
 app.get('/', (req, res) => {
-    exportFromDB('uploader_2');
     res.send('Welcome to WearMerge!');
 });
 
+app.get('/export', (req, res) => {
+    res.status(200).send('Exporting...');
+    exportFromDB('uploader_2');
+});
+
 app.get('/insert', (req, res) => {
+    res.status(200).send('Inserting...');
     insertToDB('uploader_2');
-    res.status(200).send('Inserting to DB');
 });
 
 app.post('/upload-file', (req, res) => {
