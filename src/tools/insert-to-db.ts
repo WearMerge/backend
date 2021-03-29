@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb';
+import { mongoDb } from '../mongo';
 import fs from 'fs';
 import csvParser from 'csv-parser';
 import stripBomStream from 'strip-bom-stream';
@@ -224,10 +224,8 @@ const insertJSON = async (path: string, validators: any, db: any, userId: string
 };
 
 export async function insertToDB(userId: string) {
-    const client = await new MongoClient('mongodb://localhost:27017', { forceServerObjectId: true }).connect();
-    const db = client.db('wearmerge');
-    // db.dropDatabase();
-    await db.dropCollection(userId);
+    const db = mongoDb();
+    // await db.dropCollection(userId);
 
     const validators = await getFiles('./validators/');
     const uploadsFiles = await getFiles(path.join('uploads', userId, '/'));
@@ -263,5 +261,4 @@ export async function insertToDB(userId: string) {
             }
         }));
     }
-    await client.close().then(()=>{console.log('INSERTED')});
 }

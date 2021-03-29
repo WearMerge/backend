@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb';
+import { mongoDb } from '../mongo';
 import fs from 'fs';
 import jsonexport from 'jsonexport';
 import es from 'event-stream';
@@ -17,8 +17,7 @@ const types = [
 ];
 
 export const exportFromDB = async (userId: string) => {
-    const client = await new MongoClient('mongodb://localhost:27017', { forceServerObjectId: true }).connect();
-    const db = client.db('wearmerge');
+    const db = mongoDb();
     const pathDir = path.join('./downloads', userId);
     await new Promise<void>(resolve => {
         fs.access(pathDir, fs.constants.F_OK, (err) => {
@@ -41,11 +40,9 @@ export const exportFromDB = async (userId: string) => {
             cursor.on('close', () => {
                 resolve();
             });
-            cursor.on('error', (err) => {
+            cursor.on('error', (err: Error) => {
                 console.log(err);
             });
         });
     }));
-    
-    await client.close().then(()=>{console.log('EXPORTED')});
 };
