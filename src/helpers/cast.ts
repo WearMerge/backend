@@ -19,6 +19,7 @@ export const openMHealth = (data: any, validator: { brand: string, schema: strin
 const heartRate = (header: { uuid: string, brand: string }, value: { heartRate: number, descriptiveStatistic: string }, startDateTime: Date =null, endDateTime: Date =null) => {
     if (!endDateTime) {
         return {
+            createdAt: new Date(),
             uuid: header.uuid,
             brand: header.brand,
             type: 'heart_rate',
@@ -35,6 +36,7 @@ const heartRate = (header: { uuid: string, brand: string }, value: { heartRate: 
         };
     } else {
         return {
+            createdAt: new Date(),
             uuid: header.uuid,
             brand: header.brand,
             type: 'heart_rate',
@@ -58,6 +60,7 @@ const heartRate = (header: { uuid: string, brand: string }, value: { heartRate: 
 const stepCount = (header: { uuid: string, brand: string }, value: number, startDateTime: Date =null, endDateTime: Date =null) => {
     if (!endDateTime) {
         return {
+            createdAt: new Date(),
             uuid: header.uuid,
             brand: header.brand,
             type: 'step_count',
@@ -73,6 +76,7 @@ const stepCount = (header: { uuid: string, brand: string }, value: number, start
         };
     } else {
         return {
+            createdAt: new Date(),
             uuid: header.uuid,
             brand: header.brand,
             type: 'step_count',
@@ -95,6 +99,7 @@ const stepCount = (header: { uuid: string, brand: string }, value: number, start
 const caloriesBurned = (header: { uuid: string, brand: string }, value: number, startDateTime: Date =null, endDateTime: Date =null) => {
     if (!endDateTime) {
         return {
+            createdAt: new Date(),
             uuid: header.uuid,
             brand: header.brand,
             type: 'calories_burned',
@@ -110,6 +115,7 @@ const caloriesBurned = (header: { uuid: string, brand: string }, value: number, 
         };
     } else {
         return {
+            createdAt: new Date(),
             uuid: header.uuid,
             brand: header.brand,
             type: 'calories_burned',
@@ -132,6 +138,7 @@ const caloriesBurned = (header: { uuid: string, brand: string }, value: number, 
 const physicalActivity = (header: { uuid: string, brand: string }, activityName: string, value: { distance: number, calories: number }, startDateTime: Date =null, endDateTime: Date =null) => {
     if (!endDateTime) {
         return {
+            createdAt: new Date(),
             uuid: header.uuid,
             brand: header.brand,
             type: 'physical_activity',
@@ -152,6 +159,7 @@ const physicalActivity = (header: { uuid: string, brand: string }, activityName:
         };
     } else {
         return {
+            createdAt: new Date(),
             uuid: header.uuid,
             brand: header.brand,
             type: 'physical_activity',
@@ -179,6 +187,7 @@ const physicalActivity = (header: { uuid: string, brand: string }, activityName:
 const bodyWeight = (header: { uuid: string, brand: string }, value: number, startDateTime: Date =null, endDateTime: Date =null) => {
     if (!endDateTime) {
         return {
+            createdAt: new Date(),
             uuid: header.uuid,
             brand: header.brand,
             type: 'body_weight',
@@ -194,6 +203,7 @@ const bodyWeight = (header: { uuid: string, brand: string }, value: number, star
         };
     } else {
         return {
+            createdAt: new Date(),
             uuid: header.uuid,
             brand: header.brand,
             type: 'body_weight',
@@ -216,6 +226,7 @@ const bodyWeight = (header: { uuid: string, brand: string }, value: number, star
 const bodyHeight = (header: { uuid: string, brand: string }, value: number, startDateTime: Date=null, endDateTime: Date=null) => {
     if (!endDateTime) {
         return {
+            createdAt: new Date(),
             uuid: header.uuid,
             brand: header.brand,
             type: 'body_height',
@@ -231,6 +242,7 @@ const bodyHeight = (header: { uuid: string, brand: string }, value: number, star
         };
     } else {
         return {
+            createdAt: new Date(),
             uuid: header.uuid,
             brand: header.brand,
             type: 'body_height',
@@ -253,6 +265,7 @@ const bodyHeight = (header: { uuid: string, brand: string }, value: number, star
 const bodyFatPercentage = (header: { uuid: string, brand: string }, value: number, startDateTime: Date=null, endDateTime: Date=null) => {
     if (!endDateTime) {
         return {
+            createdAt: new Date(),
             uuid: header.uuid,
             brand: header.brand,
             type: 'body_fat_percentage',
@@ -268,6 +281,7 @@ const bodyFatPercentage = (header: { uuid: string, brand: string }, value: numbe
         };
     } else {
         return {
+            createdAt: new Date(),
             uuid: header.uuid,
             brand: header.brand,
             type: 'body_fat_percentage',
@@ -290,6 +304,7 @@ const bodyFatPercentage = (header: { uuid: string, brand: string }, value: numbe
 const totalSleepTime = (header: { uuid: string, brand: string }, value: number, startDateTime: Date=null, endDateTime: Date=null) => {
     if (!endDateTime) {
         return {
+            createdAt: new Date(),
             uuid: header.uuid,
             brand: header.brand,
             type: 'total_sleep_time',
@@ -305,6 +320,7 @@ const totalSleepTime = (header: { uuid: string, brand: string }, value: number, 
         };
     } else {
         return {
+            createdAt: new Date(),
             uuid: header.uuid,
             brand: header.brand,
             type: 'total_sleep_time',
@@ -327,6 +343,7 @@ const totalSleepTime = (header: { uuid: string, brand: string }, value: number, 
 const pace = (header: { uuid: string, brand: string }, value: { pace: number, descriptiveStatistic: string }, startDateTime: Date=null, endDateTime: Date=null) => {
     if (!endDateTime) {
         return {
+            createdAt: new Date(),
             uuid: header.uuid,
             brand: header.brand,
             type: 'pace',
@@ -343,6 +360,7 @@ const pace = (header: { uuid: string, brand: string }, value: { pace: number, de
         };
     } else {
         return {
+            createdAt: new Date(),
             uuid: header.uuid,
             brand: header.brand,
             type: 'pace',

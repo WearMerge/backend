@@ -1,3 +1,4 @@
+import { mongoDb } from '../mongo';
 import path from 'path';
 import Formidable from 'formidable';
 import fs from 'fs';
@@ -24,10 +25,19 @@ export const uploadToServer = async (req: any, res: any) => {
                 }
             });
         });
-        form.on('end', () => {
+        form.on('end', async () => {
+            await setupSessionToDB(sessionId);
             res.status(200).send(sessionId);
             resolve(sessionId);
         });
         form.parse(req, () => {});
     });
+};
+
+const setupSessionToDB = async (sessionId: string) => {
+    const db = mongoDb();
+    await db.collection('session').insertOne({ sessionId: sessionId, createdAt: new Date() });
+    await db.collection('session').createIndex({ "createdAt": 1 }, { expireAfterSeconds: 604800 });
+    await db.createCollection(sessionId)
+    await db.collection(sessionId).createIndex({ "createdAt": 1 }, { expireAfterSeconds: 604800 });
 };
