@@ -52,7 +52,7 @@ export const fitbitSummary = async (filePath: string, validators: any, db: any, 
                 try {
                     await db.collection(userId).insertMany((await Promise.all(buffer)).flat());
                 } catch (error) {
-                    console.error(error);
+                    console.log(error);
                 }
             }
             resolve(true);

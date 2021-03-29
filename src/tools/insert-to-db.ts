@@ -27,9 +27,11 @@ const samsungInvalid = new RegExp(/com.samsung.health.\w+.\w+,\d+,\d+\n|com.sams
 
 const insertCSV = async (path: string, validators: any, db: any, userId: string, uuid: string) => {
     let parser: Readable;
+    let hasMiddleWare = false;
     const isFinished = await new Promise<boolean>(resolve => {
         const middleware  = fs.createReadStream(path)
             .pipe(ReplaceStream(samsungInvalid, () => {
+                hasMiddleWare = true;
                 middleware.destroy();
                 parser = fs.createReadStream(path)
                     .pipe(ReplaceStream(/com.samsung.health.\w+.\w+,\d+,\d+\n|com.samsung.shealth.\w+.\w+,\d+,\d+\n/, ''))
@@ -40,6 +42,7 @@ const insertCSV = async (path: string, validators: any, db: any, userId: string,
                 return '';
             })as Transform)
             .pipe(ReplaceStream(xiaomiInvalid, () => {
+                hasMiddleWare = true;
                 middleware.destroy();
                 parser = fs.createReadStream(path)
                     .pipe(ReplaceStream(/date,lastSyncTime,heartRate,timestamp[\n]*/, 'lastSyncTime,heartRate\n'))
@@ -49,14 +52,17 @@ const insertCSV = async (path: string, validators: any, db: any, userId: string,
                 return '';
             })as Transform)
             .pipe(ReplaceStream(fitbitSummaryInvalid, () => {
+                hasMiddleWare = true;
                 middleware.destroy();
                 resolve(fitbitSummary(path, validators, db, userId, uuid, bufferLength, ajv));
                 return '';
             })as Transform);
         middleware.on('data', () => {});
         middleware.on('finish', () => {
-            parser = fs.createReadStream(path).pipe(stripBomStream()).pipe(csvParser());
-            resolve(false);
+            if (!hasMiddleWare) {
+                parser = fs.createReadStream(path).pipe(stripBomStream()).pipe(csvParser());
+                resolve(false);
+            }
         });
         middleware.on('error', () => {});
     });
@@ -83,12 +89,12 @@ const insertCSV = async (path: string, validators: any, db: any, userId: string,
                 try {
                     await db.collection(userId).insertMany((await Promise.all(buffer)).flat());
                 } catch (error) {
-                    console.error(error);
+                    console.log(error);
                 }
             }
             resolve();
         }).on('error', async (e) => {
-            console.error(e);
+            console.log(e);
             resolve();
         });
     });
@@ -123,12 +129,12 @@ const insertXML = async (path: string, validators: any, db: any, userId: string,
                 try {
                     await db.collection(userId).insertMany((await Promise.all(buffer)).flat());
                 } catch (error) {
-                    console.error(error);
+                    console.log(error);
                 }
             }
             resolve();
         }).on('error', async (e: Error) => {
-            console.error(e);
+            console.log(e);
             resolve();
         });
     });
@@ -136,9 +142,11 @@ const insertXML = async (path: string, validators: any, db: any, userId: string,
 
 const insertJSON = async (path: string, validators: any, db: any, userId: string, uuid: string) => {
     let parser: Readable;
+    let hasMiddleWare = false;
     await new Promise<void>(resolve => {
         const middleware = fs.createReadStream(path)
             .pipe(ReplaceStream(fitbitInvalid, () => {
+                hasMiddleWare = true;
                 middleware.destroy();
                 parser = fs.createReadStream(path)
                     .pipe(ReplaceStream(/\{/g, '{"' + path.replace(/^.*[\\\/]/, '').split('-')[0] + '":"null",'))
@@ -147,6 +155,7 @@ const insertJSON = async (path: string, validators: any, db: any, userId: string
                 return '';
             })as Transform)
             .pipe(ReplaceStream(garminInvalid, () => {
+                hasMiddleWare = true;
                 middleware.destroy();
                 parser = fs.createReadStream(path)
                     .pipe(ReplaceStream(/\[[\n ]*\{[\n ]*"summarizedActivitiesExport"[\n ]*\:[\n ]*\[/, '['))
@@ -156,6 +165,7 @@ const insertJSON = async (path: string, validators: any, db: any, userId: string
                 return '';
             })as Transform)
             .pipe(ReplaceStream(garminObjectInvalid, () => {
+                hasMiddleWare = true;
                 middleware.destroy();
                 parser = fs.createReadStream(path)
                     .pipe(ReplaceStream(/\{/, '[{'))
@@ -165,6 +175,7 @@ const insertJSON = async (path: string, validators: any, db: any, userId: string
                 return '';
             })as Transform)
             .pipe(ReplaceStream(huaweiInvalid, () => {
+                hasMiddleWare = true;
                 middleware.destroy();
                 parser = fs.createReadStream(path)
                     .pipe(ReplaceStream(/\{[\n ]*"sportDataUserData"[\n ]*\:[\n ]*\[|\][\n ]*\,[\n ]*"timeZone"[\n ]*\:[\n ]*"\+\d+"[\n ]*\,[\n ]*"recordDay"[\n ]*\:[\n ]*\d+[\n ]*\,[\n ]*"version"[\n ]*\:[\n ]*\d+[\n ]*\}/g, ''))
@@ -174,8 +185,10 @@ const insertJSON = async (path: string, validators: any, db: any, userId: string
             })as Transform);
         middleware.on('data', () => {});
         middleware.on('finish', () => {
-            parser = fs.createReadStream(path).pipe(streamJson.withParser());
-            resolve();
+            if (!hasMiddleWare) {
+                parser = fs.createReadStream(path).pipe(streamJson.withParser());
+                resolve();
+            }
         });
         middleware.on('error', () => {});
     });
@@ -199,19 +212,19 @@ const insertJSON = async (path: string, validators: any, db: any, userId: string
                 try {
                     await db.collection(userId).insertMany((await Promise.all(buffer)).flat());
                 } catch (error) {
-                    console.error(error);
+                    console.log(error);
                 }
             }
             resolve();
         }).on('error', async (e) => {
-            console.error(e);
+            console.log(e);
             resolve();
         });
     });
 };
 
 export async function main(userId: string) {
-    const client = await new MongoClient('mongodb://localhost:27017', { useUnifiedTopology: true, forceServerObjectId: true }).connect();
+    const client = await new MongoClient('mongodb://localhost:27017', { forceServerObjectId: true }).connect();
     const db = client.db('wearmerge');
     // db.dropDatabase();
     await db.dropCollection(userId);
@@ -250,7 +263,7 @@ export async function main(userId: string) {
             }
         }));
     }
-    await client.close();
+    await client.close().then(()=>{console.log('END')});
 }
 
 //main('uploader_2');
