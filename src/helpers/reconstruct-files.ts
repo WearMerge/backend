@@ -4,7 +4,7 @@ import path from'path';
 import xlsx from 'xlsx';
 import { validator } from './validate-data';
 
-export const fitbitSummary = async (filePath: string, validators: any, db: any, userId: string, uuid: string, bufferLength: number, ajv: any) => {
+export const fitbitSummary = async (filePath: string, validators: any, db: any, sessionId: string, uuid: string, bufferLength: number, ajv: any) => {
     const parser = readline.createInterface({
         input: fs.createReadStream(filePath)
     });
@@ -37,7 +37,7 @@ export const fitbitSummary = async (filePath: string, validators: any, db: any, 
                     if (buffer.length > bufferLength) {
                         parser.pause();
                         Promise.all(buffer).then(x => {
-                            return db.collection(userId).insertMany(x.flat());
+                            return db.collection(sessionId).insertMany(x.flat());
                         }).then(() => {
                             parser.resume();
                         }).catch((e) => {
@@ -50,7 +50,7 @@ export const fitbitSummary = async (filePath: string, validators: any, db: any, 
         }).on('close', async () => {
             if (buffer.length > 0) {
                 try {
-                    await db.collection(userId).insertMany((await Promise.all(buffer)).flat());
+                    await db.collection(sessionId).insertMany((await Promise.all(buffer)).flat());
                 } catch (error) {
                     console.log(error);
                 }
@@ -63,7 +63,7 @@ export const fitbitSummary = async (filePath: string, validators: any, db: any, 
     });
 };
 
-export const huaweiXLS = async (filePath: string, validators: any, db: any, userId: string, uuid: string, bufferLength: number, ajv: any) => {
+export const huaweiXLS = async (filePath: string, validators: any, db: any, sessionId: string, uuid: string, bufferLength: number, ajv: any) => {
     const workbook = xlsx.readFile(filePath);
     const sheetName = workbook.SheetNames[0];
     if (sheetName === '1-user basic info') {
@@ -75,7 +75,7 @@ export const huaweiXLS = async (filePath: string, validators: any, db: any, user
             modifyTime: worksheet['B4'].v
         };
         try {
-            await db.collection(userId).insertMany(await validator(data, validators, uuid, ajv));
+            await db.collection(sessionId).insertMany(await validator(data, validators, uuid, ajv));
         } catch (error) {
             console.log(error);
         }

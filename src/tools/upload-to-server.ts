@@ -36,8 +36,6 @@ export const uploadToServer = async (req: any, res: any) => {
 
 const setupSessionToDB = async (sessionId: string) => {
     const db = mongoDb();
-    await db.collection('session').insertOne({ sessionId: sessionId, createdAt: new Date() });
-    await db.collection('session').createIndex({ "createdAt": 1 }, { expireAfterSeconds: 604800 });
-    await db.createCollection(sessionId)
-    await db.collection(sessionId).createIndex({ "createdAt": 1 }, { expireAfterSeconds: 604800 });
+    //await db.createCollection(sessionId)
+    //await db.collection(sessionId).createIndex({ "createdAt": 1 }, { expireAfterSeconds: 604800 });
 };

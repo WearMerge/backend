@@ -11,6 +11,7 @@ import { getFiles } from '../helpers/get-files';
 import { fitbitSummary, huaweiXLS } from '../helpers/reconstruct-files';
 import { validator } from '../helpers/validate-data';
 import Ajv from 'ajv';
+import { fillValues } from '../helpers/fill-values';
 
 const ajv = new Ajv({strict: false});
 
@@ -21,11 +22,11 @@ const fitbitSummaryInvalid = new RegExp(/Body\nDate,Weight,BMI,Fat|Food\nDate,Ca
 // const fitbitInvalid = new RegExp(/\[[\n ]*\{[\n ]*"logId"[\n ]*\:[\n ]*\d*[\n ]*\,[\n ]*"dateOfSleep"/);
 const fitbitInvalid = new RegExp(/\[\{[\n ]*"dateTime"[\n ]*\:[\0-\377:nonascii:]*?,[\n ]*"value"[\n ]*:[\n ]*"[\0-\377:nonascii:]*?"[\n ]*\}/);
 const garminInvalid = new RegExp(/\[[\n ]*\{[\n ]*"summarizedActivitiesExport"[\n ]*\:[\n ]*\[/);
-const garminObjectInvalid = new RegExp(/\{[\n ]*"userName"[\0-\377:nonascii:]*?\"firstName"/);
+const garminObjectInvalid = new RegExp(/\{[\n ]*"userName"[\0-\377:nonascii:]*?\"firstName"|\{[\n ]*"preferredLocale"[\0-\377:nonascii:]*?\"stepLengths"/);
 const huaweiInvalid = new RegExp(/\[[\n ]*\{[\n ]*"sportDataUserData"[\n ]*\:[\n ]*\[/);
 const samsungInvalid = new RegExp(/com.samsung.health.\w+.\w+,\d+,\d+\n|com.samsung.shealth.\w+.\w+,\d+,\d+\n/);
 
-const insertCSV = async (path: string, validators: any, db: any, userId: string, uuid: string) => {
+const insertCSV = async (path: string, validators: any, db: any, sessionId: string, uuid: string) => {
     let parser: Readable;
     let hasMiddleWare = false;
     const isFinished = await new Promise<boolean>(resolve => {
@@ -54,7 +55,7 @@ const insertCSV = async (path: string, validators: any, db: any, userId: string,
             .pipe(ReplaceStream(fitbitSummaryInvalid, () => {
                 hasMiddleWare = true;
                 middleware.destroy();
-                resolve(fitbitSummary(path, validators, db, userId, uuid, bufferLength, ajv));
+                resolve(fitbitSummary(path, validators, db, sessionId, uuid, bufferLength, ajv));
                 return '';
             })as Transform);
         middleware.on('data', () => {});
@@ -76,7 +77,7 @@ const insertCSV = async (path: string, validators: any, db: any, userId: string,
             if (buffer.length > bufferLength) {
                 parser.pause();
                 Promise.all(buffer).then(x => {
-                    return db.collection(userId).insertMany(x.flat());
+                    return db.collection(sessionId).insertMany(x.flat());
                 }).then(() => {
                     parser.resume();
                 }).catch((e) => {
@@ -87,7 +88,7 @@ const insertCSV = async (path: string, validators: any, db: any, userId: string,
         }).on('end', async () => {
             if (buffer.length > 0) {
                 try {
-                    await db.collection(userId).insertMany((await Promise.all(buffer)).flat());
+                    await db.collection(sessionId).insertMany((await Promise.all(buffer)).flat());
                 } catch (error) {
                     console.log(error);
                 }
@@ -100,7 +101,7 @@ const insertCSV = async (path: string, validators: any, db: any, userId: string,
     });
 };
 
-const insertXML = async (path: string, validators: any, db: any, userId: string, uuid: string) => {
+const insertXML = async (path: string, validators: any, db: any, sessionId: string, uuid: string) => {
     const parser = bigXml.createReader(path, /^(Me|Record|Workout|ActivitySummary)$/);
     let buffer: Promise<any[]>[] = [];
     await new Promise<void>(resolve => {
@@ -118,7 +119,7 @@ const insertXML = async (path: string, validators: any, db: any, userId: string,
             if (buffer.length > bufferLength) {
                 parser.pause();
                 Promise.all(buffer).then(x => {
-                    return db.collection(userId).insertMany(x.flat());
+                    return db.collection(sessionId).insertMany(x.flat());
                 }).then(() => {
                     parser.resume();
                 }).catch(() => {});
@@ -127,7 +128,7 @@ const insertXML = async (path: string, validators: any, db: any, userId: string,
         }).on('end', async ()=>{
             if (buffer.length > 0) {
                 try {
-                    await db.collection(userId).insertMany((await Promise.all(buffer)).flat());
+                    await db.collection(sessionId).insertMany((await Promise.all(buffer)).flat());
                 } catch (error) {
                     console.log(error);
                 }
@@ -140,7 +141,7 @@ const insertXML = async (path: string, validators: any, db: any, userId: string,
     });
 };
 
-const insertJSON = async (path: string, validators: any, db: any, userId: string, uuid: string) => {
+const insertJSON = async (path: string, validators: any, db: any, sessionId: string, uuid: string) => {
     let parser: Readable;
     let hasMiddleWare = false;
     await new Promise<void>(resolve => {
@@ -169,7 +170,7 @@ const insertJSON = async (path: string, validators: any, db: any, userId: string
                 middleware.destroy();
                 parser = fs.createReadStream(path)
                     .pipe(ReplaceStream(/\{/, '[{'))
-                    .pipe(ReplaceStream('\}', '}]'))
+                    .pipe(ReplaceStream(/\}$/, '}]'))
                     .pipe(streamJson.withParser());
                 resolve();
                 return '';
@@ -199,7 +200,7 @@ const insertJSON = async (path: string, validators: any, db: any, userId: string
             if (buffer.length > bufferLength) {
                 parser.pause();
                 Promise.all(buffer).then(x => {
-                    return db.collection(userId).insertMany(x.flat());
+                    return db.collection(sessionId).insertMany(x.flat());
                 }).then(() => {
                     parser.resume();
                 }).catch((e) => {
@@ -210,7 +211,7 @@ const insertJSON = async (path: string, validators: any, db: any, userId: string
         }).on('end', async () => {
             if (buffer.length > 0) {
                 try {
-                    await db.collection(userId).insertMany((await Promise.all(buffer)).flat());
+                    await db.collection(sessionId).insertMany((await Promise.all(buffer)).flat());
                 } catch (error) {
                     console.log(error);
                 }
@@ -223,12 +224,12 @@ const insertJSON = async (path: string, validators: any, db: any, userId: string
     });
 };
 
-export async function insertToDB(userId: string) {
+export async function insertToDB(sessionId: string) {
     const db = mongoDb();
-    // await db.dropCollection(userId);
+    await db.dropCollection(sessionId);
 
     const validators = await getFiles('./validators/');
-    const uploadsFiles = await getFiles(path.join('uploads', userId, '/'));
+    const uploadsFiles = await getFiles(path.join('uploads', sessionId, '/'));
     
     let uuid = new Map();
 
@@ -251,14 +252,16 @@ export async function insertToDB(userId: string) {
             const fileType = obj.name.substr(obj.name.lastIndexOf('.') + 1);
             
             if (fileType === 'csv') {
-                await insertCSV(obj.path, validators, db, userId, uuid.get(key));
+                await insertCSV(obj.path, validators, db, sessionId, uuid.get(key));
             } else if (fileType === 'json') {
-                await insertJSON(obj.path, validators, db, userId, uuid.get(key));
+                await insertJSON(obj.path, validators, db, sessionId, uuid.get(key));
             } else if (fileType === 'xml') {
-                await insertXML(obj.path, validators, db, userId, uuid.get(key));
+                await insertXML(obj.path, validators, db, sessionId, uuid.get(key));
             } else if (fileType === 'xls') {
-                await huaweiXLS(obj.path, validators, db, userId, uuid.get(key), bufferLength, ajv);
+                await huaweiXLS(obj.path, validators, db, sessionId, uuid.get(key), bufferLength, ajv);
             }
         }));
     }
+
+    await fillValues(sessionId, db);
 }

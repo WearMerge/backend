@@ -1,0 +1,315 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#41",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "preferredLocale",
+        "stepLengths",
+        "handedness",
+        "heartRateZones",
+        "powerZones",
+        "lactateThresholdSpeed",
+        "lactateThresholdHeartRate"
+    ],
+    "properties": {
+        "preferredLocale": {
+            "$id": "#/properties/preferredLocale",
+            "type": "string",
+            "title": "The preferredLocale schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "stepLengths": {
+            "$id": "#/properties/stepLengths",
+            "type": "array",
+            "title": "The stepLengths schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": [],
+            "additionalItems": true,
+            "items": {
+                "$id": "#/properties/stepLengths/items",
+                "anyOf": [
+                    {
+                        "$id": "#/properties/stepLengths/items/anyOf/0",
+                        "type": "object",
+                        "title": "The first anyOf schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": {},
+                        "required": [
+                            "activityTypeKey",
+                            "distance",
+                            "unitKey",
+                            "steps",
+                            "stepLength"
+                        ],
+                        "properties": {
+                            "activityTypeKey": {
+                                "$id": "#/properties/stepLengths/items/anyOf/0/properties/activityTypeKey",
+                                "type": "string",
+                                "title": "The activityTypeKey schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": ""
+                            },
+                            "distance": {
+                                "$id": "#/properties/stepLengths/items/anyOf/0/properties/distance",
+                                "type": "number",
+                                "title": "The distance schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0.0
+                            },
+                            "unitKey": {
+                                "$id": "#/properties/stepLengths/items/anyOf/0/properties/unitKey",
+                                "type": "string",
+                                "title": "The unitKey schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": ""
+                            },
+                            "steps": {
+                                "$id": "#/properties/stepLengths/items/anyOf/0/properties/steps",
+                                "type": "integer",
+                                "title": "The steps schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0
+                            },
+                            "stepLength": {
+                                "$id": "#/properties/stepLengths/items/anyOf/0/properties/stepLength",
+                                "type": "number",
+                                "title": "The stepLength schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0.0
+                            }
+                        },
+                        "additionalProperties": true
+                    }
+                ]
+            }
+        },
+        "handedness": {
+            "$id": "#/properties/handedness",
+            "type": "string",
+            "title": "The handedness schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "heartRateZones": {
+            "$id": "#/properties/heartRateZones",
+            "type": "array",
+            "title": "The heartRateZones schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": [],
+            "additionalItems": true,
+            "items": {
+                "$id": "#/properties/heartRateZones/items",
+                "anyOf": [
+                    {
+                        "$id": "#/properties/heartRateZones/items/anyOf/0",
+                        "type": "object",
+                        "title": "The first anyOf schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": {},
+                        "required": [
+                            "trainingMethod",
+                            "zone1Floor",
+                            "zone2Floor",
+                            "zone3Floor",
+                            "zone4Floor",
+                            "zone5Floor",
+                            "maxHeartRateUsed",
+                            "restingHrAutoUpdateUsed",
+                            "sport",
+                            "changeState"
+                        ],
+                        "properties": {
+                            "trainingMethod": {
+                                "$id": "#/properties/heartRateZones/items/anyOf/0/properties/trainingMethod",
+                                "type": "string",
+                                "title": "The trainingMethod schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": ""
+                            },
+                            "zone1Floor": {
+                                "$id": "#/properties/heartRateZones/items/anyOf/0/properties/zone1Floor",
+                                "type": "integer",
+                                "title": "The zone1Floor schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0
+                            },
+                            "zone2Floor": {
+                                "$id": "#/properties/heartRateZones/items/anyOf/0/properties/zone2Floor",
+                                "type": "integer",
+                                "title": "The zone2Floor schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0
+                            },
+                            "zone3Floor": {
+                                "$id": "#/properties/heartRateZones/items/anyOf/0/properties/zone3Floor",
+                                "type": "integer",
+                                "title": "The zone3Floor schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0
+                            },
+                            "zone4Floor": {
+                                "$id": "#/properties/heartRateZones/items/anyOf/0/properties/zone4Floor",
+                                "type": "integer",
+                                "title": "The zone4Floor schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0
+                            },
+                            "zone5Floor": {
+                                "$id": "#/properties/heartRateZones/items/anyOf/0/properties/zone5Floor",
+                                "type": "integer",
+                                "title": "The zone5Floor schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0
+                            },
+                            "maxHeartRateUsed": {
+                                "$id": "#/properties/heartRateZones/items/anyOf/0/properties/maxHeartRateUsed",
+                                "type": "integer",
+                                "title": "The maxHeartRateUsed schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0
+                            },
+                            "restingHrAutoUpdateUsed": {
+                                "$id": "#/properties/heartRateZones/items/anyOf/0/properties/restingHrAutoUpdateUsed",
+                                "type": "boolean",
+                                "title": "The restingHrAutoUpdateUsed schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": false
+                            },
+                            "sport": {
+                                "$id": "#/properties/heartRateZones/items/anyOf/0/properties/sport",
+                                "type": "string",
+                                "title": "The sport schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": ""
+                            },
+                            "changeState": {
+                                "$id": "#/properties/heartRateZones/items/anyOf/0/properties/changeState",
+                                "type": "string",
+                                "title": "The changeState schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": ""
+                            }
+                        },
+                        "additionalProperties": true
+                    }
+                ]
+            }
+        },
+        "powerZones": {
+            "$id": "#/properties/powerZones",
+            "type": "array",
+            "title": "The powerZones schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": [],
+            "additionalItems": true,
+            "items": {
+                "$id": "#/properties/powerZones/items",
+                "anyOf": [
+                    {
+                        "$id": "#/properties/powerZones/items/anyOf/0",
+                        "type": "object",
+                        "title": "The first anyOf schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": {},
+                        "required": [
+                            "sport",
+                            "functionalThresholdPower",
+                            "zone1Floor",
+                            "zone2Floor",
+                            "zone3Floor",
+                            "zone4Floor",
+                            "zone5Floor",
+                            "zone6Floor",
+                            "zone7Floor"
+                        ],
+                        "properties": {
+                            "sport": {
+                                "$id": "#/properties/powerZones/items/anyOf/0/properties/sport",
+                                "type": "string",
+                                "title": "The sport schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": ""
+                            },
+                            "functionalThresholdPower": {
+                                "$id": "#/properties/powerZones/items/anyOf/0/properties/functionalThresholdPower",
+                                "type": "number",
+                                "title": "The functionalThresholdPower schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0.0
+                            },
+                            "zone1Floor": {
+                                "$id": "#/properties/powerZones/items/anyOf/0/properties/zone1Floor",
+                                "type": "number",
+                                "title": "The zone1Floor schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0.0
+                            },
+                            "zone2Floor": {
+                                "$id": "#/properties/powerZones/items/anyOf/0/properties/zone2Floor",
+                                "type": "number",
+                                "title": "The zone2Floor schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0.0
+                            },
+                            "zone3Floor": {
+                                "$id": "#/properties/powerZones/items/anyOf/0/properties/zone3Floor",
+                                "type": "number",
+                                "title": "The zone3Floor schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0.0
+                            },
+                            "zone4Floor": {
+                                "$id": "#/properties/powerZones/items/anyOf/0/properties/zone4Floor",
+                                "type": "number",
+                                "title": "The zone4Floor schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0.0
+                            },
+                            "zone5Floor": {
+                                "$id": "#/properties/powerZones/items/anyOf/0/properties/zone5Floor",
+                                "type": "number",
+                                "title": "The zone5Floor schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0.0
+                            },
+                            "zone6Floor": {
+                                "$id": "#/properties/powerZones/items/anyOf/0/properties/zone6Floor",
+                                "type": "number",
+                                "title": "The zone6Floor schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0.0
+                            },
+                            "zone7Floor": {
+                                "$id": "#/properties/powerZones/items/anyOf/0/properties/zone7Floor",
+                                "type": "number",
+                                "title": "The zone7Floor schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0.0
+                            }
+                        },
+                        "additionalProperties": true
+                    }
+                ]
+            }
+        },
+        "lactateThresholdSpeed": {
+            "$id": "#/properties/lactateThresholdSpeed",
+            "type": "number",
+            "title": "The lactateThresholdSpeed schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0
+        },
+        "lactateThresholdHeartRate": {
+            "$id": "#/properties/lactateThresholdHeartRate",
+            "type": "integer",
+            "title": "The lactateThresholdHeartRate schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0
+        }
+    },
+    "additionalProperties": false
+}

@@ -16,9 +16,9 @@ const types = [
     'pace'
 ];
 
-export const exportFromDB = async (userId: string) => {
+export const exportFromDB = async (sessionId: string) => {
     const db = mongoDb();
-    const pathDir = path.join('./downloads', userId);
+    const pathDir = path.join('./downloads', sessionId);
     await new Promise<void>(resolve => {
         fs.access(pathDir, fs.constants.F_OK, (err) => {
             if (err) {
@@ -31,7 +31,7 @@ export const exportFromDB = async (userId: string) => {
     });
     await Promise.all(types.map(async (element) => {
         const writer = fs.createWriteStream(path.join(pathDir, element + '.csv'));
-        const cursor = db.collection(userId).find({ type: element }).stream();
+        const cursor = db.collection(sessionId).find({ type: element }).stream();
         await new Promise<void>(resolve => {
             cursor.pipe(es.map((doc: any, next: any) => {
                 doc = JSON.stringify(doc);
