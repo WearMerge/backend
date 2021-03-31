@@ -2,6 +2,7 @@ export const fillValues = async (sessionId: string, db: any) => {
     await fitbit(sessionId, db);
     await xiaomi(sessionId, db);
     await samsung(sessionId, db);
+    await apple(sessionId, db);
 };
 
 const fitbit = async (sessionId: string, db: any) => {
@@ -144,6 +145,97 @@ const samsung = async (sessionId: string, db: any) => {
                 );
             }
         }
+        resolve();
+    });
+};
+
+const apple = async (sessionId: string, db: any) => {
+    await new Promise<void>(async (resolve) => {
+        let buffer: any = [];
+        const cursor = await db.collection(sessionId).find({ brand: 'apple', type: 'physical_activity', 'data.kcal_burned.value': null }, {timeout: true});
+        while (await cursor.hasNext()) {
+            const data = await cursor.next();
+            //console.time('1');
+            buffer.push(newPromise(sessionId, db, data));
+            //console.timeEnd('4');
+            if (buffer.length > 100000) {
+                await Promise.all(buffer);
+                buffer = [];
+            }
+        }
+        await Promise.all(buffer);
+        resolve();
+    });
+};
+
+const newPromise = async (sessionId: string, db: any, data: any) => {
+    await new Promise<void>(async (resolve) => {
+        const weightMax = await db.collection(sessionId).find({ uuid: data.uuid, type: 'body_weight', "data.effective_time_frame.time_interval.start_date_time": { $gte: data.data.effective_time_frame.time_interval.end_date_time }}).sort({ "data.effective_time_frame.time_interval.start_date_time": 1 }).limit(1).toArray();
+            const weightMin = await db.collection(sessionId).find({ uuid: data.uuid, type: 'body_weight', "data.effective_time_frame.time_interval.end_date_time": { $lt: data.data.effective_time_frame.time_interval.start_date_time }}).sort({ "data.effective_time_frame.time_interval.end_date_time": -1 }).limit(1).toArray();
+            let weight: any;
+            if (weightMax.length && weightMin.length) {
+                const max = Math.abs(weightMax[0].data.effective_time_frame.time_interval.start_date_time - data.data.effective_time_frame.time_interval.end_date_time);
+                const min = Math.abs(weightMin[0].data.effective_time_frame.time_interval.end_date_time - data.data.effective_time_frame.time_interval.start_date_time);
+                if (max < min) {
+                    weight = weightMax[0];
+                } else {
+                    weight = weightMin[0];
+                }
+            } else if (weightMax.length) {
+                weight = weightMax[0];
+            } else {
+                weight = weightMin[0];
+            }
+            //console.timeEnd('1');
+            //console.time('2');
+            const paceMax = await db.collection(sessionId).find({ uuid: data.uuid, type: 'pace', "data.effective_time_frame.time_interval.start_date_time": { $gte: data.data.effective_time_frame.time_interval.end_date_time }}).sort({ "data.effective_time_frame.time_interval.start_date_time": 1 }).limit(1).toArray();
+            const paceMin = await db.collection(sessionId).find({ uuid: data.uuid, type: 'pace', "data.effective_time_frame.time_interval.end_date_time": { $lt: data.data.effective_time_frame.time_interval.start_date_time }}).sort({ "data.effective_time_frame.time_interval.end_date_time": -1 }).limit(1).toArray();
+            let pace: any;
+            if (paceMax.length && paceMin.length) {
+                const max = Math.abs(paceMax[0].data.effective_time_frame.time_interval.start_date_time - data.data.effective_time_frame.time_interval.end_date_time);
+                const min = Math.abs(paceMin[0].data.effective_time_frame.time_interval.end_date_time - data.data.effective_time_frame.time_interval.start_date_time);
+                if (max < min) {
+                    pace = paceMax[0];
+                } else {
+                    pace = paceMin[0];
+                }
+            } else if (paceMax.length) {
+                pace = paceMax[0];
+            } else {
+                pace = paceMin[0];
+            }
+            //console.timeEnd('2');
+            //console.time('3');
+            const coloriesMax = await db.collection(sessionId).find({ uuid: data.uuid, type: 'calories_burned', "data.effective_time_frame.time_interval.start_date_time": { $gte: data.data.effective_time_frame.time_interval.end_date_time }}).sort({ "data.effective_time_frame.time_interval.start_date_time": 1 }).limit(1).toArray();
+            const coloriesMin = await db.collection(sessionId).find({ uuid: data.uuid, type: 'calories_burned', "data.effective_time_frame.time_interval.end_date_time": { $lt: data.data.effective_time_frame.time_interval.start_date_time }}).sort({ "data.effective_time_frame.time_interval.end_date_time": -1 }).limit(1).toArray();
+            let colories: any;
+            if (coloriesMax.length && coloriesMin.length) {
+                const max = Math.abs(coloriesMax[0].data.effective_time_frame.time_interval.start_date_time - data.data.effective_time_frame.time_interval.end_date_time);
+                const min = Math.abs(coloriesMin[0].data.effective_time_frame.time_interval.end_date_time - data.data.effective_time_frame.time_interval.start_date_time);
+                if (max < min) {
+                    colories = coloriesMax[0];
+                } else {
+                    colories = coloriesMin[0];
+                }
+            } else if (paceMax.length) {
+                colories = coloriesMax[0];
+            } else {
+                colories = coloriesMin[0];
+            }
+            //console.timeEnd('3');
+            //console.time('4');
+            if (pace !== undefined && weight !== undefined && colories !== undefined) {
+                const duration = pace.data.pace.value * data.data.distance.value;
+                let met = (200*colories.data.kcal_burned.value) / (duration*3.5*weight.data.body_weight.value);
+                if (isNaN(met)) {
+                    met = 0;
+                }
+                //console.log(duration*(met*3.5*weight.data.body_weight.value)/200);
+                await db.collection(sessionId).updateOne(
+                    { _id: data._id },
+                    { $set: { "data.kcal_burned.value": duration*(met*3.5*weight.data.body_weight.value)/200 } }
+                );
+            }
         resolve();
     });
 };

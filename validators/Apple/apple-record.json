@@ -8,12 +8,9 @@
     "required": [
         "type",
         "sourceName",
-        "sourceVersion",
-        "unit",
         "creationDate",
         "startDate",
-        "endDate",
-        "value"
+        "endDate"
     ],
     "properties": {
         "type": {

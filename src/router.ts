@@ -3,10 +3,13 @@ import { insertToDB } from './tools/insert-to-db';
 import { exportFromDB } from './tools/export-from-db';
 import { uploadToServer } from './tools/upload-to-server';
 import { bullAddJob } from './bull';
+import { fillValues } from './helpers/fill-values';
+import { mongoDb } from './mongo';
 
 export const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
+    await fillValues('uploader_5', mongoDb());
     res.send('Welcome to WearMerge!');
 });
 

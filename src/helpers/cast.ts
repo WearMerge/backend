@@ -681,8 +681,77 @@ const huawei = (data: any, brand: string, schema: string, uuid: string) => {
     } else {
         return [];
     }
-}
+};
 
-const apple = (data: any, brand:string, schema: string, uuid: string) => {
-    
-}
+const apple = (data: any, brand:string, schema: string, uuid: string): any => {
+    if (schema === 'activity_summary.json') {
+        return caloriesBurned({ uuid: uuid, brand: brand, schema: schema }, Number(data['activeEnergyBurned']), new Date(data['dateComponents']));   
+    } else if (schema === 'record.json') {
+        if (data['type'] === 'HKQuantityTypeIdentifierHeartRate') {
+            return heartRate({ uuid: uuid, brand: brand, schema: schema }, { heartRate: Number(data['value']), descriptiveStatistic: 'count' }, new Date(data['startDate']), new Date(data['endDate']));
+        } else if (data['type'] === 'HKQuantityTypeIdentifierRestingHeartRate') {
+            return heartRate({ uuid: uuid, brand: brand, schema: schema }, { heartRate: Number(data['value']), descriptiveStatistic: 'count' }, new Date(data['startDate']), new Date(data['endDate']));
+        } else if (data['type'] === 'HKQuantityTypeIdentifierWalkingHeartRateAverage') {
+            return heartRate({ uuid: uuid, brand: brand, schema: schema }, { heartRate: Number(data['value']), descriptiveStatistic: 'average' }, new Date(data['startDate']), new Date(data['endDate']));
+        } else if (data['type'] === 'HKCategoryTypeIdentifierHighHeartRateEvent') {
+            return heartRate({ uuid: uuid, brand: brand, schema: schema }, { heartRate: Number(data['children'][0]['value'].split(' ')[0]), descriptiveStatistic: 'maximum' }, new Date(data['startDate']), new Date(data['endDate']));
+        } else if (data['type'] === 'HKQuantityTypeIdentifierHeartRateVariabilitySDNN') {
+            let buffer = [];
+            const date = data['startDate'].split(' ');
+            for (const val of data['children']) {
+                buffer.push(heartRate({ uuid: uuid, brand: brand, schema: schema }, { heartRate: Number(val['bpm']), descriptiveStatistic: 'count' }, new Date(date[0] + ' ' + val['time'].replace(/\,\d+/, '') + ' ' + date[2])));
+            }
+            return buffer;
+        } else if (data['type'] === 'HKQuantityTypeIdentifierStepCount') {
+            return stepCount({ uuid: uuid, brand: brand, schema: schema }, Number(data['value']), new Date(data['startDate']), new Date(data['endDate']));
+        } else if (data['type'] === 'HKCategoryTypeIdentifierSleepAnalysis') {
+            const start = new Date(data['startDate']);
+            const end = new Date(data['endDate']);
+            return totalSleepTime({ uuid: uuid, brand: brand, schema: schema }, (end.getTime() - start.getTime())/60000, start, end);
+        } else if (data['type'] === 'HKQuantityTypeIdentifierWalkingSpeed') {
+            return pace({ uuid: uuid, brand: brand, schema: schema }, { pace: 1/(Number(data['value'])*60), descriptiveStatistic: 'count' }, new Date(data['startDate']), new Date(data['endDate']));
+        } else if (data['type'] === 'HKQuantityTypeIdentifierDistanceWalkingRunning') {
+            return physicalActivity({ uuid: uuid, brand: brand, schema: schema }, 'running', { distance: Number(data['value']), calories: null }, new Date(data['startDate']), new Date(data['endDate']));
+        } else if (data['type'] === 'HKQuantityTypeIdentifierDistanceCycling') {
+            return physicalActivity({ uuid: uuid, brand: brand, schema: schema }, 'cycling', { distance: Number(data['value']), calories: null }, new Date(data['startDate']), new Date(data['endDate']));
+        } else if (data['type'] === 'HKQuantityTypeIdentifierDistanceSwimming') {
+            return physicalActivity({ uuid: uuid, brand: brand, schema: schema }, 'swimming', { distance: Number(data['value'])/1000, calories: null }, new Date(data['startDate']), new Date(data['endDate']));
+        } else if (data['type'] === 'HKQuantityTypeIdentifierBasalEnergyBurned') {
+            return caloriesBurned({ uuid: uuid, brand: brand, schema: schema }, Number(data['value']), new Date(data['startDate']), new Date(data['endDate']));
+        } else if (data['type'] === 'HKQuantityTypeIdentifierActiveEnergyBurned') {
+            return caloriesBurned({ uuid: uuid, brand: brand, schema: schema }, Number(data['value']), new Date(data['startDate']), new Date(data['endDate']));
+        } else if (data['type'] === 'HKQuantityTypeIdentifierBodyMass') {
+            return bodyWeight({ uuid: uuid, brand: brand, schema: schema }, Number(data['value']), new Date(data['startDate']), new Date(data['endDate']));
+        } else if (data['type'] === 'HKQuantityTypeIdentifierLeanBodyMass') {
+            return bodyWeight({ uuid: uuid, brand: brand, schema: schema }, Number(data['value']), new Date(data['startDate']), new Date(data['endDate']));
+        } else if (data['type'] === 'HKQuantityTypeIdentifierHeight') {
+            return bodyHeight({ uuid: uuid, brand: brand, schema: schema }, Number(data['value']), new Date(data['startDate']), new Date(data['endDate']));
+        } else if (data['type'] === 'HKQuantityTypeIdentifierBodyFatPercentage') {
+            return bodyFatPercentage({ uuid: uuid, brand: brand, schema: schema }, Number(data['value']), new Date(data['startDate']), new Date(data['endDate']));
+        } else {
+            return [];
+        }
+    } else if (schema === 'workout.json') {
+        if (data['workoutActivityType'] === 'HKWorkoutActivityTypeCycling') {
+            return [
+                physicalActivity({ uuid: uuid, brand: brand, schema: schema }, 'cycling', { distance: Number(data['totalDistance']), calories: Number(data['totalEnergyBurned']) }, new Date(data['startDate']), new Date(data['endDate'])),
+                pace({ uuid: uuid, brand: brand, schema: schema }, { pace: Number(data['duration'])/Number(data['totalDistance']), descriptiveStatistic: 'count' }, new Date(data['startDate']), new Date(data['endDate'])),
+                caloriesBurned({ uuid: uuid, brand: brand, schema: schema }, Number(data['totalEnergyBurned']), new Date(data['startDate']), new Date(data['endDate']))
+            ];
+        } else if (data['workoutActivityType'] === 'HKWorkoutActivityTypeWalking') {
+            let paceValue = 0;
+            if (Number(data['totalDistance'])) {
+                paceValue = Number(data['duration'])/Number(data['totalDistance']);
+            }
+            return [
+                physicalActivity({ uuid: uuid, brand: brand, schema: schema }, 'walking', { distance: Number(data['totalDistance']), calories: Number(data['totalEnergyBurned']) }, new Date(data['startDate']), new Date(data['endDate'])),
+                pace({ uuid: uuid, brand: brand, schema: schema }, { pace: paceValue, descriptiveStatistic: 'count' }, new Date(data['startDate']), new Date(data['endDate'])),
+                caloriesBurned({ uuid: uuid, brand: brand, schema: schema }, Number(data['totalEnergyBurned']), new Date(data['startDate']), new Date(data['endDate']))
+            ];
+        } else {
+            return [];
+        }
+    } else {
+        return [];
+    }
+};

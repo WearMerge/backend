@@ -106,9 +106,7 @@ const insertXML = async (path: string, validators: any, db: any, sessionId: stri
     let buffer: Promise<any[]>[] = [];
     await new Promise<void>(resolve => {
         parser.on('record', async (data: any) => {
-            //console.log(data);
             if (data.children != null) {
-                //console.log(data);
                 if (data.children[0].children != null) {
                     data.attrs.children = data.children[0].children.map((x: any) => x.attrs);
                 } else if (data.children != null) {
@@ -122,7 +120,9 @@ const insertXML = async (path: string, validators: any, db: any, sessionId: stri
                     return db.collection(sessionId).insertMany(x.flat());
                 }).then(() => {
                     parser.resume();
-                }).catch(() => {});
+                }).catch((e) => {
+                    console.log(e);
+                });
                 buffer = [];
             }
         }).on('end', async ()=>{
@@ -263,5 +263,5 @@ export async function insertToDB(sessionId: string) {
         }));
     }
 
-    await fillValues(sessionId, db);
+    //await fillValues(sessionId, db);
 }
