@@ -497,7 +497,7 @@ const fitbit = (data: any, brand: string, schema: string, uuid: string) => {
     } else if (schema === 'exercise.json') {
         const date = new Date(data['startTime']);
         return [
-            pace({ uuid: uuid, brand: brand, schema: schema }, { pace: Number(data['duration']), descriptiveStatistic: 'count' }, date),
+            pace({ uuid: uuid, brand: brand, schema: schema }, { pace: null, descriptiveStatistic: 'count' }, date),
             physicalActivity({ uuid: uuid, brand: brand, schema: schema }, data['activityName'], { distance: null, calories: data['calories'] }, date),
             stepCount({ uuid: uuid, brand: brand, schema: schema }, Number(data['steps']), date),
             heartRate({ uuid: uuid, brand: brand, schema: schema }, { heartRate: Number(data['averageHeartRate']), descriptiveStatistic: 'average' }, date),

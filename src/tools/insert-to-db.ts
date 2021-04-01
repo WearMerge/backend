@@ -226,7 +226,7 @@ const insertJSON = async (path: string, validators: any, db: any, sessionId: str
 
 export async function insertToDB(sessionId: string) {
     const db = mongoDb();
-    await db.dropCollection(sessionId);
+    //await db.dropCollection(sessionId);
 
     const validators = await getFiles('./validators/');
     const uploadsFiles = await getFiles(path.join('uploads', sessionId, '/'));
