@@ -11,6 +11,7 @@ import { getFiles } from '../helpers/get-files';
 import { fitbitSummary, huaweiXLS } from '../helpers/reconstruct-files';
 import { validator } from '../helpers/validate-data';
 import Ajv from 'ajv';
+import { deleteDir } from '../helpers/delete-dir';
 import { fillValues } from '../helpers/fill-values';
 
 const ajv = new Ajv({strict: false});
@@ -250,7 +251,7 @@ export async function insertToDB(sessionId: string) {
                 uuid.set(key, uuidv4());
             }
             const fileType = obj.name.substr(obj.name.lastIndexOf('.') + 1);
-            
+            //console.log(obj.path);
             if (fileType === 'csv') {
                 await insertCSV(obj.path, validators, db, sessionId, uuid.get(key));
             } else if (fileType === 'json') {
@@ -262,6 +263,10 @@ export async function insertToDB(sessionId: string) {
             }
         }));
     }
-
+    const exist = await db.collection(sessionId).findOne();
+    if (exist === undefined) {
+        await db.collection('session').deleteOne({ sessionId: sessionId });
+        await deleteDir(path.join('uploads', sessionId));
+    }
     //await fillValues(sessionId, db);
 }
