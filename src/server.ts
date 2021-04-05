@@ -6,17 +6,20 @@ import { bullConnect } from './bull';
 
 const app = express();
 const port = process.env.PORT || 3000;
-const mongoURL = 'mongodb://localhost:27017';
+const prod = process.env.NODE_ENV === 'production';
+const mongoURL = prod ? 'mongodb://mongo:27017' : 'mongodb://localhost:27017';
 const mongoDatabase = 'wearmerge';
 const bullSettings = {
     redis: {
-        host: '127.0.0.1',
+        host: prod ? 'redis' : '127.0.0.1',
         port: 6379
     }
 };
 const bullCPU = 2;
 
-app.use(cors());
+if (!prod) {
+    app.use(cors());
+}
 app.use('/', router);
 
 
