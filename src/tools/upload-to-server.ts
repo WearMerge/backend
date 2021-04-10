@@ -37,7 +37,7 @@ export const uploadToServer = async (req: any, res: any) => {
         form.on('field', async (fieldName, fieldValue) => {
             if (fieldName === 'email') {
                 if (validator.isEmail(fieldValue)) {
-                    await db.collection('session').insertOne({ sessionId: sessionId, email: fieldValue });
+                    await db.collection('session').insertOne({ sessionId: sessionId, email: fieldValue, createdAt: new Date() });
                 } else {
                     deleteDir(path.join('uploads', sessionId));
                     resolve('Invalid e-mail address');
