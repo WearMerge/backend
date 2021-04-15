@@ -12,7 +12,6 @@ import { fitbitSummary, huaweiXLS } from '../helpers/reconstruct-files';
 import { validator } from '../helpers/validate-data';
 import Ajv from 'ajv';
 import { deleteDir } from '../helpers/delete-dir';
-import { fillValues } from '../helpers/fill-values';
 
 const ajv = new Ajv({strict: false});
 
@@ -78,7 +77,10 @@ const insertCSV = async (path: string, validators: any, db: any, sessionId: stri
             if (buffer.length > bufferLength) {
                 parser.pause();
                 Promise.all(buffer).then(x => {
-                    return db.collection(sessionId).insertMany(x.flat());
+                    const array = x.flat();
+                    if (array.length) {
+                        return db.collection(sessionId).insertMany(x);
+                    }
                 }).then(() => {
                     parser.resume();
                 }).catch((e) => {
@@ -89,14 +91,17 @@ const insertCSV = async (path: string, validators: any, db: any, sessionId: stri
         }).on('end', async () => {
             if (buffer.length > 0) {
                 try {
-                    await db.collection(sessionId).insertMany((await Promise.all(buffer)).flat());
+                    const array = (await Promise.all(buffer)).flat();
+                    if (array.length) {
+                        await db.collection(sessionId).insertMany(array);
+                    }
                 } catch (error) {
                     console.log(error);
                 }
             }
             resolve();
         }).on('error', async (e) => {
-            console.log(e);
+            //console.log(e);
             resolve();
         });
     });
@@ -118,7 +123,10 @@ const insertXML = async (path: string, validators: any, db: any, sessionId: stri
             if (buffer.length > bufferLength) {
                 parser.pause();
                 Promise.all(buffer).then(x => {
-                    return db.collection(sessionId).insertMany(x.flat());
+                    const array = x.flat();
+                    if (array.length) {
+                        return db.collection(sessionId).insertMany(x);
+                    }
                 }).then(() => {
                     parser.resume();
                 }).catch((e) => {
@@ -129,14 +137,17 @@ const insertXML = async (path: string, validators: any, db: any, sessionId: stri
         }).on('end', async ()=>{
             if (buffer.length > 0) {
                 try {
-                    await db.collection(sessionId).insertMany((await Promise.all(buffer)).flat());
+                    const array = (await Promise.all(buffer)).flat();
+                    if (array.length) {
+                        await db.collection(sessionId).insertMany(array);
+                    }
                 } catch (error) {
                     console.log(error);
                 }
             }
             resolve();
         }).on('error', async (e: Error) => {
-            console.log(e);
+            //console.log(e);
             resolve();
         });
     });
@@ -201,7 +212,10 @@ const insertJSON = async (path: string, validators: any, db: any, sessionId: str
             if (buffer.length > bufferLength) {
                 parser.pause();
                 Promise.all(buffer).then(x => {
-                    return db.collection(sessionId).insertMany(x.flat());
+                    const array = x.flat();
+                    if (array.length) {
+                        return db.collection(sessionId).insertMany(x);
+                    }
                 }).then(() => {
                     parser.resume();
                 }).catch((e) => {
@@ -212,14 +226,17 @@ const insertJSON = async (path: string, validators: any, db: any, sessionId: str
         }).on('end', async () => {
             if (buffer.length > 0) {
                 try {
-                    await db.collection(sessionId).insertMany((await Promise.all(buffer)).flat());
+                    const array = (await Promise.all(buffer)).flat();
+                    if (array.length) {
+                        await db.collection(sessionId).insertMany(array);
+                    }
                 } catch (error) {
                     console.log(error);
                 }
             }
             resolve();
         }).on('error', async (e) => {
-            console.log(e);
+            //console.log(e);
             resolve();
         });
     });
@@ -234,6 +251,7 @@ export async function insertToDB(sessionId: string) {
     
     let uuid = new Map();
 
+    console.log("files: ",uploadsFiles.length);
     if (uploadsFiles.length === 0) {
         console.log('Error');
     } else {
@@ -263,10 +281,9 @@ export async function insertToDB(sessionId: string) {
             }
         }));
     }
-    const exist = await db.collection(sessionId).findOne();
-    if (exist === undefined) {
-        await db.collection('session').deleteOne({ sessionId: sessionId });
-        await deleteDir(path.join('uploads', sessionId));
-    }
-    //await fillValues(sessionId, db);
+    // const exist = await db.collection(sessionId).findOne();
+    // if (exist === undefined) {
+    //     await db.collection('session').deleteOne({ sessionId: sessionId });
+    //     await deleteDir(path.join('uploads', sessionId));
+    // }
 }

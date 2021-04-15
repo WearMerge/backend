@@ -8,7 +8,7 @@ export const mongoConnect = async (url: string, database: string) => {
             console.log('Connected to mongodb');
             resolve();
         }
-        MongoClient.connect(url, (err, client) => {
+        MongoClient.connect(url, { forceServerObjectId: true }, (err, client) => {
             if (err) {
                 console.error(err);
                 process.exit();
