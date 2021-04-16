@@ -81,6 +81,7 @@ const insertCSV = async (path: string, validators: any, db: any, sessionId: stri
                     if (array.length) {
                         return db.collection(sessionId).insertMany(x);
                     }
+                    // return db.collection(sessionId).insertMany(x.flat());
                 }).then(() => {
                     parser.resume();
                 }).catch((e) => {
@@ -95,6 +96,7 @@ const insertCSV = async (path: string, validators: any, db: any, sessionId: stri
                     if (array.length) {
                         await db.collection(sessionId).insertMany(array);
                     }
+                    // await db.collection(sessionId).insertMany((await Promise.all(buffer)).flat());
                 } catch (error) {
                     console.log(error);
                 }
@@ -243,7 +245,7 @@ const insertJSON = async (path: string, validators: any, db: any, sessionId: str
 };
 
 export async function insertToDB(sessionId: string) {
-    const db = mongoDb();
+    const db = await mongoDb();
     //await db.dropCollection(sessionId);
 
     const validators = await getFiles('./validators/');

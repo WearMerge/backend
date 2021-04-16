@@ -17,7 +17,7 @@ const types = [
 ];
 
 export const exportFromDB = async (sessionId: string) => {
-    const db = mongoDb();
+    const db = await mongoDb();
     const pathDir = path.join('./downloads', sessionId);
     await new Promise<void>(resolve => {
         fs.access(pathDir, fs.constants.F_OK, (err) => {

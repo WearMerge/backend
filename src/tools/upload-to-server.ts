@@ -6,7 +6,6 @@ import { v4 as uuidv4 } from 'uuid';
 import validator from 'validator';
 import { deleteDir } from '../helpers/delete-dir';
 import util from 'util';
-import multer from 'multer';
 
 const access = util.promisify(fs.access);
 const mkdir = util.promisify(fs.mkdir);
@@ -20,7 +19,7 @@ export const uploadToServer = async (req: any, res: any) => {
         uploadDir: 'tmp/',
         maxFileSize: 200 * 1024 * 1024
     });
-    const db = mongoDb();
+    const db = await mongoDb();
     return await new Promise<string>(resolve => {
         form.on('error', (e) => {
             // send mail for max file error
@@ -35,6 +34,7 @@ export const uploadToServer = async (req: any, res: any) => {
         });
         form.on('field', async (fieldName, fieldValue) => {
             fields.push({
+                sessionId: sessionId,
                 fieldName: fieldName,
                 fieldValue: fieldValue
             });
@@ -72,8 +72,8 @@ const saveFields = async (fields: any[], db: any) => {
     }));
 };
 
-const setupSessionToDB = async (sessionId: string) => {
-    const db = mongoDb();
-    //await db.createCollection(sessionId)
-    //await db.collection(sessionId).createIndex({ "createdAt": 1 }, { expireAfterSeconds: 604800 });
-};
+// const setupSessionToDB = async (sessionId: string) => {
+//     const db = mongoDb();
+//     //await db.createCollection(sessionId)
+//     //await db.collection(sessionId).createIndex({ "createdAt": 1 }, { expireAfterSeconds: 604800 });
+// };
