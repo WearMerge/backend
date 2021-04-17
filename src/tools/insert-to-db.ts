@@ -244,7 +244,7 @@ const insertJSON = async (path: string, validators: any, db: any, sessionId: str
     });
 };
 
-export async function insertToDB(sessionId: string) {
+export const insertToDB = async (sessionId: string) => {
     const db = await mongoDb();
     //await db.dropCollection(sessionId);
 

@@ -1,7 +1,7 @@
 import { Job } from 'bull';
-import { insertToDB } from '../tools/insert-to-db';
+import { integration } from '../scripts/integration';
 
-export default function(job: Job) {
+export default async function(job: Job) {
     console.log('starting')
-    return insertToDB(job.data.id);
+    return integration(job.data.id);
 }
