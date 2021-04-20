@@ -5,20 +5,28 @@ import { deleteDir } from '../helpers/delete-dir'
 export const getSession = async (sessionId: string, res: any) => {
     const db = await mongoDb();
     const session = await db.collection('session').findOne({ sessionId: sessionId });
-    if (session.expiredAt >= new Date()) {
-        res.status(200).send('Found');
+    if (session === undefined) {
+        res.status(404).send('Not found')
     } else {
-        res.status(404).send('Not found');
+        if (session.expiredAt >= new Date()) {
+            res.status(200).send('Found');
+        } else {
+            res.status(404).send('Not found')
+        }
     }
 };
 
 export const downloadFile = async (sessionId: string, res: any) => {
     const db = await mongoDb();
     const session = await db.collection('session').findOne({ sessionId: sessionId });
-    if (session.expiredAt >= new Date()) {
-        res.download(join('downloads', session.sessionId + '.zip'));
+    if (session === undefined) {
+        res.status(404).send('Not found')
     } else {
-        res.status(404).send('Not found');
+        if (session.expiredAt >= new Date()) {
+            res.download(join('downloads', session.sessionId + '.zip'));
+        } else {
+            res.status(404).send('Not found');
+        }
     }
 }
 

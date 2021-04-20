@@ -29,43 +29,48 @@ const samsungInvalid = new RegExp(/com.samsung.health.\w+.\w+,\d+,\d+\n|com.sams
 const insertCSV = async (path: string, validators: any, db: any, sessionId: string, uuid: string) => {
     let parser: Readable;
     let hasMiddleWare = false;
+    let isSamsung = false;
+    let isXiaomi = false;
     const isFinished = await new Promise<boolean>(resolve => {
         const middleware  = fs.createReadStream(path)
             .pipe(ReplaceStream(samsungInvalid, () => {
                 hasMiddleWare = true;
-                middleware.destroy();
-                parser = fs.createReadStream(path)
-                    .pipe(ReplaceStream(/com.samsung.health.\w+.\w+,\d+,\d+\n|com.samsung.shealth.\w+.\w+,\d+,\d+\n/, ''))
-                    .pipe(ReplaceStream(/,\n/g, '\n'))
-                    .pipe(stripBomStream())
-                    .pipe(csvParser());
-                resolve(false);
+                isSamsung = true;
                 return '';
             })as Transform)
             .pipe(ReplaceStream(xiaomiInvalid, () => {
                 hasMiddleWare = true;
-                middleware.destroy();
-                parser = fs.createReadStream(path)
-                    .pipe(ReplaceStream(/date,lastSyncTime,heartRate,timestamp[\n]*/, 'lastSyncTime,heartRate\n'))
-                    .pipe(stripBomStream())
-                    .pipe(csvParser());
-                resolve(false);
+                isXiaomi = true;
                 return '';
             })as Transform)
             .pipe(ReplaceStream(fitbitSummaryInvalid, () => {
                 hasMiddleWare = true;
-                middleware.destroy();
                 resolve(fitbitSummary(path, validators, db, sessionId, uuid, bufferLength, ajv));
                 return '';
             })as Transform);
         middleware.on('data', () => {});
-        middleware.on('finish', () => {
+        middleware.on('end', () => {
             if (!hasMiddleWare) {
                 parser = fs.createReadStream(path).pipe(stripBomStream()).pipe(csvParser());
-                resolve(false);
+            } else {
+                if (isSamsung) {
+                    parser = fs.createReadStream(path)
+                        .pipe(ReplaceStream(/com.samsung.health.\w+.\w+,\d+,\d+\n|com.samsung.shealth.\w+.\w+,\d+,\d+\n/, ''))
+                        .pipe(ReplaceStream(/,\n/g, '\n'))
+                        .pipe(stripBomStream())
+                        .pipe(csvParser());
+                } else if (isXiaomi) {
+                    parser = fs.createReadStream(path)
+                        .pipe(ReplaceStream(/date,lastSyncTime,heartRate,timestamp[\n]*/, 'lastSyncTime,heartRate\n'))
+                        .pipe(stripBomStream())
+                        .pipe(csvParser());
+                }
             }
+            resolve(false)
         });
-        middleware.on('error', () => {});
+        middleware.on('error', (e: Error) => {
+            //console.log(e);
+        });
     });
     if (isFinished) {
         return;
@@ -158,52 +163,58 @@ const insertXML = async (path: string, validators: any, db: any, sessionId: stri
 const insertJSON = async (path: string, validators: any, db: any, sessionId: string, uuid: string) => {
     let parser: Readable;
     let hasMiddleWare = false;
+    let isFitbit = false;
+    let isGarmin = false;
+    let isGarminObject = false;
+    let isHuawei = false;
     await new Promise<void>(resolve => {
         const middleware = fs.createReadStream(path)
             .pipe(ReplaceStream(fitbitInvalid, () => {
                 hasMiddleWare = true;
-                middleware.destroy();
-                parser = fs.createReadStream(path)
-                    .pipe(ReplaceStream(/\{/g, '{"' + path.replace(/^.*[\\\/]/, '').split('-')[0] + '":"null",'))
-                    .pipe(streamJson.withParser());
-                resolve();
+                isFitbit = true;
                 return '';
             })as Transform)
             .pipe(ReplaceStream(garminInvalid, () => {
                 hasMiddleWare = true;
-                middleware.destroy();
-                parser = fs.createReadStream(path)
-                    .pipe(ReplaceStream(/\[[\n ]*\{[\n ]*"summarizedActivitiesExport"[\n ]*\:[\n ]*\[/, '['))
-                    .pipe(ReplaceStream(/\}\]\}\]/, '}]'))
-                    .pipe(streamJson.withParser());
-                resolve();
+                isGarmin = true;  
                 return '';
             })as Transform)
             .pipe(ReplaceStream(garminObjectInvalid, () => {
                 hasMiddleWare = true;
-                middleware.destroy();
-                parser = fs.createReadStream(path)
-                    .pipe(ReplaceStream(/\{/, '[{'))
-                    .pipe(ReplaceStream(/\}$/, '}]'))
-                    .pipe(streamJson.withParser());
-                resolve();
+                isGarminObject = true;
                 return '';
             })as Transform)
             .pipe(ReplaceStream(huaweiInvalid, () => {
                 hasMiddleWare = true;
-                middleware.destroy();
-                parser = fs.createReadStream(path)
-                    .pipe(ReplaceStream(/\{[\n ]*"sportDataUserData"[\n ]*\:[\n ]*\[|\][\n ]*\,[\n ]*"timeZone"[\n ]*\:[\n ]*"\+\d+"[\n ]*\,[\n ]*"recordDay"[\n ]*\:[\n ]*\d+[\n ]*\,[\n ]*"version"[\n ]*\:[\n ]*\d+[\n ]*\}/g, ''))
-                    .pipe(streamJson.withParser());
-                resolve()
+                isHuawei = true;
                 return '';
             })as Transform);
         middleware.on('data', () => {});
-        middleware.on('finish', () => {
+        middleware.on('end', () => {
             if (!hasMiddleWare) {
                 parser = fs.createReadStream(path).pipe(streamJson.withParser());
-                resolve();
+            } else {
+                if (isFitbit) {
+                    parser = fs.createReadStream(path)
+                        .pipe(ReplaceStream(/\{/g, '{"' + path.replace(/^.*[\\\/]/, '').split('-')[0] + '":"null",'))
+                        .pipe(streamJson.withParser());
+                } else if (isGarmin) {
+                    parser = fs.createReadStream(path)
+                        .pipe(ReplaceStream(/\[[\n ]*\{[\n ]*"summarizedActivitiesExport"[\n ]*\:[\n ]*\[/, '['))
+                        .pipe(ReplaceStream(/\}\]\}\]/, '}]'))
+                        .pipe(streamJson.withParser());
+                } else if (isGarminObject) {
+                    parser = fs.createReadStream(path)
+                        .pipe(ReplaceStream(/\{/, '[{'))
+                        .pipe(ReplaceStream(/\}$/, '}]'))
+                        .pipe(streamJson.withParser());
+                } else if (isHuawei) {
+                    parser = fs.createReadStream(path)
+                        .pipe(ReplaceStream(/\{[\n ]*"sportDataUserData"[\n ]*\:[\n ]*\[|\][\n ]*\,[\n ]*"timeZone"[\n ]*\:[\n ]*"\+\d+"[\n ]*\,[\n ]*"recordDay"[\n ]*\:[\n ]*\d+[\n ]*\,[\n ]*"version"[\n ]*\:[\n ]*\d+[\n ]*\}/g, ''))
+                        .pipe(streamJson.withParser());
+                }
             }
+            resolve();
         });
         middleware.on('error', () => {});
     });
