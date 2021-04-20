@@ -4,6 +4,8 @@ import { router } from './router';
 import { bullConnect } from './bull';
 import { router as bullBoard } from 'bull-board';
 import Queue from 'bull';
+import cron from 'node-cron';
+import { deleteSessions } from './scripts/queries';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -18,6 +20,11 @@ const bullSettings: Queue.QueueOptions = {
     }
 };
 const bullCPU = 1;
+
+cron.schedule('* * * 1 * *', () => {
+    deleteSessions();
+    console.log('Clearing db')
+});
 
 if (!prod) {
     app.use(cors());

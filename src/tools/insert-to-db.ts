@@ -246,8 +246,6 @@ const insertJSON = async (path: string, validators: any, db: any, sessionId: str
 
 export const insertToDB = async (sessionId: string) => {
     const db = await mongoDb();
-    //await db.dropCollection(sessionId);
-
     const validators = await getFiles('./validators/');
     const uploadsFiles = await getFiles(path.join('uploads', sessionId, '/'));
     
@@ -282,10 +280,6 @@ export const insertToDB = async (sessionId: string) => {
                 await huaweiXLS(obj.path, validators, db, sessionId, uuid.get(key), bufferLength, ajv);
             }
         }));
+        await deleteDir(path.join('uploads', sessionId));
     }
-    // const exist = await db.collection(sessionId).findOne();
-    // if (exist === undefined) {
-    //     await db.collection('session').deleteOne({ sessionId: sessionId });
-    //     await deleteDir(path.join('uploads', sessionId));
-    // }
 }

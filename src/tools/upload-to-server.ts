@@ -66,13 +66,19 @@ const saveFields = async (fields: any[], db: any) => {
     await Promise.all(fields.map(async (val: any) => {
         if (val.fieldName === 'email') {
             if (validator.isEmail(val.fieldValue)) {
-                await db.collection('session').insertOne({ sessionId: val.sessionId, email: val.fieldValue, createdAt: new Date() });
+                await db.collection('session').insertOne({ sessionId: val.sessionId, email: val.fieldValue, createdAt: new Date(), expiredAt: addDays(new Date(), 7) });
             } else {
                 deleteDir(path.join('uploads', val.sessionId));
                 //resolve('Invalid e-mail address');
             }
         }
     }));
+};
+
+const addDays = (date: Date, days: number) => {
+    const obj = new Date(date);
+    obj.setDate(obj.getDate() + days);
+    return obj
 };
 
 // const setupSessionToDB = async (sessionId: string) => {
