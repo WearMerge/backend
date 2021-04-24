@@ -28,9 +28,9 @@ cron.schedule('* * * 1 * *', () => {
 
 if (!prod) {
     app.use(cors());
+    app.use('/bull-board', bullBoard);
 }
 app.use('/', router);
-app.use('/bull-board', bullBoard);
 
 const main = async () => {
     await bullConnect(bullCPU, bullSettings);
