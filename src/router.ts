@@ -1,46 +1,20 @@
 import express from 'express';
-import { insertToDB } from './tools/insert-to-db';
-import { exportFromDB } from './tools/export-from-db';
 import { uploadToServer } from './tools/upload-to-server';
 import { bullAddJob } from './bull';
-import sgMail from '@sendgrid/mail';
-
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+import { getSession, downloadFile } from './scripts/queries';
 
 export const router = express.Router();
 
 router.get('/', async (req, res) => {
-    //await fillValues('uploader_5', mongoDb());
     res.send('Welcome to WearMerge!');
 });
 
-router.get('/export/:sessionId', (req, res) => {
-    res.status(200).send('Exporting...');
-    exportFromDB(req.params.sessionId);
+router.get('/find-session/:sessionId', async (req, res) => {
+    getSession(req.params.sessionId, res);
 });
 
-router.get('/insert/:sessionId', (req, res) => {
-    res.status(200).send('Inserting...');
-    insertToDB(req.params.sessionId);
-});
-
-router.get('/mail', (req, res) => {
-    const msg = {
-        to: '',
-        from: '',
-        subject: 'Test mail',
-        text: 'something',
-        html: '<strong>something</strong>'
-    };
-    sgMail
-        .send(msg)
-        .then(() => {
-            console.log('Email sent')
-        })
-        .catch((error) => {
-            console.error(error)
-        });
-    res.status(200).send('E-Mail sent');
+router.get('/download/:sessionId', async (req, res) => {
+    downloadFile(req.params.sessionId, res);
 });
 
 router.post('/upload-file', (req, res) => {
@@ -48,6 +22,5 @@ router.post('/upload-file', (req, res) => {
         if (sessionId !== '') {
             bullAddJob(sessionId);
         }
-        res.status(200).send(sessionId);
     });
 });

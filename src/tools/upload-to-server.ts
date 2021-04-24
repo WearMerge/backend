@@ -5,60 +5,84 @@ import fs from 'fs';
 import { v4 as uuidv4 } from 'uuid';
 import validator from 'validator';
 import { deleteDir } from '../helpers/delete-dir';
+import util from 'util';
+
+const access = util.promisify(fs.access);
+const mkdir = util.promisify(fs.mkdir);
+const rename = util.promisify(fs.rename);
 
 export const uploadToServer = async (req: any, res: any) => {
+    const files: any[] = [];
+    const fields: any[] = [];
     const sessionId = uuidv4();
     let form = new Formidable.IncomingForm({
         uploadDir: 'tmp/',
         maxFileSize: 200 * 1024 * 1024
     });
-    const db = mongoDb();
+    const db = await mongoDb();
     return await new Promise<string>(resolve => {
         form.on('error', (e) => {
             // send mail for max file error
             console.log(e);
         });
         form.on('file', async (filename, file) => {
-            const filePath = path.join('uploads', sessionId, file.name);
-            const dir = path.join('uploads', sessionId, filename);
-            fs.access(dir, fs.constants.F_OK, (err) => {
-                if (err) {
-                    fs.mkdir(dir, { recursive: true }, (err) => {
-                        if (err) {
-                            console.log(err);
-                        }
-                        fs.rename(file.path, filePath, () => {});
-                    });
-                } else {
-                    fs.rename(file.path, filePath, () => {});
-                }
+            files.push({
+                filePath: path.join('uploads', sessionId, file.name),
+                dir: path.join('uploads', sessionId, filename),
+                path: file.path
             });
         });
         form.on('field', async (fieldName, fieldValue) => {
-            if (fieldName === 'email') {
-                if (validator.isEmail(fieldValue)) {
-                    await db.collection('session').insertOne({ sessionId: sessionId, email: fieldValue, createdAt: new Date() });
-                } else {
-                    deleteDir(path.join('uploads', sessionId));
-                    resolve('Invalid e-mail address');
-                }
-            }
-        });
-        form.on('end', async () => {
-            //await setupSessionToDB(sessionId);
-            fs.access(path.join('uploads', sessionId), fs.constants.F_OK, async (err) => {
-                if (err) {
-                    await db.collection('session').deleteOne({ sessionId: sessionId });
-                }
-                resolve(sessionId);
+            fields.push({
+                sessionId: sessionId,
+                fieldName: fieldName,
+                fieldValue: fieldValue
             });
         });
-        form.parse(req, () => {});
+        form.on('end', () => {
+            res.status(200).send('uploaded');
+        });
+        form.parse(req, async () => {
+            saveFiles(files).then(() => saveFields(fields, db)).then(() => resolve(sessionId));
+        });
     });
 };
 
-const setupSessionToDB = async (sessionId: string) => {
-    const db = mongoDb();
-    //await db.createCollection(sessionId)
-    //await db.collection(sessionId).createIndex({ "createdAt": 1 }, { expireAfterSeconds: 604800 });
+const saveFiles = async (files: any[]) => {
+    await Promise.all(files.map(async (val: any) => {
+        await access(val.dir, fs.constants.F_OK).catch(async (err: any) => {
+            if (err) {
+                await mkdir(val.dir, { recursive: true }).then(async () => {
+                    await rename(val.path, val.filePath);
+                });
+            } else {
+                await rename(val.path, val.filePath);
+            }
+        });
+    }));        
 };
+
+const saveFields = async (fields: any[], db: any) => {
+    await Promise.all(fields.map(async (val: any) => {
+        if (val.fieldName === 'email') {
+            if (validator.isEmail(val.fieldValue)) {
+                await db.collection('session').insertOne({ sessionId: val.sessionId, email: val.fieldValue, createdAt: new Date(), expiredAt: addDays(new Date(), 7) });
+            } else {
+                deleteDir(path.join('uploads', val.sessionId));
+                //resolve('Invalid e-mail address');
+            }
+        }
+    }));
+};
+
+const addDays = (date: Date, days: number) => {
+    const obj = new Date(date);
+    obj.setDate(obj.getDate() + days);
+    return obj
+};
+
+// const setupSessionToDB = async (sessionId: string) => {
+//     const db = mongoDb();
+//     //await db.createCollection(sessionId)
+//     //await db.collection(sessionId).createIndex({ "createdAt": 1 }, { expireAfterSeconds: 604800 });
+// };

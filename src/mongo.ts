@@ -2,13 +2,17 @@ import { MongoClient } from 'mongodb';
 
 let db: any = null;
 
-export const mongoConnect = async (url: string, database: string) => {
+const prod = process.env.NODE_ENV === 'production';
+const mongoURL = prod ? 'mongodb://' + process.env.MONGO_USERNAME + ':' + process.env.MONGO_PASSWORD + '@mongo:27017' : 'mongodb://localhost:27017';
+const mongoDatabase = 'wearmerge';
+
+const mongoConnect = async (url: string, database: string) => {
     await new Promise<void>((resolve) => {
         if (db) {
             console.log('Connected to mongodb');
             resolve();
         }
-        MongoClient.connect(url, (err, client) => {
+        MongoClient.connect(url, { forceServerObjectId: true }, (err, client) => {
             if (err) {
                 console.error(err);
                 process.exit();
@@ -20,7 +24,10 @@ export const mongoConnect = async (url: string, database: string) => {
     });
 };
 
-export const mongoDb = () => {
+export const mongoDb = async () => {
+    if (db === null) {
+        await mongoConnect(mongoURL, mongoDatabase);
+    }
     return db;
 };
 

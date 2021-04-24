@@ -12,7 +12,6 @@ import { fitbitSummary, huaweiXLS } from '../helpers/reconstruct-files';
 import { validator } from '../helpers/validate-data';
 import Ajv from 'ajv';
 import { deleteDir } from '../helpers/delete-dir';
-import { fillValues } from '../helpers/fill-values';
 
 const ajv = new Ajv({strict: false});
 
@@ -30,43 +29,48 @@ const samsungInvalid = new RegExp(/com.samsung.health.\w+.\w+,\d+,\d+\n|com.sams
 const insertCSV = async (path: string, validators: any, db: any, sessionId: string, uuid: string) => {
     let parser: Readable;
     let hasMiddleWare = false;
+    let isSamsung = false;
+    let isXiaomi = false;
     const isFinished = await new Promise<boolean>(resolve => {
         const middleware  = fs.createReadStream(path)
             .pipe(ReplaceStream(samsungInvalid, () => {
                 hasMiddleWare = true;
-                middleware.destroy();
-                parser = fs.createReadStream(path)
-                    .pipe(ReplaceStream(/com.samsung.health.\w+.\w+,\d+,\d+\n|com.samsung.shealth.\w+.\w+,\d+,\d+\n/, ''))
-                    .pipe(ReplaceStream(/,\n/g, '\n'))
-                    .pipe(stripBomStream())
-                    .pipe(csvParser());
-                resolve(false);
+                isSamsung = true;
                 return '';
             })as Transform)
             .pipe(ReplaceStream(xiaomiInvalid, () => {
                 hasMiddleWare = true;
-                middleware.destroy();
-                parser = fs.createReadStream(path)
-                    .pipe(ReplaceStream(/date,lastSyncTime,heartRate,timestamp[\n]*/, 'lastSyncTime,heartRate\n'))
-                    .pipe(stripBomStream())
-                    .pipe(csvParser());
-                resolve(false);
+                isXiaomi = true;
                 return '';
             })as Transform)
             .pipe(ReplaceStream(fitbitSummaryInvalid, () => {
                 hasMiddleWare = true;
-                middleware.destroy();
                 resolve(fitbitSummary(path, validators, db, sessionId, uuid, bufferLength, ajv));
                 return '';
             })as Transform);
         middleware.on('data', () => {});
-        middleware.on('finish', () => {
+        middleware.on('end', () => {
             if (!hasMiddleWare) {
                 parser = fs.createReadStream(path).pipe(stripBomStream()).pipe(csvParser());
-                resolve(false);
+            } else {
+                if (isSamsung) {
+                    parser = fs.createReadStream(path)
+                        .pipe(ReplaceStream(/com.samsung.health.\w+.\w+,\d+,\d+\n|com.samsung.shealth.\w+.\w+,\d+,\d+\n/, ''))
+                        .pipe(ReplaceStream(/,\n/g, '\n'))
+                        .pipe(stripBomStream())
+                        .pipe(csvParser());
+                } else if (isXiaomi) {
+                    parser = fs.createReadStream(path)
+                        .pipe(ReplaceStream(/date,lastSyncTime,heartRate,timestamp[\n]*/, 'lastSyncTime,heartRate\n'))
+                        .pipe(stripBomStream())
+                        .pipe(csvParser());
+                }
             }
+            resolve(false)
         });
-        middleware.on('error', () => {});
+        middleware.on('error', (e: Error) => {
+            //console.log(e);
+        });
     });
     if (isFinished) {
         return;
@@ -78,7 +82,11 @@ const insertCSV = async (path: string, validators: any, db: any, sessionId: stri
             if (buffer.length > bufferLength) {
                 parser.pause();
                 Promise.all(buffer).then(x => {
-                    return db.collection(sessionId).insertMany(x.flat());
+                    const array = x.flat();
+                    if (array.length) {
+                        return db.collection(sessionId).insertMany(x);
+                    }
+                    // return db.collection(sessionId).insertMany(x.flat());
                 }).then(() => {
                     parser.resume();
                 }).catch((e) => {
@@ -89,14 +97,18 @@ const insertCSV = async (path: string, validators: any, db: any, sessionId: stri
         }).on('end', async () => {
             if (buffer.length > 0) {
                 try {
-                    await db.collection(sessionId).insertMany((await Promise.all(buffer)).flat());
+                    const array = (await Promise.all(buffer)).flat();
+                    if (array.length) {
+                        await db.collection(sessionId).insertMany(array);
+                    }
+                    // await db.collection(sessionId).insertMany((await Promise.all(buffer)).flat());
                 } catch (error) {
                     console.log(error);
                 }
             }
             resolve();
         }).on('error', async (e) => {
-            console.log(e);
+            //console.log(e);
             resolve();
         });
     });
@@ -118,7 +130,10 @@ const insertXML = async (path: string, validators: any, db: any, sessionId: stri
             if (buffer.length > bufferLength) {
                 parser.pause();
                 Promise.all(buffer).then(x => {
-                    return db.collection(sessionId).insertMany(x.flat());
+                    const array = x.flat();
+                    if (array.length) {
+                        return db.collection(sessionId).insertMany(x);
+                    }
                 }).then(() => {
                     parser.resume();
                 }).catch((e) => {
@@ -129,14 +144,17 @@ const insertXML = async (path: string, validators: any, db: any, sessionId: stri
         }).on('end', async ()=>{
             if (buffer.length > 0) {
                 try {
-                    await db.collection(sessionId).insertMany((await Promise.all(buffer)).flat());
+                    const array = (await Promise.all(buffer)).flat();
+                    if (array.length) {
+                        await db.collection(sessionId).insertMany(array);
+                    }
                 } catch (error) {
                     console.log(error);
                 }
             }
             resolve();
         }).on('error', async (e: Error) => {
-            console.log(e);
+            //console.log(e);
             resolve();
         });
     });
@@ -145,52 +163,58 @@ const insertXML = async (path: string, validators: any, db: any, sessionId: stri
 const insertJSON = async (path: string, validators: any, db: any, sessionId: string, uuid: string) => {
     let parser: Readable;
     let hasMiddleWare = false;
+    let isFitbit = false;
+    let isGarmin = false;
+    let isGarminObject = false;
+    let isHuawei = false;
     await new Promise<void>(resolve => {
         const middleware = fs.createReadStream(path)
             .pipe(ReplaceStream(fitbitInvalid, () => {
                 hasMiddleWare = true;
-                middleware.destroy();
-                parser = fs.createReadStream(path)
-                    .pipe(ReplaceStream(/\{/g, '{"' + path.replace(/^.*[\\\/]/, '').split('-')[0] + '":"null",'))
-                    .pipe(streamJson.withParser());
-                resolve();
+                isFitbit = true;
                 return '';
             })as Transform)
             .pipe(ReplaceStream(garminInvalid, () => {
                 hasMiddleWare = true;
-                middleware.destroy();
-                parser = fs.createReadStream(path)
-                    .pipe(ReplaceStream(/\[[\n ]*\{[\n ]*"summarizedActivitiesExport"[\n ]*\:[\n ]*\[/, '['))
-                    .pipe(ReplaceStream(/\}\]\}\]/, '}]'))
-                    .pipe(streamJson.withParser());
-                resolve();
+                isGarmin = true;  
                 return '';
             })as Transform)
             .pipe(ReplaceStream(garminObjectInvalid, () => {
                 hasMiddleWare = true;
-                middleware.destroy();
-                parser = fs.createReadStream(path)
-                    .pipe(ReplaceStream(/\{/, '[{'))
-                    .pipe(ReplaceStream(/\}$/, '}]'))
-                    .pipe(streamJson.withParser());
-                resolve();
+                isGarminObject = true;
                 return '';
             })as Transform)
             .pipe(ReplaceStream(huaweiInvalid, () => {
                 hasMiddleWare = true;
-                middleware.destroy();
-                parser = fs.createReadStream(path)
-                    .pipe(ReplaceStream(/\{[\n ]*"sportDataUserData"[\n ]*\:[\n ]*\[|\][\n ]*\,[\n ]*"timeZone"[\n ]*\:[\n ]*"\+\d+"[\n ]*\,[\n ]*"recordDay"[\n ]*\:[\n ]*\d+[\n ]*\,[\n ]*"version"[\n ]*\:[\n ]*\d+[\n ]*\}/g, ''))
-                    .pipe(streamJson.withParser());
-                resolve()
+                isHuawei = true;
                 return '';
             })as Transform);
         middleware.on('data', () => {});
-        middleware.on('finish', () => {
+        middleware.on('end', () => {
             if (!hasMiddleWare) {
                 parser = fs.createReadStream(path).pipe(streamJson.withParser());
-                resolve();
+            } else {
+                if (isFitbit) {
+                    parser = fs.createReadStream(path)
+                        .pipe(ReplaceStream(/\{/g, '{"' + path.replace(/^.*[\\\/]/, '').split('-')[0] + '":"null",'))
+                        .pipe(streamJson.withParser());
+                } else if (isGarmin) {
+                    parser = fs.createReadStream(path)
+                        .pipe(ReplaceStream(/\[[\n ]*\{[\n ]*"summarizedActivitiesExport"[\n ]*\:[\n ]*\[/, '['))
+                        .pipe(ReplaceStream(/\}\]\}\]/, '}]'))
+                        .pipe(streamJson.withParser());
+                } else if (isGarminObject) {
+                    parser = fs.createReadStream(path)
+                        .pipe(ReplaceStream(/\{/, '[{'))
+                        .pipe(ReplaceStream(/\}$/, '}]'))
+                        .pipe(streamJson.withParser());
+                } else if (isHuawei) {
+                    parser = fs.createReadStream(path)
+                        .pipe(ReplaceStream(/\{[\n ]*"sportDataUserData"[\n ]*\:[\n ]*\[|\][\n ]*\,[\n ]*"timeZone"[\n ]*\:[\n ]*"\+\d+"[\n ]*\,[\n ]*"recordDay"[\n ]*\:[\n ]*\d+[\n ]*\,[\n ]*"version"[\n ]*\:[\n ]*\d+[\n ]*\}/g, ''))
+                        .pipe(streamJson.withParser());
+                }
             }
+            resolve();
         });
         middleware.on('error', () => {});
     });
@@ -201,7 +225,10 @@ const insertJSON = async (path: string, validators: any, db: any, sessionId: str
             if (buffer.length > bufferLength) {
                 parser.pause();
                 Promise.all(buffer).then(x => {
-                    return db.collection(sessionId).insertMany(x.flat());
+                    const array = x.flat();
+                    if (array.length) {
+                        return db.collection(sessionId).insertMany(x);
+                    }
                 }).then(() => {
                     parser.resume();
                 }).catch((e) => {
@@ -212,28 +239,30 @@ const insertJSON = async (path: string, validators: any, db: any, sessionId: str
         }).on('end', async () => {
             if (buffer.length > 0) {
                 try {
-                    await db.collection(sessionId).insertMany((await Promise.all(buffer)).flat());
+                    const array = (await Promise.all(buffer)).flat();
+                    if (array.length) {
+                        await db.collection(sessionId).insertMany(array);
+                    }
                 } catch (error) {
                     console.log(error);
                 }
             }
             resolve();
         }).on('error', async (e) => {
-            console.log(e);
+            //console.log(e);
             resolve();
         });
     });
 };
 
-export async function insertToDB(sessionId: string) {
-    const db = mongoDb();
-    //await db.dropCollection(sessionId);
-
+export const insertToDB = async (sessionId: string) => {
+    const db = await mongoDb();
     const validators = await getFiles('./validators/');
     const uploadsFiles = await getFiles(path.join('uploads', sessionId, '/'));
     
     let uuid = new Map();
 
+    console.log("files: ",uploadsFiles.length);
     if (uploadsFiles.length === 0) {
         console.log('Error');
     } else {
@@ -262,11 +291,6 @@ export async function insertToDB(sessionId: string) {
                 await huaweiXLS(obj.path, validators, db, sessionId, uuid.get(key), bufferLength, ajv);
             }
         }));
-    }
-    const exist = await db.collection(sessionId).findOne();
-    if (exist === undefined) {
-        await db.collection('session').deleteOne({ sessionId: sessionId });
         await deleteDir(path.join('uploads', sessionId));
     }
-    //await fillValues(sessionId, db);
 }

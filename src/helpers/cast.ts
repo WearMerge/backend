@@ -565,19 +565,19 @@ const garmin = (data: any, brand: string, schema: string, uuid: string) => {
 
 const samsung = (data: any, brand: string, schema: string, uuid: string) => {
     if (schema === 'health_height.json') {
-        return bodyHeight({ uuid: uuid, brand: brand, schema: schema }, Number(data['height']), new Date(data['start_time']));
+        return bodyHeight({ uuid: uuid, brand: brand, schema: schema }, Number(data['height']), new Date(data['start_time'] + String( String(data['time_offset'])).replace('UTC', 'GMT')));
     } else if (schema === 'health_sleep_stage.json') {
-        const start = new Date(data['start_time']);
-        const end = new Date(data['end_time']);
+        const start = new Date(data['start_time'] +  String(data['time_offset']).replace('UTC', 'GMT'));
+        const end = new Date(data['end_time'] +  String(data['time_offset']).replace('UTC', 'GMT'));
         return totalSleepTime({ uuid: uuid, brand: brand, schema: schema }, (end.getTime() - start.getTime())/60000, start, end);
     } else if (schema === 'health_weight.json') {
-        const date = new Date(data['start_time']);
+        const date = new Date(data['start_time'] +  String(data['time_offset']).replace('UTC', 'GMT'));
         return [
             bodyWeight({ uuid: uuid, brand: brand, schema: schema }, Number(data['weight']), date),
             bodyHeight({ uuid: uuid, brand: brand, schema: schema }, Number(data['height']), date)
         ];
     } else if (schema === 'shealth_activity_day_summary.json') {
-        const date = new Date(data['create_time']);
+        const date = new Date(data['create_time'] +  String(data['time_offset']).replace('UTC', 'GMT'));
         const totalDistance = Number(data['distance']) / 1000;
         const runTime = Number(data['run_time']) / 60000;
         const walkTime = Number(data['walk_time']) / 60000;
@@ -590,8 +590,8 @@ const samsung = (data: any, brand: string, schema: string, uuid: string) => {
             caloriesBurned({ uuid: uuid, brand: brand, schema: schema }, Number(data['calorie']), date)
         ];
     } else if (schema === 'shealth_exercise.json') {
-        const start = new Date(data['com.samsung.health.exercise.start_time']);
-        const end = new Date(data['com.samsung.health.exercise.end_time']);
+        const start = new Date(data['com.samsung.health.exercise.start_time'] +  String(data['time_offset']).replace('UTC', 'GMT'));
+        const end = new Date(data['com.samsung.health.exercise.end_time'] +  String(data['time_offset']).replace('UTC', 'GMT'));
         return [
             caloriesBurned({ uuid: uuid, brand: brand, schema: schema }, Number(data['total_calorie']), start, end),
             heartRate({ uuid: uuid, brand: brand, schema: schema }, { heartRate: Number(data['heart_rate_sample_count']), descriptiveStatistic: 'count' }, start, end),
@@ -600,31 +600,31 @@ const samsung = (data: any, brand: string, schema: string, uuid: string) => {
             heartRate({ uuid: uuid, brand: brand, schema: schema }, { heartRate: Number(data['com.samsung.health.exercise.mean_heart_rate']), descriptiveStatistic: 'median' }, start, end)
         ];
     } else if (schema === 'shealth_sleep.json') {
-        const start = new Date(data['com.samsung.health.sleep.start_time']);
-        const end = new Date(data['com.samsung.health.sleep.end_time']);
+        const start = new Date(data['com.samsung.health.sleep.start_time'] +  String(data['time_offset']).replace('UTC', 'GMT'));
+        const end = new Date(data['com.samsung.health.sleep.end_time'] +  String(data['time_offset']).replace('UTC', 'GMT'));
         return totalSleepTime({ uuid: uuid, brand: brand, schema: schema }, (end.getTime() - start.getTime())/60000, start, end);
     } else if (schema === 'shealth_sleep_data.json') {
-        const start = new Date(data['start_time']);
-        const end = new Date(data['update_time']);
+        const start = new Date(data['start_time'] +  String(data['time_offset']).replace('UTC', 'GMT'));
+        const end = new Date(data['update_time'] +  String(data['time_offset']).replace('UTC', 'GMT'));
         return totalSleepTime({ uuid: uuid, brand: brand, schema: schema }, (end.getTime() - start.getTime())/60000, start, end);
     } else if (schema === 'shealth_step_daily_trend.json') {
-        const date = new Date(data['create_time']);
+        const date = new Date(data['create_time'] +  String(data['time_offset']).replace('UTC', 'GMT'));
         return [
             stepCount({ uuid: uuid, brand: brand, schema: schema }, Number(data['count']), date),
             physicalActivity({ uuid: uuid, brand: brand, schema: schema }, 'step_daily', { distance: Number(data['distance'])/1000, calories: Number(data['calorie']) }, date),
             caloriesBurned({ uuid: uuid, brand: brand, schema: schema }, Number(data['calorie']), date)
         ];
     } else if (schema === 'shealth_tracker_heart_rate.json') {
-        const start = new Date(data['com.samsung.health.heart_rate.start_time']);
-        const end = new Date(data['com.samsung.health.heart_rate.end_time']);
+        const start = new Date(data['com.samsung.health.heart_rate.start_time'] +  String(data['time_offset']).replace('UTC', 'GMT'));
+        const end = new Date(data['com.samsung.health.heart_rate.end_time'] +  String(data['time_offset']).replace('UTC', 'GMT'));
         return [
             heartRate({ uuid: uuid, brand: brand, schema: schema }, { heartRate: Number(data['com.samsung.health.heart_rate.max']), descriptiveStatistic: 'maximum' }, start, end),
             heartRate({ uuid: uuid, brand: brand, schema: schema }, { heartRate: Number(data['com.samsung.health.heart_rate.min']), descriptiveStatistic: 'minimum' }, start, end),
             heartRate({ uuid: uuid, brand: brand, schema: schema }, { heartRate: Number(data['com.samsung.health.heart_rate.heart_rate']), descriptiveStatistic: 'count' }, start, end)
         ];
     } else if (schema === 'shealth_tracker_pedometer_step_count.json') {
-        const start = new Date(data['com.samsung.health.step_count.start_time']);
-        const end = new Date(data['com.samsung.health.step_count.end_time']);
+        const start = new Date(data['com.samsung.health.step_count.start_time'] +  String(data['time_offset']).replace('UTC', 'GMT'));
+        const end = new Date(data['com.samsung.health.step_count.end_time'] +  String(data['time_offset']).replace('UTC', 'GMT'));
         return [
             stepCount({ uuid: uuid, brand: brand, schema: schema }, Number(data['com.samsung.health.step_count.count']), start, end),
             physicalActivity({ uuid: uuid, brand: brand, schema: schema }, 'podometer', { distance: Number(data['com.samsung.health.step_count.distance'])/1000, calories: Number(data['com.samsung.health.step_count.calorie']) }, start, end),

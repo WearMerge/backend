@@ -1,16 +1,12 @@
 import rimraf from 'rimraf';
-import fs from 'fs';
 
-export const deleteDir = (dir: string) => {
+export const deleteDir = (path: string) => {
     return new Promise<void>(resolve => {
-        fs.access(dir, fs.constants.F_OK, (err) => {
-            if (err) {
-                resolve();
+        rimraf(path, async (e: Error) => {
+            if (e) {
+                console.log(e);
             }
-            rimraf(dir, () => {
-                //send mail
-                resolve();
-            });
+            resolve();
         });
     });
 };
