@@ -80,9 +80,3 @@ const addDays = (date: Date, days: number) => {
     obj.setDate(obj.getDate() + days);
     return obj
 };
-
-// const setupSessionToDB = async (sessionId: string) => {
-//     const db = mongoDb();
-//     //await db.createCollection(sessionId)
-//     //await db.collection(sessionId).createIndex({ "createdAt": 1 }, { expireAfterSeconds: 604800 });
-// };
