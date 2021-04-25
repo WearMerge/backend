@@ -6,6 +6,7 @@ import { router as bullBoard } from 'bull-board';
 import Queue from 'bull';
 import cron from 'node-cron';
 import { deleteSessions } from './scripts/queries';
+import fs from 'fs';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -31,6 +32,14 @@ if (!prod) {
     app.use('/bull-board', bullBoard);
 }
 app.use('/', router);
+
+// const createDir = (name: string) => {
+//     try {
+//         fs.mkdirSync(name);
+//     } catch (e: any) {
+
+//     }
+// };
 
 const main = async () => {
     await bullConnect(bullCPU, bullSettings);

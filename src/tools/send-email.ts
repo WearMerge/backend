@@ -20,6 +20,7 @@ export const sendEmail = async (sessionId: string) => {
             console.log('Email sent')
         })
         .catch((error) => {
-            console.error(error)
+            console.log(error)
+            console.log(error.response.body.errors);
         });
 }

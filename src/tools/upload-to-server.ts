@@ -9,7 +9,8 @@ import util from 'util';
 
 const access = util.promisify(fs.access);
 const mkdir = util.promisify(fs.mkdir);
-const rename = util.promisify(fs.rename);
+//const rename = util.promisify(fs.rename);
+const copy = util.promisify(fs.copyFile);
 
 export const uploadToServer = async (req: any, res: any) => {
     const files: any[] = [];
@@ -53,10 +54,12 @@ const saveFiles = async (files: any[]) => {
         await access(val.dir, fs.constants.F_OK).catch(async (err: any) => {
             if (err) {
                 await mkdir(val.dir, { recursive: true }).then(async () => {
-                    await rename(val.path, val.filePath);
+                    await copy(val.path, val.filePath);
+                    await deleteDir(val.path);
                 });
             } else {
-                await rename(val.path, val.filePath);
+                await copy(val.path, val.filePath);
+                await deleteDir(val.path);
             }
         });
     }));        
