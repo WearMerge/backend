@@ -1,8 +1,0 @@
-{
-    "verbose": true,
-    "nodemonConfig": {
-    },
-    "watch": [
-        "dist"
-    ]
-}
