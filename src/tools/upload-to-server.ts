@@ -71,7 +71,7 @@ const saveFields = async (fields: any[], db: any) => {
             if (validator.isEmail(val.fieldValue)) {
                 await db.collection('session').insertOne({ sessionId: val.sessionId, email: val.fieldValue, createdAt: new Date(), expiredAt: addDays(new Date(), 7) });
             } else {
-                deleteDir(path.join('uploads', val.sessionId));
+                await deleteDir(path.join('uploads', val.sessionId));
                 //resolve('Invalid e-mail address');
             }
         }
