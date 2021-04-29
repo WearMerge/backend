@@ -1,3 +1,5 @@
+import e from "express";
+
 export const openMHealth = (data: any, validator: { brand: string, schema: string }, uuid: string) => {
     if (validator.brand === 'xiaomi') {
         return xiaomi(data, validator.brand, validator.schema, uuid);
@@ -408,7 +410,7 @@ const unit = (header: { uuid: string, brand: string, schema: string }, data: { w
         type: 'unit',
         data: {
             weight: data.weight,
-            height: data. height,
+            height: data.height,
             distance: data.distance
         }
     };
@@ -419,6 +421,20 @@ const metricOrImperial = (value: string) => {
         return 'metric';
     }
     return 'imperial';
+};
+
+const userDemographic = (header: { uuid: string, brand: string, schema: string }, data: { gender: string, yearOfBithday: number }) => {
+    return {
+        createdAt: new Date(),
+        uuid: header.uuid,
+        brand: header.brand,
+        schema: header.schema,
+        type: 'demographic',
+        data: {
+            gender: data.gender,
+            yearOfBithday: data.yearOfBithday
+        }
+    };
 };
 
 const xiaomi = (data: any, brand: string, schema: string, uuid: string) => {
@@ -462,9 +478,17 @@ const xiaomi = (data: any, brand: string, schema: string, uuid: string) => {
             caloriesBurned({ uuid: uuid, brand: brand, schema: schema }, Number(data['calories']), date)
         ];
     } else if (schema === 'user.json') {
+        const date = new Date(data['birthday']);
+        let gender: string;
+        if (Number(data['gender'])) {
+            gender = 'Male';
+        } else {
+            gender = 'Female';
+        }
         return [
             bodyWeight({ uuid: uuid, brand: brand, schema: schema }, Number(data['weight']), null),
-            bodyHeight({ uuid: uuid, brand: brand, schema: schema }, Number(data['height']), null)
+            bodyHeight({ uuid: uuid, brand: brand, schema: schema }, Number(data['height']), null),
+            userDemographic({ uuid: uuid, brand: brand, schema: schema }, { gender: gender, yearOfBithday: date.getFullYear() })
         ];
     } else {
         return [];
@@ -489,10 +513,18 @@ const fitbit = (data: any, brand: string, schema: string, uuid: string) => {
     } else if (schema === 'sleep.json') {
         return totalSleepTime({ uuid: uuid, brand: brand, schema: schema }, Number(data['Minutes_Asleep']), new Date(data['Start_Time'].replace(/([\0-\377:nonascii:]*?)(AM|PM)/g, '$1 $2')), new Date(data['End_Time'].replace(/([\0-\377:nonascii:]*?)(AM|PM)/g, '$1 $2')));
     } else if (schema === 'profile.json') {
+        const date = new Date(data['date_of_birth']);
+        let gender: string;
+        if (data['gender'] === 'MALE') {
+            gender = 'Male';
+        } else {
+            gender = 'Female';
+        }
         return [
             unit({ uuid: uuid, brand: brand, schema: schema }, { weight: metricOrImperial(data['weight_unit']), height: metricOrImperial(data['height_unit']), distance: metricOrImperial(data['distance_unit']) }),
             bodyWeight({ uuid: uuid, brand: brand, schema: schema }, Number(data['weight']), null),
-            bodyHeight({ uuid: uuid, brand: brand, schema: schema }, Number(data['height']), null)
+            bodyHeight({ uuid: uuid, brand: brand, schema: schema }, Number(data['height']), null),
+            userDemographic({ uuid: uuid, brand: brand, schema: schema }, { gender: gender, yearOfBithday: date.getFullYear() })
         ];
     } else if (schema === 'exercise.json') {
         const date = new Date(data['startTime']);
@@ -552,9 +584,17 @@ const garmin = (data: any, brand: string, schema: string, uuid: string) => {
             stepCount({ uuid: uuid, brand: brand, schema: schema }, Number(data['totalSteps']), date)
         ];
     } else if (schema === 'user_profile.json') {
+        const date = new Date(data['birthDate']);
+        let gender: string;
+        if (data['gender'] === 'MALE') {
+            gender = 'Male';
+        } else {
+            gender = 'Female';
+        }
         return [
             bodyWeight({ uuid: uuid, brand: brand, schema: schema }, Number(data['weight'])/1000, null),
-            bodyHeight({ uuid: uuid, brand: brand, schema: schema }, Number(data['height']), null)
+            bodyHeight({ uuid: uuid, brand: brand, schema: schema }, Number(data['height']), null),
+            userDemographic({ uuid: uuid, brand: brand, schema: schema }, { gender: gender, yearOfBithday: date.getFullYear() })
         ];
     } else if (schema === 'user_settings.json') {
         return unit({ uuid: uuid, brand: brand, schema: schema }, { weight: null, height: null, distance: metricOrImperial(data['stepLengths'][0]['unitKey']) });
@@ -567,8 +607,8 @@ const samsung = (data: any, brand: string, schema: string, uuid: string) => {
     if (schema === 'health_height.json') {
         return bodyHeight({ uuid: uuid, brand: brand, schema: schema }, Number(data['height']), new Date(data['start_time'] + String(data['time_offset']).replace('UTC', 'GMT')));
     } else if (schema === 'health_sleep_stage.json') {
-        const start = new Date(data['start_time'] +  String(data['time_offset']).replace('UTC', 'GMT'));
-        const end = new Date(data['end_time'] +  String(data['time_offset']).replace('UTC', 'GMT'));
+        const start = new Date(data['start_time']);
+        const end = new Date(data['end_time']);
         return totalSleepTime({ uuid: uuid, brand: brand, schema: schema }, (end.getTime() - start.getTime())/60000, start, end);
     } else if (schema === 'health_weight.json') {
         const date = new Date(data['start_time'] +  String(data['time_offset']).replace('UTC', 'GMT'));
@@ -577,7 +617,7 @@ const samsung = (data: any, brand: string, schema: string, uuid: string) => {
             bodyHeight({ uuid: uuid, brand: brand, schema: schema }, Number(data['height']), date)
         ];
     } else if (schema === 'shealth_activity_day_summary.json') {
-        const date = new Date(data['create_time'] +  String(data['time_offset']).replace('UTC', 'GMT'));
+        const date = new Date(Number(data['day_time']));
         const totalDistance = Number(data['distance']) / 1000;
         const runTime = Number(data['run_time']) / 60000;
         const walkTime = Number(data['walk_time']) / 60000;
@@ -608,7 +648,7 @@ const samsung = (data: any, brand: string, schema: string, uuid: string) => {
         const end = new Date(data['update_time'] +  String(data['time_offset']).replace('UTC', 'GMT'));
         return totalSleepTime({ uuid: uuid, brand: brand, schema: schema }, (end.getTime() - start.getTime())/60000, start, end);
     } else if (schema === 'shealth_step_daily_trend.json') {
-        const date = new Date(data['create_time'] +  String(data['time_offset']).replace('UTC', 'GMT'));
+        const date = new Date(Number(data['day_time']));
         return [
             stepCount({ uuid: uuid, brand: brand, schema: schema }, Number(data['count']), date),
             physicalActivity({ uuid: uuid, brand: brand, schema: schema }, 'step_daily', { distance: Number(data['distance'])/1000, calories: Number(data['calorie']) }, date),
@@ -629,6 +669,18 @@ const samsung = (data: any, brand: string, schema: string, uuid: string) => {
             stepCount({ uuid: uuid, brand: brand, schema: schema }, Number(data['com.samsung.health.step_count.count']), start, end),
             physicalActivity({ uuid: uuid, brand: brand, schema: schema }, 'podometer', { distance: Number(data['com.samsung.health.step_count.distance'])/1000, calories: Number(data['com.samsung.health.step_count.calorie']) }, start, end),
             caloriesBurned({ uuid: uuid, brand: brand, schema: schema }, Number(data['com.samsung.health.step_count.calorie']), start, end)
+        ];
+    } else if (schema === 'health_user_profile.json') {
+        let gender: string;
+        if (data['gender'] === 'M') {
+            gender = 'Male';
+        } else {
+            gender = 'Female';
+        }
+        return [
+            bodyWeight({ uuid: uuid, brand: brand, schema: schema }, Number(data['weight']['value']), new Date(data['weight']['create_time'])),
+            bodyHeight({ uuid: uuid, brand: brand, schema: schema }, Number(data['height']['value']), new Date(data['height']['create_time'])),
+            userDemographic({ uuid: uuid, brand: brand, schema: schema }, { gender: gender, yearOfBithday: Math.floor(Number(data['birth_date']) / 10000) })
         ];
     } else {
         return [];
@@ -751,6 +803,15 @@ const apple = (data: any, brand:string, schema: string, uuid: string): any => {
         } else {
             return [];
         }
+    } else if (schema === 'me.json') {
+        const date = new Date(data['HKCharacteristicTypeIdentifierDateOfBirth']);
+        let gender: string;
+        if (data['HKCharacteristicTypeIdentifierBiologicalSex'] === 'HKBiologicalSexMale') {
+            gender = 'Male';
+        } else {
+            gender = 'Female';
+        }
+        return userDemographic({ uuid: uuid, brand: brand, schema: schema }, { gender: gender, yearOfBithday: date.getFullYear() });
     } else {
         return [];
     }

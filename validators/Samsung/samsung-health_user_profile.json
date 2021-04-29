@@ -1,0 +1,87 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "#27",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "height",
+        "weight",
+        "birth_date",
+        "gender"
+    ],
+    "properties": {
+        "height": {
+            "$id": "#/properties/height",
+            "type": "object",
+            "title": "The height schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "required": [
+                "value",
+                "create_time"
+            ],
+            "properties": {
+                "value": {
+                    "$id": "#/properties/height/properties/value",
+                    "type": "string",
+                    "title": "The value schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": ""
+                },
+                "create_time": {
+                    "$id": "#/properties/height/properties/create_time",
+                    "type": "string",
+                    "title": "The create_time schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": ""
+                }
+            },
+            "additionalProperties": false
+        },
+        "weight": {
+            "$id": "#/properties/weight",
+            "type": "object",
+            "title": "The weight schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "required": [
+                "value",
+                "create_time"
+            ],
+            "properties": {
+                "value": {
+                    "$id": "#/properties/weight/properties/value",
+                    "type": "string",
+                    "title": "The value schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": ""
+                },
+                "create_time": {
+                    "$id": "#/properties/weight/properties/create_time",
+                    "type": "string",
+                    "title": "The create_time schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": ""
+                }
+            },
+            "additionalProperties": false
+        },
+        "birth_date": {
+            "$id": "#/properties/birth_date",
+            "type": "string",
+            "title": "The birth_date schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        },
+        "gender": {
+            "$id": "#/properties/gender",
+            "type": "string",
+            "title": "The gender schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": ""
+        }
+    },
+    "additionalProperties": false
+}

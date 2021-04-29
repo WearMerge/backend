@@ -8,7 +8,7 @@ import path from'path';
 import {v4 as uuidv4 } from 'uuid';
 import ReplaceStream from 'replacestream';
 import { getFiles } from '../helpers/get-files';
-import { fitbitSummary, huaweiXLS } from '../helpers/reconstruct-files';
+import { fitbitSummary, huaweiXLS, samsungProfile } from '../helpers/reconstruct-files';
 import { validator } from '../helpers/validate-data';
 import Ajv from 'ajv';
 import { deleteDir } from '../helpers/delete-dir';
@@ -25,6 +25,7 @@ const garminInvalid = new RegExp(/\[[\n ]*\{[\n ]*"summarizedActivitiesExport"[\
 const garminObjectInvalid = new RegExp(/\{[\n ]*"userName"[\0-\377:nonascii:]*?\"firstName"|\{[\n ]*"preferredLocale"[\0-\377:nonascii:]*?\"stepLengths"/);
 const huaweiInvalid = new RegExp(/\[[\n ]*\{[\n ]*"sportDataUserData"[\n ]*\:[\n ]*\[/);
 const samsungInvalid = new RegExp(/com.samsung.health.\w+.\w+,\d+,\d+\n|com.samsung.shealth.\w+.\w+,\d+,\d+\n/);
+const samsungProfileInvalid = new RegExp(/com.samsung.health.\w+.\w+,\d+,\d+\ntext_value,float_value,update_time,create_time,long_value,key,blob_value,int_value,deviceuuid,pkg_name,double_value,datauuid\n/);
 
 const insertCSV = async (path: string, validators: any, db: any, sessionId: string, uuid: string) => {
     let parser: Readable;
@@ -33,6 +34,11 @@ const insertCSV = async (path: string, validators: any, db: any, sessionId: stri
     let isXiaomi = false;
     const isFinished = await new Promise<boolean>(resolve => {
         const middleware  = fs.createReadStream(path)
+            .pipe(ReplaceStream(samsungProfileInvalid, () => {
+                hasMiddleWare = true;
+                resolve(samsungProfile(path, validators, db, sessionId, uuid, bufferLength, ajv));
+                return '';
+            })as Transform)
             .pipe(ReplaceStream(samsungInvalid, () => {
                 hasMiddleWare = true;
                 isSamsung = true;

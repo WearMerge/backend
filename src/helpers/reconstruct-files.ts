@@ -3,6 +3,9 @@ import readline from 'readline';
 import path from'path';
 import xlsx from 'xlsx';
 import { validator } from './validate-data';
+import ReplaceStream from 'replacestream';
+import csvParser from 'csv-parser';
+import stripBomStream from 'strip-bom-stream';
 
 export const fitbitSummary = async (filePath: string, validators: any, db: any, sessionId: string, uuid: string, bufferLength: number, ajv: any) => {
     const parser = readline.createInterface({
@@ -57,7 +60,7 @@ export const fitbitSummary = async (filePath: string, validators: any, db: any, 
             }
             resolve(true);
         }).on('error', async (e) => {
-            console.log(e);
+            //console.log(e);
             resolve(true);
         });
     });
@@ -80,4 +83,53 @@ export const huaweiXLS = async (filePath: string, validators: any, db: any, sess
             console.log(error);
         }
     }
+};
+
+export const samsungProfile = async (filePath: string, validators: any, db: any, sessionId: string, uuid: string, bufferLength: number, ajv: any) => {
+    const parser = fs.createReadStream(filePath)
+        .pipe(ReplaceStream(/com.samsung.health.\w+.\w+,\d+,\d+\n/, ''))
+        .pipe(ReplaceStream(/,\n/g, '\n'))
+        .pipe(stripBomStream())
+        .pipe(csvParser());
+    const obj = {
+        height: {
+            value: '',
+            create_time: ''
+        },
+        weight: {
+            value: '',
+            create_time: ''
+        },
+        birth_date: '',
+        gender: ''
+    };
+    return await new Promise<boolean>(resolve => {
+        parser.on('data', async (data: any) => {
+            if (data['key'] === 'height') {
+                obj.height.value = data['float_value'];
+                obj.height.create_time = data['create_time'];
+            } else if (data['key'] === 'weight') {
+                obj.weight.value = data['float_value'];
+                obj.weight.create_time = data['create_time'];
+            } else if (data['key'] === 'birth_date') {
+                obj.birth_date = data['text_value'];
+            } else if (data['key'] === 'gender') {
+                obj.gender = data['text_value'];
+            }
+        }).on('end', async () => {
+            try {
+                const array = await validator(obj, validators, uuid, ajv);
+                if (array.length) {
+                    await db.collection(sessionId).insertMany(array);
+                }
+                // await db.collection(sessionId).insertMany((await Promise.all(buffer)).flat());
+            } catch (error) {
+                console.log(error);
+            }
+            resolve(true);
+        }).on('error', async (e: any) => {
+            //console.log(e);
+            resolve(true);
+        });
+    });
 };
