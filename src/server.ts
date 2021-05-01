@@ -22,7 +22,7 @@ const bullSettings: Queue.QueueOptions = {
 };
 const bullCPU = 1;
 
-cron.schedule('* * * 1 * *', () => {
+cron.schedule('* * 23 * * *', () => {
     deleteSessions();
     console.log('Clearing db')
 });

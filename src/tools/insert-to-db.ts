@@ -138,7 +138,7 @@ const insertXML = async (path: string, validators: any, db: any, sessionId: stri
                 Promise.all(buffer).then(x => {
                     const array = x.flat();
                     if (array.length) {
-                        return db.collection(sessionId).insertMany(x);
+                        return db.collection(sessionId).insertMany(array);
                     }
                 }).then(() => {
                     parser.resume();

@@ -18,7 +18,7 @@ export const uploadToServer = async (req: any, res: any) => {
     const sessionId = uuidv4();
     let form = new Formidable.IncomingForm({
         uploadDir: 'tmp/',
-        maxFileSize: 200 * 1024 * 1024
+        maxFileSize: 2000 * 1024 * 1024
     });
     const db = await mongoDb();
     return await new Promise<string>(resolve => {

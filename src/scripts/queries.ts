@@ -119,6 +119,7 @@ export const weightPerUser = async (sessionId: string, res: any) => {
     const db = await mongoDb();
     const users = await db.collection(sessionId).distinct('uuid');
     const results: any[] = []
+    let count = 1;
     await Promise.all(users.map(async (user: string) => {
         const cursor = await db.collection(sessionId).find({ uuid: user, type: 'body_weight' });
         const array = [];
@@ -137,7 +138,7 @@ export const weightPerUser = async (sessionId: string, res: any) => {
             }
         }
         results.push({
-            label: user,
+            label: 'User ' + count++,
             data: array.sort((a, b) => a.x - b.x)
         });
     }));
@@ -153,10 +154,10 @@ export const devicePerUser = async (sessionId: string, res: any) => {
         if (brand === undefined) {
             results.push('N/A');
         } else {
-            results.push(brand.brand);
+            results.push(brand.brand.charAt(0).toUpperCase() + brand.brand.slice(1));
         }
     }));
-    const map = results.reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map());
+    const map = results.sort((a, b) => a.x - b.x).reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map());
     res.status(200).send({
         labels: [...map.keys()],
         data: [...map.values()]
