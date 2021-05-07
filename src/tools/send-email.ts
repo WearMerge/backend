@@ -13,7 +13,7 @@ export const sendEmail = async (sessionId: string) => {
         from: process.env.EMAIL,
         subject: 'Your files are ready via WearMerge',
         text: 'WearMerge\nAnalysis & Download link - Expires in 7 days\n',
-        html: '<h1>WearMerge</h1><strong>Analysis ink - Expires in 7 days</strong><br/><a href="' + analysisLink + '">' + analysisLink +'</a><br/><strong>Download link - Expires in 7 days</strong><br/><a href="' + downloadLink + '">' + downloadLink +'</a>'
+        html: '<h1>WearMerge</h1><strong>Analysis link - Expires in 7 days</strong><br/><a href="' + analysisLink + '">' + analysisLink +'</a><br/><strong>Download link - Expires in 7 days</strong><br/><a href="' + downloadLink + '">' + downloadLink +'</a>'
     };
     await sgMail
         .send(msg)
