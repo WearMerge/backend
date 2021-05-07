@@ -41,7 +41,7 @@ export const uploadToServer = async (req: any, res: any) => {
             });
         });
         form.on('end', () => {
-            res.status(200).send('uploaded');
+            res.status(200).send('sessionId: ' + sessionId);
         });
         form.parse(req, async () => {
             saveFiles(files).then(() => saveFields(fields, db)).then(() => resolve(sessionId));
